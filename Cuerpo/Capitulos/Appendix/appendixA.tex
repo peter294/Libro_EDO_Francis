@@ -1,0 +1,217 @@
+
+%\mychapter{Funciones gamma, beta y s\'imbolo de Pochhammer.}{Funciones gamma, beta y s\'imbolo de Pochhammer.}
+\chapter{Funciones gamma, beta y s\'imbolo de Pochhammer.}\label{aped.A}
+
+Las funciones gamma y beta son de las funciones m\'as importantes en matem\'atica, m\'as all\'a de las funciones exponenciales y logar\'itmicas. \\
+La funci\'on gamma se denota por $\Gamma{(a)}$,\, (gamma de a) y tiene su representaci\'on integral:
+\begin{eqnarray}\label{representacion de Gamma}
+	% \nonumber % Remove numbering (before each equation)
+	\Gamma{(a)}&=&\int_{0}^{\infty} e^{-t}t^{a-1}dt\quad \, Re\, a>0
+\end{eqnarray}
+
+A partir de dicha representaci\'on integral, vamos a deducir ciertas propiedades o relaciones de la funci\'on gamma, que utilizaremos frecuentemente en el desarrollo de este trabajo.
+
+\section{Propiedades de la funci\'on Gamma}
+\begin{eqnarray}\label{Relaci\'on de recurrencia de la funci\'on gamma}
+	% \nonumber % Remove numbering (before each equation)
+	\Gamma{(a+1)}&=&a\Gamma{(a)}
+\end{eqnarray}
+
+\begin{demo}
+	De \ref{representacion de Gamma}
+	\begin{eqnarray*}
+		\Gamma{(a+1)}&=&\int_{0}^{\infty} e^{-t}t^{a}dt
+	\end{eqnarray*}
+	integrando por partes $u=t^{a}\Rightarrow du=a t^{a-1}dt\quad y \quad dv=e^{-t}\Rightarrow v=-e^{-t}$
+	\begin{eqnarray*}
+		\Gamma{(a+1)}&=&-t^{a}e^{-t}\bigg|_{0}^{\infty}+a \int_{0}^{\infty} e^{-t}t^{a-1}dt=a\Gamma{(a)} \quad Re\, a>0
+	\end{eqnarray*}
+\end{demo}
+ 
+\begin{eqnarray}\label{Relaci\'on de recurrencia generalizada de la funci\'on gamma}
+	% \nonumber % Remove numbering (before each equation)
+	\Gamma{(a+n)}&=&(a+n-1)(a+n-2)\cdots(a+2)(a+1)a\Gamma{(a)}\,:\, n=1,2,3,...
+\end{eqnarray}
+\begin{demo}
+	\begin{eqnarray*}
+		\Gamma{(a+n)}&=&(a+n-1)\Gamma{(a+n-1)}\\
+		&=&(a+n-1)(a+n-2)\Gamma{(a+n-2)}\\
+		&=&(a+n-1)(a+n-2)(a+n-3)\Gamma{(a+n-3)}\\
+		& \vdots \\
+		\Gamma{(a+n)}&=&(a+n-1)(a+n-2)\cdots(a+2)(a+1)a\,\Gamma{(a)}\,:\,n=1,2,3,...
+	\end{eqnarray*}
+\end{demo}
+
+
+\begin{eqnarray}\label{Funci\'on gamma en t\'erminos de la productoria}
+	\frac{\Gamma{(a+n)}}{\Gamma{(a)}}&=&\prod_{k=0}^{n-1}(a+k)\quad n=1,2,3,...
+\end{eqnarray}
+\begin{demo}
+	\begin{eqnarray*}
+		\Gamma{(a+n)}&=&(a+n-1)(a+n-2)\cdots(a+2)(a+1)a\,\Gamma{(a)}\\
+		\frac{\Gamma{(a+n)}}{\Gamma{(a)}}&=&(a+n-1)(a+n-2)\cdots(a+2)(a+1)a\\
+		\frac{\Gamma{(a+n)}}{\Gamma{(a)}}&=&\prod_{k=0}^{n-1}(a+k)=a(a+1)(a+2)(a+3)\cdots(a+n-1)\quad\,n=1,2,3,...
+	\end{eqnarray*}
+\end{demo}
+
+
+
+En la siguiente propiedade demostraremos la relaci\'on entre la funci\'on gamma y el s\'imbolo de Pochhammer
+\begin{eqnarray}\label{Relaci\'on entre la funci\'on gamma y el s\'imbolo de Pochhammer}
+	\frac{\Gamma{(a+n)}}{\Gamma{(a)}}&=&(a)_{n}
+\end{eqnarray}
+$(a)_{n}$ representa el \textit{shifted factorial o s\'imbolo de Pochhammer} definido por:
+\begin{equation}\label{P1}
+	(a)_{n}=\begin{cases}
+		1 & \text{si $n= 0$}\\
+		a(a+1)(a+2)\cdots{(a+n-1)} & \text{si $n=1,\,2,\,3,\,...$}
+	\end{cases}\\ \end{equation}
+\begin{demo}
+	Esta prueba es inmediata, pues por definici\'on:
+	\begin{equation}\label{P1}(a)_{n}=\begin{cases}
+			1 & \text{si $n= 0$}\\
+			a(a+1)(a+2)\cdots{(a+n-1)}=\displaystyle\prod_{k=0}^{n-1}(a+k)=\frac{\Gamma{(a+n)}}{\Gamma{(n)}} & \text{si $n=1,\,2,\,3,\,...$}
+		\end{cases}\\ \end{equation}
+	Lo que se concluye
+	$$ \frac{\Gamma{(a+n)}}{\Gamma{(n)}}=(a)_{n}\,:\,n=1,2,3,...$$
+\end{demo}
+
+
+Ahora obtendremos la relaci\'on entre la funci\'on gamma y la funci\'on beta
+\begin{eqnarray}\label{relaci\'on entre la funci\'on gamma y la funci\'on beta}
+	\frac{\Gamma{(a)}\Gamma{(b)}}{\Gamma{(a+b)}}&=& B(a,b)
+\end{eqnarray}
+$B(a,b)$ denota la funci\'on beta y tiene su representaci\'on integral:
+\begin{eqnarray}
+	B{(a,b)}&=&\int_{0}^{1}t^{a-1} (1-t)^{b-1}dt \quad Re\, a>0, \, Re\, b>0
+\end{eqnarray}
+\begin{demo}
+	Sea $x=rcos^{2}\theta,\, y=rsin^{2}(\theta),\, 0\leq r<\infty,\, 0\leq \theta \leq{\frac{\pi}{2}}.$\, Entonces el Jacobiano es $2rcos(\theta) sin(\theta).$\quad As\'i:
+	
+	\begin{eqnarray*}
+		\Gamma{(a)}\Gamma{(b)}&=&\int_{0}^{\infty} e^{-x}x^{a-1}dx\int_{0}^{\infty} e^{-y}y^{b-1}dy=\int_{0}^{\infty}\int_{0}^{\infty} x^{a-1}y^{b-1}e^{-x}e^{-y}dxdy\\
+		\Gamma{(a)}\Gamma{(b)}&=&\int_{0}^{\infty}\int_{0}^{\frac{\pi}{2}}
+		(rcos^{2}(\theta))^{a-1}(rsin^{2}(\theta))^{b-1}e^{-rcos^{2}(\theta)}e^{-rsin^{2}(\theta)}(2rcos(\theta) sin(\theta) drd\theta)\\
+		\Gamma{(a)}\Gamma{(b)}&=&\int_{0}^{\infty}r^{a-1}r^{b-1}e^{-r}rdr \cdot{2}\int_{0}^{\frac{\pi}{2}} (cos^{2}(\theta))^{a-1}(sin^{2}(\theta))^{b-1}(cos(\theta) sin(\theta) d\theta)\\
+		\Gamma{(a)}\Gamma{(b)}&=&\int_{0}^{\infty}r^{a+b-1}e^{-r}dr \cdot{2}\int_{0}^{\frac{\pi}{2}} (cos^{2}(\theta))^{a-1}(1-cos^{2}(\theta))^{b-1}(cos(\theta) sin(\theta) d\theta)\\
+		\Gamma{(a)}\Gamma{(b)}&=&\Gamma{(a+b)} \cdot{2}\int_{0}^{\frac{\pi}{2}} (cos^{2}(\theta))^{a-1}(1-cos^{2}(\theta))^{b-1}(cos(\theta) sin(\theta) d\theta)
+	\end{eqnarray*}
+	Sea $$t=cos^{2}(\theta) \Rightarrow dt=-2cos(\theta) sin(\theta) d\theta$$
+	
+	\begin{equation}\begin{cases}
+			\text{si}\quad \theta \rightarrow 0 &  t\rightarrow 1\\
+			\text{si}\quad \theta \rightarrow \frac{\pi}{2} &  t\rightarrow 0
+		\end{cases}\\ \end{equation}
+	\begin{eqnarray*}
+		\Gamma{(a)}\Gamma{(b)}&=&\Gamma{(a+b)} \left(-\int_{1}^{0} t^{a-1}(1-t)^{b-1}dt\right)=\Gamma{(a+b)} \int_{0}^{1} t^{a-1}(1-t)^{b-1}dt\\
+		\Gamma{(a)}\Gamma{(b)}&=&\Gamma{(a+b)} B(a,b)\Rightarrow \frac{\Gamma{(a)}\Gamma{(b)}}{\Gamma{(a+b)}}= B(a,b)
+	\end{eqnarray*}
+	Acontinuaci\'on analizaremos la F\'ormula de duplicaci\'on de Legendre
+	\begin{eqnarray}\label{F\'ormula de duplicaci\'on de Legendre}
+		\Gamma{(2a)}&=&\frac{2^{2a-1}}{\Gamma{(\frac{1}{2})}}\Gamma{(a)}\Gamma{(a+\frac{1}{2})}
+	\end{eqnarray}
+	\begin{demo}
+		Como $$\frac{\Gamma{(a)}\Gamma{(b)}}{\Gamma{(a+b)}}= B(a,b) \Rightarrow \frac{\Gamma{(a)}\Gamma{(a)}}{\Gamma{(2a)}}= B(a,a)=\int_{0}^{1}t^{a-1} (1-t)^{a-1}dt=\int_{0}^{1}[t(1-t)]^{a} \frac{dt}{t(1-t)}.$$
+		Tomando la sustituci\'on $u=4t(1-t)$,\, en el intervalo $0 \leq t \leq \frac{1}{2}\Rightarrow du=4(1-2t)dt$\\
+		$\Rightarrow du=4\sqrt{1-u}dt\Rightarrow dt=\frac{du}{4\sqrt{1-u}},$\, y reemplaz\'adola en la expresi\'on anterior tenemos:
+		$$\Rightarrow \frac{\Gamma{(a)}\Gamma{(a)}}{\Gamma{(2a)}}=2\int_{0}^{\frac{1}{2}}[t(1-t)]^{a} \frac{dt}{t(1-t)}=2\int_{0}^{1}\left(\frac{u}{4}\right)^{a} \frac{1}{t(1-t)}\frac{du}{4\sqrt{1-u}}.$$
+		$$\Rightarrow \frac{\Gamma{(a)}\Gamma{(a)}}{\Gamma{(2a)}}=2\int_{0}^{1}\left(\frac{u}{4}\right)^{a} \frac{du}{u\sqrt{1-u}}$$
+		$$\Rightarrow \frac{\Gamma{(a)}\Gamma{(a)}}{\Gamma{(2a)}}=\frac{2}{4^a}\int_{0}^{1} u^{a-1} (1-u)^{-\frac{1}{2}}du=2^{1-2a}B(a,\frac{1}{2})=2^{1-2a}\frac{\Gamma{(a)}\Gamma{(\frac{1}{2})}}{\Gamma{(a+\frac{1}{2})}}.$$
+		Finalmente, al despejar se obtiene:
+		$$\Gamma{(2a)}=\frac{2^{2a-1}}{\Gamma{(\frac{1}{2})}}\Gamma{(a)}\Gamma{(a+\frac{1}{2})}.$$
+	\end{demo}
+\end{demo}
+
+\begin{eqnarray}
+	\Gamma{(\frac{1}{2})}&=&\sqrt{\pi}
+\end{eqnarray}
+\begin{demo}
+	\begin{eqnarray*}
+		% \nonumber % Remove numbering (before each equation)
+		\left[\Gamma{\left(\frac{1}{2}\right)}\right]^{2} &=& \displaystyle\Gamma{\left(\frac{1}{2}\right)}\cdot \Gamma{\left(\frac{1}{2}\right)}\\
+		&=&\displaystyle\int_{0}^{\infty} e^{-x}x^{-\frac{1}{2}}dx\int_{0}^{\infty} e^{-y}y^{-\frac{1}{2}}dy
+	\end{eqnarray*}
+	Tomando el siguiente cambio de variable
+	\begin{equation}\begin{cases}
+			\text{sea}\quad x=rcos^{2}(\theta)& y=rsin^{2}(\theta)\\
+			0\leq r<\infty &0\leq \theta \leq{\frac{\pi}{2}}
+		\end{cases}\\ \end{equation}
+	Entonces el Jacobiano es $2rcos(\theta) sin(\theta).$\, As\'i:
+	$$\left[\Gamma{\left(\frac{1}{2}\right)}\right]^{2}=\int_{0}^{\infty} \int_{0}^{\frac{\pi}{2}}  e^{-r(sin^{2}\theta+cos^{2}\theta)}(rcos^{2}\theta)^{-\frac{1}{2}}(rsin^{2}(\theta))^{-\frac{1}{2}}(2rcos(\theta) sin(\theta) dr\cdot d{\theta}).$$
+	$$\Rightarrow \left[\Gamma{\left(\frac{1}{2}\right)}\right]^{2}=\left(2 \int_{0}^{\infty}e^{-r} dr\right) \left(\int_{0}^{\frac{\pi}{2}}d{\theta} \right)=2(-e^{-r}|_{0}^{\infty})(\theta|_{0}^{\frac{\pi}{2}})=2(1)(\frac{\pi}{2})=\pi \Rightarrow \Gamma{(\frac{1}{2})}=\sqrt{\pi} .$$
+\end{demo}
+
+\section{Variable Compleja}
+
+\begin{comment}
+	\begin{teo}{Polo Simple}{}\label{PoloSimple}
+		Si $f$ tiene un polo simple en $z=z_0$, entonces,
+		\begin{eqnarray}\label{polosimple}
+			Res\left(f(z), z_0\right)&=&\displaystyle\lim _{z \rightarrow z_0}\left(z-z_0\right) f(z)
+		\end{eqnarray}
+	\end{teo}
+	
+\end{comment}
+
+\begin{demo}
+	Puesto que $f$ tiene un polo simple en $z=z_0$, su desarrollo de Laurent convergente en un disco perforado $0<\left|z-z_0\right|<R$ tiene la forma
+	\begin{eqnarray*}
+		f(z)&=&\displaystyle\frac{a_{-1}}{z-z_0}+a_0+a_1\left(z-z_0\right)+a_2\left(z-z_0\right)+\cdots,
+	\end{eqnarray*}
+	donde $a_{-1} \neq 0$. Al multiplicar ambos lados de esta serie por $z-z_0$ y luego tomando el límite cuando $z \rightarrow z_0$ obtenemos
+	$$
+	\begin{aligned}
+		\displaystyle\lim _{z \rightarrow z_0}\left(z-z_0\right) f(z) & =\lim _{z \rightarrow z_0}\left[a_{-1}+a_0\left(z-z_0\right)+a_1\left(z-z_0\right)^2+\cdots\right] \\
+		& =a_{-1}=\operatorname{Res}\left(f(z), z_0\right)
+	\end{aligned}
+	$$
+\end{demo}
+
+\begin{comment}
+	\begin{teo}{Polo de Orden}{}\label{PoloN}
+		Si $f$ tiene un polo de orden $n$ en $z=z_0$, entonces,
+		\begin{eqnarray}\label{poloN}
+			Res\left(f(z), z_0\right)&=&\frac{1}{(n-1) !} \lim _{z \rightarrow z_0} \frac{d^{n-1}}{d z^{n-1}}\left[\left(z-z_0\right)^n f(z)\right]
+		\end{eqnarray}
+	\end{teo}
+\end{comment}
+
+
+\begin{demo}
+	Debido a que se supone que $f$ tiene polo de orden $n$ en $z=z_0$, su desarrollo de Laurent convergente en un disco perforado $0<\left|z-z_0\right|<R$ debe tener la forma
+	\begin{eqnarray*}
+		f(z)&=&\frac{a_{-n}}{\left(z-z_0\right)^n}+\cdots+\frac{a_{-2}}{\left(z-z_0\right)^2}+\frac{a_{-1}}{z-z_0}+a_0+a_1\left(z-z_0\right)+\cdots,
+	\end{eqnarray*}
+	donde $a_{-n} \neq 0$. Multiplicamos la \'ultima expresi\'on por $\left(z-z_0\right)^n$,
+	\begin{eqnarray*}
+		\left(z-z_0\right)^n f(z)&=&a_{-n}+\cdots+a_{-2}\left(z-z_0\right)^{n-2}+a_{-1}\left(z-z_0\right)^{n-1}+a_0\left(z-z_0\right)^n+a_1\left(z-z_0\right)^{n+1}+\cdots
+	\end{eqnarray*}
+	y despu\'es derivando $n-1$ veces ambos lados de la igualdad:
+	\begin{eqnarray}\label{ins}
+		\displaystyle\frac{d^{n-1}}{d z^{n-1}}\left[\left(z-z_0\right)^n f(z)\right]&=&(n-1) ! a_{-1}+n ! a_0\left(z-z_0\right)+\cdots
+	\end{eqnarray}
+	Ya que todos los t\'erminos del lado derecho despu\'es del primero involucran potencias enteras positivas de $z-z_0$, el l\'imite de (\ref{ins}), cuando $z \rightarrow z_0$ es
+	\begin{eqnarray*}
+		\lim _{z \rightarrow z_0} \frac{d^{n-1}}{d z^{n-1}}\left[\left(z-z_0\right)^n f(z)\right]&=&(n-1) ! a_{-1}
+	\end{eqnarray*}
+	Resolviendo la \'ultima ecuaci\'on para $a_{-1}$ se obtiene (\ref{poloN}).
+\end{demo}
+
+\begin{comment}
+	\begin{teo}{Cauchy}{}\label{cauchy}
+		Sea $D$ un dominio simplemente conexo y $C$ un contorno simple y cerrado que se encuentra en el interior de $D$. Si una funci\'on $f$ es anal\'itica sobre y dentro de $C$, excepto en un n\'umero finito de singularidades aisladas $z_1, z_2, \ldots, z_n$ dentro de $C$, entonces
+		\begin{eqnarray}\label{cauchyteo}
+			\oint_C f(z) d z&=&2 \pi i \sum_{k=1}^n \operatorname{Res}\left(f(z), z_k\right)
+		\end{eqnarray}
+	\end{teo}
+	
+\end{comment}
+
+\begin{demo}
+	Supongamos que $C_1, C_2, \ldots, C_n$ son circunferencias con centro en $z_1, z_2, \ldots, z_n$, respectivamente. Adem\'as que cada circunferencia $C_k$ tiene un radio $r_k$ suficientemente peque\~no tal que $C_1, C_2, \ldots, C_n$
+	
+	son mutuamente disjuntas y est\'an en el interior de la curva cerrada simple $C$. Vea la figura 6.5.1. Ahora en (20) de la secci\'on 6.3 vimos que $\oint_{C_k} f(z) d z=2 \pi i \operatorname{Res}\left(f(z), z_k\right)$, y así por el teorema 5.3.2 tenemos
+	$$
+	\oint_C f(z) d z=\sum_{k=1}^n \oint_{C_k} f(z) d z=2 \pi i \sum_{k=1}^n \operatorname{Res}\left(f(z), z_k\right)
+	$$
+\end{demo}

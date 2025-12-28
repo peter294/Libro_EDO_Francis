@@ -1,0 +1,38 @@
+# Archivos auxiliares LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.auxlock
+*.mtc*
+
+# Bibliografía
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+
+# Índices y glosarios
+# *.idx
+# *.ilg
+# *.ind
+# *.glg
+# *.glo
+# *.gls
+# *.acn
+# *.acr
+# *.alg
+
+# # Presentaciones / TikZ / pgf
+# *.nav
+# *.snm
+# *.vrb
+# *.xdv
+
+# Salida final (descomenta si NO quieres subir el PDF)
+ *.pdf

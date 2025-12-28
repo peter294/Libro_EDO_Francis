@@ -1,0 +1,113 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{ shapes.geometric }
+\usetikzlibrary{calc}
+\usepackage{anyfontsize}
+\usepackage{comment}
+\usepackage{lipsum}
+%=======================================
+\usepackage{pgfplots}
+\usepgfplotslibrary{colormaps}
+\pgfplotsset{
+	compat=1.13,
+	% either load the colormap here ...
+	% colormap/gray,
+}
+%====================================
+\definecolor{gold}{RGB}{252, 200, 3}
+\usepackage{comment}
+\definecolor{uasdblue}{HTML}{003366} % Azul UASD
+\usepackage{fontspec} % Permite usar fuentes del sistema
+\newfontfamily{\oldenglish}{Old English Text MT}
+\usepackage{wrapfig}
+\usepackage{geometry}
+\geometry{top=2cm,left=2cm,right=2cm,bottom=2cm}
+\begin{document}
+	
+	\pagestyle{empty}
+	
+	
+	\begin{tikzpicture}[remember picture,overlay]
+		\path
+		(current page.north west) coordinate (A)
+		(current page.north east) coordinate (B)
+		(current page.south east) coordinate (C)
+		(current page.south west) coordinate (D)
+		(current page.center) coordinate (E);
+		%%%%%%%%%%%%%%%%%%%% Background %%%%%%%%%%%%%%%%%%%%%%%%
+		%\fill[black] (A) rectangle (C);
+		
+		
+		%====================================================
+		\node[uasdblue,align=left] (F) at ([xshift=9cm,yshift=-2cm]A)
+		{\bfseries \fontsize{24}{24}\selectfont ECUACIONES DIFERENCIALES};
+	%	\node[uasdblue,align=left] at ([xshift=-1cm,yshift=-1cm]F.south east)
+		%{\bfseries \fontsize{30}{30}\selectfont 1e};
+	%	\node[uasdblue,align=left] at ([xshift=-6.7cm,yshift=-2cm]B)
+	%	{\bfseries \fontsize{24}{24}\selectfont Juan Toribio Milane};
+	%	\node[uasdblue,align=left] at ([xshift=-6.1cm,yshift=-3cm]B)
+	%	{\bfseries \fontsize{24}{24}\selectfont Francis Álvarez Paulino};
+	%	\node[uasdblue,align=left] at ([xshift=-6cm,yshift=-4cm]B)
+	%	{\bfseries \fontsize{24}{24}\selectfont Pedro Guzmán Guzmán};
+	%	\node[uasdblue,align=left] at ([xshift=-11.6cm,yshift=-3.1cm]B)
+	%	{\scalebox{10}{\ensuremath{\int}}};
+		
+		\node[anchor=center, inner sep=0pt] at (6.3,-22) {
+			\begin{minipage}{0.9\textwidth}
+				\begin{center}
+					\begin{minipage}{0.2\textwidth}
+						\includegraphics[width=\linewidth]{Dibujos/uasd_escudo.jpg}
+					\end{minipage}
+					\hspace{0.1cm}
+					\begin{minipage}{0.7\textwidth}
+						\textcolor{uasdblue}{
+							{\fontsize{36}{42}\selectfont \textbf{UASD}}\\[1ex]
+							{\oldenglish \fontsize{16}{18}\selectfont Universidad Autónoma\\ de Santo Domingo}\\[1ex]
+							{\fontsize{10}{12}\selectfont PRIMADA DE AMÉRICA  | \\ Fundada el 28 de octubre de 1538}
+						}
+					\end{minipage}
+				\end{center}
+			\end{minipage}
+		};
+	\end{tikzpicture}
+	
+	\begin{comment}
+		
+
+	\vspace*{\fill}
+	\begin{center}
+		% Primera fila
+		\begin{minipage}{0.45\textwidth}
+			\includegraphics[width=7cm]{Dibujos/img4.pdf}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\includegraphics[width=7cm]{Dibujos/img4.pdf}
+		\end{minipage}
+		
+		\vspace{1em} % espacio entre filas
+		
+		% Segunda fila
+		\begin{minipage}{0.45\textwidth}
+			\includegraphics[width=7cm]{Dibujos/img4.pdf}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\includegraphics[width=7cm]{Dibujos/img4.pdf}
+		\end{minipage}
+	\end{center}
+	\vspace*{\fill}
+		\end{comment}
+		\vspace{2cm}
+		
+		\begin{wrapfigure}{r}{0.35\textwidth} %this figure will be at the right
+			\centering
+			\includegraphics[width=0.40\textwidth]{Dibujos/img4.pdf}
+		\end{wrapfigure} 
+		\lipsum[1-5]
+		
+\end{document}

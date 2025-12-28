@@ -1,0 +1,552 @@
+
+% -- La caja ---
+\newtcolorbox{mybox}[1]{
+	enhanced,
+	sharp corners=all,
+	colback=white,
+	colframe=gray,
+	toprule=0pt,
+	bottomrule=0pt,
+	leftrule=1pt,
+	rightrule=1pt,
+	overlay={
+		\draw[gray,line width=1pt] (frame.north west) -- ++(2cm,0pt);
+		\draw[gray,line width=1pt] (frame.south east) -- ++(-2cm,0pt);
+	},
+	attach boxed title to top left={yshift=-20pt},
+	boxed title style={frame hidden,interior hidden},
+	top=.75cm,
+	title={\bfseries\color{black}#1},
+	breakable % Permite que la caja se divida entre páginas
+}
+
+%---------------------------------------
+
+ \chapter{Referencias}
+ 
+
+\section{Reglas de la Derivación}
+
+\begin{fullwidth}[%\begin{fullwidth}[%
+	width=\dimexpr\textwidth+\marginparsep+\marginparwidth,
+	outermargin=\dimexpr-\marginparsep-\marginparwidth,
+	]
+
+
+\begin{mybox}{\textbf{\large \color{blue}Fórmulas generales}}
+	\begin{minipage}[t]{0.48\textwidth}
+		\begin{itemize}
+			\item[1.] \( \dfrac{d}{dx} (c) = 0 \)
+			\item[2.] \( \dfrac{d}{dx} [cf(x)] = cf'(x) \)
+			\item[3.] \( \dfrac{d}{dx} [f(x) + g(x)] = f'(x) + g'(x) \)
+			\item[4.] \( \dfrac{d}{dx} [f(x) - g(x)] = f'(x) - g'(x) \)
+		\end{itemize}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.48\textwidth}
+		\begin{itemize}
+			\item[5.] \( \dfrac{d}{dx} [f(x)g(x)] = f(x) g'(x) + g(x) f'(x) \)
+			\item[6.] \( \dfrac{d}{dx} \left[ \dfrac{f(x)}{g(x)} \right] = \dfrac{g(x)f'(x) - f(x)g'(x)}{[g(x)]^2} \)
+			\item[7.] \( \dfrac{d}{dx} f(g(x)) = f'(g(x)) g'(x) \)
+			\item[8.] \( \dfrac{d}{dx} (x^n) = n x^{n-1} \)
+		\end{itemize}
+	\end{minipage}
+\end{mybox}
+
+\vspace{0.5cm}
+
+\begin{mybox}{\textbf{\large \color{blue}Funciones exponenciales y logarítmicas}}
+	\begin{minipage}[t]{0.48\textwidth}
+		\begin{enumerate}
+			\setcounter{enumi}{8}
+			\item \( \dfrac{d}{dx} (e^x) = e^x \)
+			\item \( \dfrac{d}{dx} (b^x) = b^x \ln b \)
+		\end{enumerate}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.48\textwidth}
+		\begin{enumerate}
+			\setcounter{enumi}{10}
+			\item \( \dfrac{d}{dx} \ln |x| = \dfrac{1}{x} \)
+			\item \( \dfrac{d}{dx} (\log_b x) = \dfrac{1}{x \ln b} \)
+		\end{enumerate}
+	\end{minipage}
+\end{mybox}
+
+\vspace{0.5cm}
+
+\begin{mybox}{\textbf{\large \color{blue}Funciones trigonométricas}}
+	\begin{minipage}[t]{0.48\textwidth}
+		\begin{enumerate}
+			\setcounter{enumi}{12}
+			\item \( \dfrac{d}{dx} (\sen x) = \cos x \)
+			\item \( \dfrac{d}{dx} (\cos x) = -\sen x \)
+			\item \( \dfrac{d}{dx} (\tan x) = \sec^2 x \)
+		\end{enumerate}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.48\textwidth}
+		\begin{enumerate}
+			\setcounter{enumi}{15}
+			\item \( \dfrac{d}{dx} (\csc x) = -\csc x \cot x \)
+			\item \( \dfrac{d}{dx} (\sec x) = \sec x \tan x \)
+			\item \( \dfrac{d}{dx} (\cot x) = -\csc^2 x \)
+		\end{enumerate}
+	\end{minipage}
+\end{mybox}
+
+
+
+\begin{mybox}{\textbf{\large \color{blue}Funciones trigonométricas inversas}}
+	\begin{minipage}[t]{0.48\textwidth}
+		\begin{enumerate}
+			\setcounter{enumi}{18}
+			\item \( \dfrac{d}{dx} (\sen^{-1} x) = \dfrac{1}{\sqrt{1 - x^2}} \)
+			\item \( \dfrac{d}{dx} (\cos^{-1} x) = -\dfrac{1}{\sqrt{1 - x^2}} \)
+			\item \( \dfrac{d}{dx} (\tan^{-1} x) = \dfrac{1}{1 + x^2} \)
+		\end{enumerate}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.48\textwidth}
+		\begin{enumerate}
+			\setcounter{enumi}{21}
+			\item \( \dfrac{d}{dx} (\csc^{-1} x) = -\dfrac{1}{x\sqrt{x^2 - 1}} \)
+			\item \( \dfrac{d}{dx} (\sec^{-1} x) = \dfrac{1}{x\sqrt{x^2 - 1}} \)
+			\item \( \dfrac{d}{dx} (\cot^{-1} x) = -\dfrac{1}{1 + x^2} \)
+		\end{enumerate}
+	\end{minipage}
+\end{mybox}
+
+\vspace{0.5cm}
+
+\begin{mybox}{\textbf{\large \color{blue}Funciones hiperbólicas}}
+	\begin{minipage}[t]{0.48\textwidth}
+		\begin{enumerate}
+			\setcounter{enumi}{24}
+			\item \( \dfrac{d}{dx} (\senh x) = \cos{h}^2 x \)
+			\item \( \dfrac{d}{dx} (\cosh x) = \sen{h}^2 x \)
+			\item \( \dfrac{d}{dx} (\tanh x) = \sec{h}^2 x \)
+		\end{enumerate}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.48\textwidth}
+		\begin{enumerate}
+			\setcounter{enumi}{27}
+			\item \( \dfrac{d}{dx} (\csch x) = -\csch x \coth x \)
+			\item \( \dfrac{d}{dx} (\sech x) = -\sech x \tanh x \)
+			\item \( \dfrac{d}{dx} (\coth x) = -csch^2  x \)
+		\end{enumerate}
+	\end{minipage}
+\end{mybox}
+
+\vspace{0.5cm}
+
+\begin{mybox}{\textbf{\large \color{blue}Funciones hiperbólicas inversas}}
+	\begin{minipage}[t]{0.48\textwidth}
+		\begin{enumerate}
+			\setcounter{enumi}{30}
+			\item \( \dfrac{d}{dx} (\senh^{-1} x) = \dfrac{1}{\sqrt{1 + x^2}} \)
+			\item \( \dfrac{d}{dx} (\cosh^{-1} x) = \dfrac{1}{\sqrt{x^2 - 1}} \)
+			\item \( \dfrac{d}{dx} (\tanh^{-1} x) = \dfrac{1}{1 - x^2} \)
+		\end{enumerate}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.48\textwidth}
+		\begin{enumerate}
+			\setcounter{enumi}{33}
+			\item \( \dfrac{d}{dx} (\csch^{-1} x) = -\dfrac{1}{|x|\sqrt{x^2 + 1}} \)
+			\item \( \dfrac{d}{dx} (\sech^{-1} x) = -\dfrac{1}{x\sqrt{1 - x^2}} \)
+			\item \( \dfrac{d}{dx} (\coth^{-1} x) = \dfrac{1}{1 - x^2} \)
+		\end{enumerate}
+	\end{minipage}
+\end{mybox}
+
+
+
+\end{fullwidth}
+
+\newpage
+
+\begin{fullwidth}[%\begin{fullwidth}[%
+	width=\dimexpr\textwidth+\marginparsep+\marginparwidth,
+	outermargin=\dimexpr-\marginparsep-\marginparwidth,
+	]
+
+\section{Tabla de Integrales}
+
+\begin{mybox}{\textbf{\large \color{blue}Formas básicas}}
+	\begin{minipage}[t]{0.34\textwidth}
+		\begin{enumerate}
+			\item \( \displaystyle \int u \, dv = uv - \int v \, du \)
+			\item \( \displaystyle \int u^n \, du = \dfrac{u^{n+1}}{n+1} + C, \quad n \neq -1 \)
+			\item \( \displaystyle \int \dfrac{du}{u} = \ln |u| + C \)
+			\item \( \displaystyle \int e^u \, du = e^u + C \)
+			\item \( \displaystyle \int b^u \, du = \dfrac{b^u}{\ln b} + C \)
+			\item \( \displaystyle \int \sen u \, du = -\cos u + C \)
+			\item \( \displaystyle \int \cos u \, du = \sen u + C \)
+			\item \( \displaystyle \int \sec^2 u \, du = \tan u + C \)
+		\end{enumerate}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.28\textwidth}
+		\begin{enumerate}
+			\setcounter{enumi}{7}
+		
+			\item \( \displaystyle \int \csc^2 u \, du = -\cot u + C \)
+			\item \( \displaystyle \int \sec u \tan u \, du = \sec u + C \)
+			\item \( \displaystyle \int \csc u \cot u \, du = -\csc u + C \)
+			\item \( \displaystyle \int \tan u \, du = \ln |\sec u| + C \)
+			\item \( \displaystyle \int \cot u \, du = \ln |\sen u| + C \)
+			\item \( \displaystyle \int \sec u \, du = \ln |\sec u + \tan u| + C \)
+		\end{enumerate}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.28\textwidth}
+		\begin{enumerate}
+			\setcounter{enumi}{14}
+			\item \( \displaystyle \int \csc u \, du = \ln |\csc u - \cot u| + C \)
+			\item \( \displaystyle \int \dfrac{du}{\sqrt{a^2 - u^2}} = \sen^{-1} \dfrac{u}{a} + C, \quad a > 0 \)
+			\item \( \displaystyle \int \dfrac{du}{a^2 + u^2} = \dfrac{1}{a} \tan^{-1} \dfrac{u}{a} + C \)
+			\item \( \displaystyle \int \dfrac{du}{u\sqrt{u^2 - a^2}} = \dfrac{1}{a} \sec^{-1} \dfrac{u}{a} + C \)
+			\item \( \displaystyle \int \dfrac{du}{a^2 - u^2} = \dfrac{1}{2a} \ln \left| \dfrac{u+a}{u-a} \right| + C \)
+			\item \( \displaystyle \int \dfrac{du}{u^2 - a^2} = \dfrac{1}{2a} \ln \left| \dfrac{u-a}{u+a} \right| + C \)
+		\end{enumerate}
+	\end{minipage}
+\end{mybox}
+
+
+\vspace{-0.5cm}
+
+\begin{mybox}{\textbf{\large \color{blue}Formas que involucran \( \sqrt{a^2 + u^2} \), \quad \( a > 0 \)}}
+	\begin{enumerate}
+		\setcounter{enumi}{20}
+		\item \( \displaystyle \int \sqrt{a^2 + u^2} \, du = \dfrac{u}{2} \sqrt{a^2 + u^2} + \dfrac{a^2}{2} \ln (u + \sqrt{a^2 + u^2}) + C \)
+		\item \( \displaystyle \int u^2 \sqrt{a^2 + u^2} \, du = \dfrac{u}{8} (a^2 + 2u^2) \sqrt{a^2 + u^2} - \dfrac{a^4}{8} \ln (u + \sqrt{a^2 + u^2}) + C \)
+		\item \( \displaystyle \int \dfrac{\sqrt{a^2 + u^2}}{u} \, du = \sqrt{a^2 + u^2} - a \ln \left| \dfrac{a + \sqrt{a^2 + u^2}}{u} \right| + C \)
+		\item \( \displaystyle \int \dfrac{\sqrt{a^2 + u^2}}{u^2} \, du = -\dfrac{\sqrt{a^2 + u^2}}{u} + \ln (u + \sqrt{a^2 + u^2}) + C \)
+		\item \( \displaystyle \int \dfrac{du}{\sqrt{a^2 + u^2}} = \ln (u + \sqrt{a^2 + u^2}) + C \)
+		\item \( \displaystyle \int \dfrac{u^2 \, du}{\sqrt{a^2 + u^2}} = \dfrac{u}{2} \sqrt{a^2 + u^2} - \dfrac{a^2}{2} \ln (u + \sqrt{a^2 + u^2}) + C \)
+		
+		\begin{minipage}[t]{0.48\textwidth}
+			\item \( \displaystyle \int \dfrac{du}{u\sqrt{a^2 + u^2}} = -\dfrac{1}{a} \ln \left| \dfrac{\sqrt{a^2 + u^2} + a}{u} \right| + C \)
+		\end{minipage}%
+		\hfill
+		\begin{minipage}[t]{0.48\textwidth}
+			\item \( \displaystyle \int \dfrac{du}{u^2 \sqrt{a^2 + u^2}} = -\dfrac{\sqrt{a^2 + u^2}}{a^2 u} + C \)
+		\end{minipage}
+			
+			\item \( \displaystyle \int \dfrac{du}{(a^2 + u^2)^{3/2}} = \dfrac{u}{a^2 \sqrt{a^2 + u^2}} + C \)
+		\end{enumerate}
+	\end{mybox}
+
+
+
+\begin{mybox}{\textbf{\large \color{blue}Formas que involucran $\sqrt{a^2 - u^2}$, \quad $a > 0$}}
+	\begin{enumerate}
+		\setcounter{enumi}{29}
+		\item $\displaystyle \int \sqrt{a^2 - u^2} \, du = \frac{u}{2} \sqrt{a^2 - u^2} + \frac{a^2}{2} \sin^{-1} \frac{u}{a} + C$
+		\item $\displaystyle \int u^2 \sqrt{a^2 - u^2} \, du = \frac{u}{8} (2u^2 - a^2) \sqrt{a^2 - u^2} + \frac{a^4}{8} \sin^{-1} \frac{u}{a} + C$
+		\item $\displaystyle \int \frac{\sqrt{a^2 - u^2}}{u} \, du = \sqrt{a^2 - u^2} - a \ln \left| \frac{a + \sqrt{a^2 - u^2}}{u} \right| + C$
+		\item $\displaystyle \int \frac{\sqrt{a^2 - u^2}}{u^2} \, du = -\frac{1}{u} \sqrt{a^2 - u^2} - \sin^{-1} \frac{u}{a} + C$
+		\item $\displaystyle \int \frac{u^2 \, du}{\sqrt{a^2 - u^2}} = \frac{u}{2} \sqrt{a^2 - u^2} - \frac{a^2}{2} \sin^{-1} \frac{u}{a} + C$
+		\item $\displaystyle \int \frac{du}{u \sqrt{a^2 - u^2}} = \frac{1}{a} \ln \left| \frac{a + \sqrt{a^2 - u^2}}{u} \right| + C$
+		\item $\displaystyle \int \frac{du}{u^2 \sqrt{a^2 - u^2}} = -\frac{\sqrt{a^2 - u^2}}{a^2 u} + C$
+		\item $\displaystyle \int \frac{(a^2 - u^2)^{3/2} \, du}{u} = \frac{u}{8} (2u^2 - 5a^2) \sqrt{a^2 - u^2} + \frac{3a^4}{8} \sin^{-1} \frac{u}{a} + C$
+		\item $\displaystyle \int \frac{du}{(a^2 - u^2)^{3/2}} = \frac{u}{a^2 \sqrt{a^2 - u^2}} + C$
+	\end{enumerate}
+\end{mybox}
+
+
+
+
+\begin{mybox}{\textbf{\large \color{blue}Formas que involucran $\sqrt{u^2 - a^2}$, \quad $a > 0$}}
+	\begin{enumerate}
+		\setcounter{enumi}{38}
+		\item $\displaystyle \int \sqrt{u^2 - a^2} \, du = \frac{u}{2} \sqrt{u^2 - a^2} - \frac{a^2}{2} \ln |u + \sqrt{u^2 - a^2}| + C$
+		\item $\displaystyle \int u^2 \sqrt{u^2 - a^2} \, du = \frac{u}{8} (2u^2 - a^2) \sqrt{u^2 - a^2} - \frac{a^4}{8} \ln |u + \sqrt{u^2 - a^2}| + C$
+		\item $\displaystyle \int \frac{\sqrt{u^2 - a^2}}{u} \, du = \sqrt{u^2 - a^2} - a \cosh^{-1} \frac{u}{a} + C$
+		\item $\displaystyle \int \frac{\sqrt{u^2 - a^2}}{u^2} \, du = -\frac{\sqrt{u^2 - a^2}}{u} + \ln |u + \sqrt{u^2 - a^2}| + C$
+		\item $\displaystyle \int \frac{du}{\sqrt{u^2 - a^2}} = \ln |u + \sqrt{u^2 - a^2}| + C$
+		\item $\displaystyle \int \frac{u^2 \, du}{\sqrt{u^2 - a^2}} = \frac{u}{2} \sqrt{u^2 - a^2} - \frac{a^2}{2} \ln |u + \sqrt{u^2 - a^2}| + C$
+		
+		\begin{minipage}[t]{0.48\textwidth}
+			\item $\displaystyle \int \frac{du}{u \sqrt{u^2 - a^2}} = \frac{1}{a} \ln \left| \frac{\sqrt{u^2 - a^2} + a}{u} \right| + C$
+		\end{minipage}%
+		\hfill
+		\begin{minipage}[t]{0.48\textwidth}
+			\item $\displaystyle \int \frac{du}{u^2 \sqrt{u^2 - a^2}} = -\frac{\sqrt{u^2 - a^2}}{a^2 u} + C$
+		\end{minipage}
+		
+		\item $\displaystyle \int \frac{du}{(u^2 - a^2)^{3/2}} = \frac{u}{a^2 \sqrt{u^2 - a^2}} + C$
+	\end{enumerate}
+\end{mybox}
+
+
+
+\begin{mybox}{\textbf{\Large \color{blue}Formas que involucran $a + bu$}}
+	\begin{enumerate}
+		\setcounter{enumi}{46} % Para continuar la numeración
+		\item $\displaystyle \int \frac{u \,du}{a + bu} = \frac{1}{b^2} (a + bu - a \ln |a + bu|) + C$
+		\item $\displaystyle \int \frac{u^2 \,du}{a + bu} = \frac{1}{2b^3} \left[ (a + bu)^2 - 4a(a + bu) + 2a^2 \ln |a + bu| \right] + C$
+		\item $\displaystyle \int \frac{du}{a + bu} = \frac{1}{a} \ln \left| \frac{u}{a + bu} \right| + C$
+		\item $\displaystyle \int \frac{du}{u^2(a + bu)} = \frac{1}{a} + \frac{b}{a^2} \ln \left| \frac{a + bu}{u} \right| + C$
+		\item $\displaystyle \int \frac{u \,du}{(a + bu)^2} = \frac{1}{b^2(a + bu)} + \frac{1}{b^2} \ln |a + bu| + C$
+		\item $\displaystyle \int \frac{du}{u(a + bu)^2} = \frac{1}{a(a + bu)} - \frac{a}{a^2} \ln \left| \frac{a + bu}{u} \right| + C$
+		\item $\displaystyle \int \frac{u^2 \,du}{(a + bu)^2} = \frac{1}{b^3} \left( a + bu - \frac{a^2}{a + bu} - 2a \ln |a + bu| \right) + C$
+		\item $\displaystyle \int \sqrt{a + bu} \, du = \frac{2}{15b^2} (3bu - 2a)(a + bu)^{3/2} + C$
+		\item $\displaystyle \int \frac{du}{\sqrt{a + bu}} = \frac{2}{3b^2} (bu - 2a) \sqrt{a + bu} + C$
+		\item $\displaystyle \int \frac{u^2 \,du}{\sqrt{a + bu}} = \frac{2}{15b^3} (8a^2 + 3b^2u^2 - 4abu)\sqrt{a + bu} + C$
+		\item $\displaystyle \int \frac{du}{\sqrt{a + bu}} = \frac{1}{\sqrt{a + bu}} - \frac{\sqrt{a + bu}}{\sqrt{a}} + C, \quad \text{si } a > 0$
+		\item $\quad \quad = \frac{2}{\sqrt{-a}} \tan^{-1} \sqrt{\frac{a + bu}{-a}} + C, \quad \text{si } a < 0$
+		\item $\displaystyle \int \frac{du}{u \sqrt{a + bu}} = 2 \sqrt{a + bu} + a \int \frac{du}{\sqrt{a + bu}}$
+		\item $\displaystyle \int \frac{du}{u^2} = -\frac{\sqrt{a + bu}}{u} + \frac{b}{2} \int \frac{du}{\sqrt{a + bu}}$
+		\item $\displaystyle \int u^n \sqrt{a + bu} \, du = \frac{2}{b(2n + 3)} u^n(a + bu)^{3/2} - \frac{n}{b(2n + 1)} \int u^{n-1} \sqrt{a + bu} \, du$
+		\item $\displaystyle \int \frac{du}{\sqrt{a + bu}} = \ln |\sqrt{a + bu} + a| + C$
+		\item $\displaystyle \int \frac{u \,du}{\sqrt{a + bu}} = \frac{2u^2 + a}{b(2n + 1)} - \frac{2na}{b(2n + 1)} \int \frac{du}{\sqrt{a + bu}}$
+		\item $\displaystyle \int \frac{du}{\sqrt{a + bu}} = \frac{b(2n - 3)}{2a(2n - 1)} \int \frac{du}{\sqrt{a + bu}}$
+	\end{enumerate}
+\end{mybox}
+
+
+\newpage
+
+
+\section*{\textbf{\color{blue}Formas trigonométricas}}
+
+\noindent
+\begin{minipage}{0.32\textwidth}
+	\begin{align*}
+		63. & \int \sen^2 u \, du = \frac{1}{2} u - \frac{1}{4} \sen 2u + C \\[8pt]
+		64. & \int \cos^2 u \, du = \frac{1}{2} u + \frac{1}{4} \sen 2u + C \\[8pt]
+		65. & \int \tan^2 u \, du = \tan u - u + C \\[8pt]
+		66. & \int \cot^2 u \, du = -\cot u - u + C \\[8pt]
+		67. & \int \sen^3 u \, du = -\frac{1}{3} (2 + \sen^2 u) \cos u + C \\[8pt]
+		68. & \int \cos^3 u \, du = \frac{1}{3} (2 + \cos^2 u) \sen u + C \\[8pt]
+		69. & \int \tan^3 u \, du = \frac{1}{2} \tan^2 u + \ln |\cos u| + C \\[8pt]
+		70. & \int \cot^3 u \, du = -\frac{1}{2} \cot^2 u - \ln |\sen u| + C
+	\end{align*}
+\end{minipage}
+%\hfill
+
+\begin{minipage}{0.32\textwidth}
+	\begin{align*}
+		79. & \int \sen au \sen bu \, du = \frac{\sen (a-b)u}{2(a-b)} - \frac{\sen (a+b)u}{2(a+b)} + C \\[8pt]
+		80. & \int \cos au \cos bu \, du = \frac{\sen (a-b)u}{2(a-b)} + \frac{\sen (a+b)u}{2(a+b)} + C \\[8pt]
+		81. & \int \sen au \cos bu \, du = -\frac{\cos (a-b)u}{2(a-b)} - \frac{\cos (a+b)u}{2(a+b)} + C \\[8pt]
+		82. & \int u \sen u \, du = \sen u - u \cos u + C \\[8pt]
+		83. & \int u \cos u \, du = \cos u + u \sen u + C \\[8pt]
+		84. & \int u^n \sen u \, du = -u^n \cos u + n \int u^{n-1} \cos u \, du \\[8pt]
+		85. & \int u^n \cos u \, du = u^n \sen u - n \int u^{n-1} \sen u \, du \\[8pt]
+		86. & \int \sen^n u \cos^m u \, du = -\frac{\sen^{n-1} u \cos^{m+1} u}{n+m} + \frac{n-1}{n+m} \int \sen^{n-2} u \cos^m u \, du \\[8pt]
+		& = \frac{\sen^{n+1} u \cos^{m-1} u}{n+m} + \frac{m-1}{n+m} \int \sen^{n-2} u \cos^{m-2} u \, du
+	\end{align*}
+\end{minipage}
+
+%\hfill
+
+\begin{minipage}{0.32\textwidth}
+	\begin{align*}
+		71. & \int \sec^3 u \, du = \frac{1}{2} \sec u \tan u + \frac{1}{2} \ln |\sec u + \tan u| + C \\[8pt]
+		72. & \int \csc^3 u \, du = -\frac{1}{2} \csc u \cot u + \frac{1}{2} \ln |\csc u - \cot u| + C \\[8pt]
+		73. & \int \sen^n u \, du = -\frac{1}{n} \sen^{n-1} u \cos u + \frac{n-1}{n} \int \sen^{n-2} u \, du \\[8pt]
+		74. & \int \cos^n u \, du = \frac{1}{n} \cos^{n-1} u \sen u + \frac{n-1}{n} \int \cos^{n-2} u \, du \\[8pt]
+		75. & \int \tan^n u \, du = \frac{1}{n-1} \tan^{n-1} u - \int \tan^{n-2} u \, du \\[8pt]
+		76. & \int \cot^n u \, du = \frac{-1}{n-1} \cot^{n-1} u - \int \cot^{n-2} u \, du \\[8pt]
+		77. & \int \sec^n u \, du = \frac{1}{n-1} \tan u \sec^{n-2} u + \frac{n-2}{n-1} \int \sec^{n-2} u \, du \\[8pt]
+		78. & \int \csc^n u \, du = \frac{-1}{n-1} u \csc^{n-2} u + \frac{n-2}{n-1} \int \csc^{n-2} u \, du
+	\end{align*}
+\end{minipage}
+
+
+\vspace{0.5cm}
+
+% Trigonométricas inversas
+\section*{\textbf{\color{blue}Formas trigonométricas inversas}}
+
+	
+		\begin{minipage}{0.48\textwidth}
+		\begin{align*}
+			87. & \int \sen^{-1} u \, du = u \sen^{-1} u + \sqrt{1 - u^2} + C \\[8pt]
+			88. & \int \cos^{-1} u \, du = u \cos^{-1} u - \sqrt{1 - u^2} + C \\[8pt]
+			89. & \int \tan^{-1} u \, du = u \tan^{-1} u - \frac{1}{2} \ln(1 + u^2) + C \\[8pt]
+			90. & \int \sen^{-1} u \, du = \frac{2u^2 - 1}{4} \sen^{-1} u + \frac{\sqrt{1 - u^2}}{4} + C \\[8pt]
+			91. & \int \cos^{-1} u \, du = \frac{2u^2 - 1}{4} \cos^{-1} u - \frac{\sqrt{1 - u^2}}{4} + C
+		\end{align*}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.48\textwidth}
+		\begin{align*}
+			92. & \int u \tan^{-1} u \, du = \frac{u^2 + 1}{2} \tan^{-1} u - \frac{u}{2} + C \\[8pt]
+			93. & \int u^n \sen^{-1} u \, du = \frac{1}{n+1} \left[ u^{n+1} \sen^{-1} u - \int \frac{u^{n+1} du}{\sqrt{1 - u^2}} \right], \quad n \neq -1 \\[8pt]
+			94. & \int u^n \cos^{-1} u \, du = \frac{1}{n+1} \left[ u^{n+1} \cos^{-1} u - \int \frac{u^{n+1} du}{\sqrt{1 - u^2}} \right], \quad n \neq -1 \\[8pt]
+			95. & \int u^n \tan^{-1} u \, du = \frac{1}{n+1} \left[ u^{n+1} \tan^{-1} u - \int \frac{u^{n+1} du}{1 + u^2} \right], \quad n \neq -1
+		\end{align*}
+	\end{minipage}
+	
+	\newpage
+
+
+% Exponenciales y logarítmicas
+\section*{\textbf{\color{blue}Formas exponenciales y logarítmicas}}
+
+\begin{minipage}{0.48\textwidth}
+	\begin{align*}
+		96. & \int u e^u \, du = \frac{1}{a^2} (au - 1)e^u + C \\[8pt]
+		97. & \int u^n e^{au} \, du = \frac{1}{a} \left[ u^n e^{au} - \frac{n}{a} \int u^{n-1} e^{au} \, du \right] \\[8pt]
+		98. & \int e^{au} \sen bu \, du = \frac{e^{au}}{a^2 + b^2} (a \sen bu - b \cos bu) + C \\[8pt]
+		99. & \int e^{au} \cos bu \, du = \frac{e^{au}}{a^2 + b^2} (a \cos bu + b \sin bu) + C
+	\end{align*}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+	\begin{align*}
+		100. & \int \ln u \, du = u \ln u - u + C \\[8pt]
+		101. & \int u^n \ln u \, du = \frac{u^{n+1}}{(n+1)^2} \left[ (n+1) \ln u - 1 \right] + C \\[8pt]
+		102. & \int \frac{1}{u} \ln u \, du = \ln |\ln u| + C
+	\end{align*}
+\end{minipage}
+
+
+
+
+
+
+
+\vspace{10pt}
+
+% Hiperbólicas
+
+\section*{\textbf{\color{blue}Formas hiperbólicas}}
+
+	\begin{minipage}{0.48\textwidth}
+	\begin{align*}
+		103. & \int \senh u \, du = \cosh u + C \\[8pt]
+		104. & \int \cosh u \, du = \senh u + C \\[8pt]
+		105. & \int \tanh u \, du = \ln |\cosh u| + C \\[8pt]
+		106. & \int \coth u \, du = \ln |\senh u| + C \\[8pt]
+		107. & \int \sech u \, du = \tan^{-1} |\senh u| + C
+	\end{align*}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+	\begin{align*}
+		108. & \int \csch u \, du = \ln |\tanh \frac{u}{2}| + C \\[8pt]
+		109. & \int \sech^2 u \, du = \tanh u + C \\[8pt]
+		110. & \int \csch^2 u \, du = -\coth u + C \\[8pt]
+		111. & \int \sech u \tanh u \, du = -\sech u + C \\[8pt]
+		112. & \int \csch u \coth u \, du = -\csch u + C
+	\end{align*}
+\end{minipage}
+
+
+
+\section*{\textbf{\color{blue}Transformadas de Laplace}}
+
+\begin{center}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{ll}
+	\hline
+	\( f(t) \) & \( \mathcal{L} \{ f(t) \} = F(s) \) \\
+	\hline
+	1. \( 1 \) & \( \displaystyle \frac{1}{s} \) \\
+	
+	2. \( t \) & \( \displaystyle \frac{1}{s^2} \) \\
+	
+	3. \( t^n \) & \( \displaystyle \frac{n!}{s^{n+1}}, \quad n \text{ entero positivo} \) \\
+	
+	4. \( t^{-1/2} \) & \( \displaystyle \sqrt{\frac{\pi}{s}} \) \\
+	
+	5. \( t^{1/2} \) & \( \displaystyle \frac{\sqrt{\pi}}{2s^{3/2}} \) \\
+	
+	6. \( t^\alpha \) & \( \displaystyle \frac{\Gamma(\alpha+1)}{s^{\alpha+1}}, \quad \alpha > -1 \) \\
+	
+	7. \( \sen kt \) & \( \displaystyle \frac{k}{s^2 + k^2} \) \\
+	
+	8. \( \cos kt \) & \( \displaystyle \frac{s}{s^2 + k^2} \) \\
+	
+	9. \( \sen^2 kt \) & \( \displaystyle \frac{2k^2}{s(s^2 + 4k^2)} \) \\
+	
+	10. \( \cos^2 kt \) & \( \displaystyle \frac{s^2 + 2k^2}{s(s^2 + 4k^2)} \) \\
+	
+	11. \( e^{at} \) & \( \displaystyle \frac{1}{s - a} \) \\
+	
+	12. \( \senh kt \) & \( \displaystyle \frac{k}{s^2 - k^2} \) \\
+
+	13. \( \cosh kt \) & \( \displaystyle \frac{s}{s^2 - k^2} \) \\
+	
+	14. \( \senh^2 kt \) & \( \displaystyle \frac{2k^2}{s(s^2 - 4k^2)} \) \\
+	
+	15. \( \cosh^2 kt \) & \( \displaystyle \frac{s^2 - 2k^2}{s(s^2 - 4k^2)} \) \\
+	
+	16. \( t e^{at} \) & \( \displaystyle \frac{1}{(s-a)^2} \) \\
+	
+	17. \( t^n e^{at} \) & \( \displaystyle \frac{n!}{(s-a)^{n+1}}, \quad n \text{ entero positivo} \) \\
+	18. \( e^{at} \operatorname{sen}kt \) &  \(\displaystyle \dfrac{k}{(s-a)^{2}+k^{2}} \)
+
+\end{tabular}
+\end{center}
+
+\begin{comment}
+	
+
+\begin{center}
+	\renewcommand{\arraystretch}{2}
+	\begin{tabular}{lcl}
+		f(0) && \displaystyle 2tf(0)=F(0) \\
+		\\
+		18. & \displaystyle e^{at}\operatorname{sen}kt & \displaystyle \dfrac{k}{(s-a)^{2}+k^{2}} \\
+		\\
+		19. & \displaystyle e^{at}\cos kt & \displaystyle \dfrac{s-a}{(s-a)^{2}+k^{2}} \\
+		\\
+		20. & \displaystyle e^{at}\operatorname{senh}kt & \displaystyle \dfrac{k}{(s-a)^{2}-k^{2}} \\
+		\\
+		21. & \displaystyle e^{at}\cosh kt & \displaystyle \dfrac{s-a}{(s-a)^{2}-k^{2}} \\
+		\\
+		22. & \displaystyle t\operatorname{sen}kt & \displaystyle \dfrac{2ks}{(s^{2}+k^{2})^{2}} \\
+		\\
+		23. & \displaystyle t\cos kt & \displaystyle \dfrac{s^{3}-k^{2}}{(s^{2}+k^{2})^{2}} \\
+		\\
+		24. & \displaystyle \operatorname{sen}kt+kt\cos kt & \displaystyle \dfrac{2ks^{2}}{(s^{2}+k^{2})^{2}} \\
+		\\
+		25. & \displaystyle \operatorname{sen}kt-kt\cos kt & \displaystyle \dfrac{2k^{2}}{(s^{2}+k^{2})^{2}} \\
+		\\
+		26. & \displaystyle t\operatorname{senh}kt & \displaystyle \dfrac{2ks}{(s^{2}-k^{2})^{2}} \\
+		\\
+		27. & \displaystyle t\cosh kt & \displaystyle \dfrac{s^{3}+k^{2}}{(s^{2}-k^{2})^{2}} \\
+		\\
+		28. & \displaystyle \dfrac{e^{at}-e^{bt}}{a-b} & \displaystyle \dfrac{1}{(s-a)(s-b)} \\
+		\\
+		29. & \displaystyle \dfrac{ae^{at}-be^{bt}}{a-b} & \displaystyle \dfrac{s}{(s-a)(s-b)} \\
+		\\
+		30. & \displaystyle 1-\cos kt & \displaystyle \dfrac{k^{2}}{s(s^{2}+k^{2})} \\
+		\\
+		31. & \displaystyle kt-\operatorname{sen}kt & \displaystyle \dfrac{k^{2}}{s^{2}(s^{2}+k^{2})} \\
+		\\
+		32. & \displaystyle \dfrac{a\operatorname{sen}bt-b\operatorname{sen}at}{ab(a^{2}-b^{2})} & \displaystyle \dfrac{1}{(s^{2}+a^{2})(s^{2}+b^{2})} \\
+		\\
+		33. & \displaystyle \dfrac{\cos bt-\cos at}{a^{2}-b^{2}} & \displaystyle \dfrac{s}{(s^{2}+a^{2})(s^{2}+b^{2})} \\
+		\\
+		34. & \displaystyle \operatorname{sen}kt\operatorname{senh}kt & \displaystyle \dfrac{2k^{2}s}{s^{4}+4k^{4}} \\
+		\\
+		35. & \displaystyle \operatorname{sen}kt\cosh kt & \displaystyle \dfrac{k(k^{2}+2k^{2})}{s^{4}+4k^{4}} \\
+		\\
+		36. & \displaystyle \cos kt\operatorname{senh}kt & \displaystyle \dfrac{k(k^{2}-2k^{2})}{s^{4}+4k^{4}} \\
+		\\
+		37. & \displaystyle \cos kt\cosh kt & \displaystyle \dfrac{s^{3}}{s^{4}+4k^{4}} \\
+	\end{tabular}
+\end{center}
+
+
+\end{comment}
+
+\end{fullwidth}
+
+
+
+
+
+
+
+
+
+

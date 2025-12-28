@@ -1,0 +1,1207 @@
+\mychapter{Funciones especiales como soluci\'on de un problema de Sturm-Louville }{\begin{wrapfigure}{l}{0.45\textwidth}
+		\centering
+		\includegraphics[width=0.45\textwidth]{imagen/img8.png}
+	\end{wrapfigure} El estudio de las ecuaciones de Sturm–Liouville constituye un puente fundamental entre la teoría de ecuaciones diferenciales y la aparición de funciones especiales en contextos físicos y matemáticos. Estos problemas, caracterizados por operadores diferenciales autoadjuntos y condiciones de frontera, permiten la construcción de sistemas de funciones ortogonales que forman la base para el análisis de soluciones de gran diversidad de fenómenos.
+	
+	\vspace{0.5cm}
+	
+	En este capítulo se mostrará cómo diversos conjuntos de funciones especiales clásicas —como los polinomios de Legendre, Hermite, Laguerre, Chebyshev, así como las funciones de Bessel— emergen de manera natural como soluciones de problemas de Sturm–Liouville. Cada una de estas funciones se obtiene al imponer condiciones específicas que reflejan la naturaleza del sistema modelado, desde vibraciones de membranas y ondas esféricas, hasta la descripción cuántica de osciladores armónicos y potenciales centrales.
+	
+	\vspace{0.5cm}
+	
+	Asimismo, se introducirá el concepto de función de Green como autofunción asociada a un operador de Sturm–Liouville, junto con la importancia de los problemas con valores en la frontera. De esta manera, el lector comprenderá que las funciones especiales no son entidades aisladas, sino parte de una teoría unificada que surge del análisis de operadores diferenciales y de las condiciones físicas impuestas en los sistemas.}
+	
+	 \addtocontents{toc}{\protect\figuretoc{imagen/img8.png}}
+	
+	\textcolor[rgb]{0.00,0.50,0.25}{Teoria de sturm-liouville,definir que es el espacio $L^{2}$, un espacio de hilbert y pre-hilbert, ejemplos, definir el operador, el operador adjunto, propiedades, ejemplos, problemas de sturm liouville y clasificaciones(dirichlet,newman,cauchy)}
+	
+	\textcolor{red}{clasificacion de los problemas de sturm-liouville de acuerdo a las condiciones, propiedades de los problemas de sturm-liouville(las funciones propias de un problema de sturm-liouville forman un sistema ortogonal)}
+	\textcolor{red}{calcular las normas de los polinomios especiales}
+	\section{Funci\'on de Green como autofunciones}
+	We continue to consider the operator
+	$$
+	L[y(x)]=\left[p(x) y^{\prime}(x)\right]^{\prime}+q(x) y(x)
+	$$
+	We want to solve
+	$$
+	\begin{gathered}
+		L[y(x)]=-f(x) \\
+		y(0)=0, \quad y(1)=0
+	\end{gathered}
+	$$
+	Suppose that $\left\{\phi_n\right\}$ is a complete orthonormal basis for the vector space consisting of eigenvectors of $L$ that satisfy the boundary conditions, and that $\lambda_n$ is the eigenvalue of $\phi_n$. We assume the inner product
+	$$
+	\langle f(x), g(x)\rangle=\displaystyle\int_0^1 f(x) g(x) d x .
+	$$
+	Then we have
+	$$
+	f(x)=\displaystyle\sum f_n \phi_n(x), \quad y(x)=\displaystyle\sum y_n \phi_n(x),
+	$$
+	where
+	$$
+	f_n=\left\langle f(x), \phi_n(x)\right\rangle=\displaystyle\int_0^1 f(x) \phi_n(x) d x .
+	$$
+	We must find the $y_n \mathrm{~s}$.
+	Since $L$ is a linear operator and $\phi_n(x)$ is an eigenvector of $L$ with eigenvalue $\lambda_n$ for each $n$, we have
+	$$
+	L[y(x)]=L\left(\displaystyle\sum y_n \phi_n(x)\right)=\displaystyle\sum y_n \lambda_n \phi_n(x) .
+	$$
+	So, from $L[y(x)]=-f(x)$, we get
+	$$
+	\displaystyle\sum y_n \lambda_n \phi_n(x)=-\displaystyle\sum f_n \phi_n(x),
+	$$
+	and, since $\left\{\phi_n(x)\right\}$ is a basis,
+	$$
+	y_n \lambda_n=-f_n .
+	$$
+	Now, 0 is not an eigenvalue, so $y_n=-\frac{f_n}{\lambda_n}$, and thus
+	$$
+	y(x)=\displaystyle\sum y_n \phi_n(x)=-\displaystyle\sum \frac{f_n}{\lambda_n} \phi_n(x) .
+	$$
+	We now want to find $G(x, t)$ so that
+	$$
+	y(x)=\displaystyle\int_0^1 G(x, t) f(t) d t ;
+	$$
+	that is, we want to find the Green's function.
+	Recall
+	$$
+	f_n=\displaystyle\int_0^1 f(t) \phi_n(t) d t
+	$$
+	so
+	$$
+	\begin{aligned}
+		y(x) & =-\displaystyle\sum \frac{\phi_n(x)}{\lambda_n} f_n=-\displaystyle\sum \frac{\phi_n(x)}{\lambda_n} \displaystyle\int_0^1 f(t) \phi_n(t) d t=-\displaystyle\sum \displaystyle\int_0^1 \frac{\phi_n(x) \phi_n(t)}{\lambda_n} f(t) d t \\
+		& =-\displaystyle\int_0^1\left(\displaystyle\sum \frac{\phi_n(x) \phi_n(t)}{\lambda_n}\right) f(t) d t
+	\end{aligned}
+	$$
+	where we have assumed moving the summation inside the integral is legitimate. Thus,
+	\begin{equation}\label{eq11}
+		G(x, t)=-\displaystyle\sum \frac{\phi_n(x) \phi_n(t)}{\lambda_n} .
+	\end{equation}
+	Clearly, to find the Green's function using this method, the crucial step is to find the eigenvalues and eigenfunctions for $L$ that satisfy the initial conditions.
+	We note that some authors consider the problem
+	$$
+	\bar{L}[y(x)]+\mu y(x)=\left[p(x) y^{\prime}(x)\right]^{\prime}+\bar{q}(x) y(x)+\mu y(x)=-f(x),
+	$$
+	where $\mu$ is not an eigenvalue of $\bar{L}$ (but now 0 may be an eigenvalue of $\bar{L}$ ) and obtain the Green's function
+	\begin{equation}\label{eq12}
+		\bar{G}(x, t)=-\displaystyle\sum \frac{\phi_n(x) \phi_n(t)}{\lambda_n-\mu} .
+	\end{equation}
+	By adjusting either $q(x)$ or $\bar{q}(x)$ either problem can be changed into the other. The preference would be for the version for which the eigenvalues/ eigenvectors are easier to find.
+	
+	\Example{Use the eigenfunction expansion to find the Green's}{Use the eigenfunction expansion to find the Green's function for
+		$$
+		y^{\prime \prime}(x)+y(x)=-f(x), \quad y(0)=0, \quad y(1)=0
+		$$}
+	
+	\begin{demo}
+		We consider the second form of the problem with $L[y(x)]=y^{\prime \prime}(x)$ and $\mu=1$.
+		The eigenvalues and eigenfunctions for are
+		$$
+		\begin{gathered}
+			L[y(x)]=y^{\prime \prime}(\mathrm{x}) \\
+			y(x)=\sin (a x), \quad y(x)=\cos (a x),
+		\end{gathered}
+		$$
+		each with eigenvalue $-a^2$.
+		We now find the eigenvalues for which the eigenfunctions satisfy the initial conditions. Suppose
+		$$
+		y(x)=A \sin (a x)+B \cos (a x)
+		$$
+		and $y(0)=0$. Then $B=0$. If $y(1)=0$, then
+		$$
+		y(1)=0=A \sin \alpha
+		$$
+		so $\alpha=n \pi$ where $n$ is an integer. (Otherwise, we have only the trivial solution.) The eigenvalue of $L$ for the eigenfunction $\psi_n(x)=\sin (n \pi x)$ is $-(n \pi)^2$. Since
+		$$
+		\int_0^1 \sin ^2(n \pi x) d x=\frac{1}{2}, \quad \text { then }\left\|\psi_n(x)\right\|=\frac{1}{\sqrt{2}} .
+		$$
+		Thus, $\{\sqrt{2} \sin (n \pi x)\}=\left\{\phi_n(x)\right\}$ is an orthonormal set of eigenfunctions for $L$ that satisfy the initial conditions. So, according to equation (\ref{eq12}), the Green's function for this example is
+		$$
+		G(x, t)=-\displaystyle\sum \frac{\phi_n(x) \phi_n(t)}{\lambda_n-\mu}=-\displaystyle\sum \frac{[\sqrt{2} \sin (n \pi x)][\sqrt{2} \sin (n \pi t)]}{-(n \pi)^2-1} .
+		$$
+	\end{demo}
+	\section{Problemas con valores en la frontera}
+	Hasta ahora, nos hemos concentrado s\'olo en problemas de valor inicial, en los que para una ED dada las condiciones suplementarias sobre la funci\'on desconocida y sus derivadas se prescriben en un valor fijo $x_0$ de la variable independiente $x$. Sin embargo, hay una variedad de otras condiciones posibles que son importantes en las aplicaciones. En muchos problemas pr\'acticos, los requisitos adicionales se dan en forma de condiciones de contorno: la funci\'on desconocida y algunas de sus derivadas se fijan en m\'as de un valor de la variable independiente $x$. La ED junto con las condiciones de contorno se conoce como un problema de valor de contorno. En esta secci\'on proporcionaremos una condici\'on necesaria y suficiente para que un problema de valor de contorno dado tenga una soluci\'on \'unica. Antes de tratar la condici\'on de suficiencia y necesidad vamos a tratar la definici\'on de un problema de valor de contorno.
+	\Definition{Problema con valores en la frontera}{ Si en la ecuaci\'on diferencial \ref{EDON} consideramos el caso de la ecuaci\'on lineal de segundo orden
+		\begin{equation}\label{ED2O}
+			a_{2}(x)y^{\prime \prime}(x)+a_{1}(x)y^{\prime}(x)+a_{0}(x)y(x)=g(x)
+		\end{equation} donde las funciones $a_{2}(x), a_{1}(x), a_{0}(x)$ y $g(x)$ son continuas en un intervalo $I=[\alpha, \beta]$. La ED (\ref{ED2O}) conjuntamente con las condiciones de frontera de la forma
+		\begin{equation}\label{CondFrontera}
+			\begin{aligned}
+				& \ell_1[y]=a_0 y(\alpha)+a_1 y^{\prime}(\alpha)+b_0 y(\beta)+b_1 y^{\prime}(\beta)=A \\
+				& \ell_2[y]=c_0 y(\alpha)+c_1 y^{\prime}(\alpha)+d_0 y(\beta)+d_1 y^{\prime}(\beta)=B
+			\end{aligned}
+		\end{equation} con $a_i,\, b_i,\, c_i,\, d_i,\, i=0,1$ y $A, B$ son constantes conocidas se denomina \textbf{problema de valor l\'imite lineal de dos puntos no homog\'eneo.}}
+	Para el caso de que $g(x)=0$ y $A=B=0$ tenemos la expresi\'on
+	\begin{equation}\label{ED2O}
+		a_{2}(x)y^{\prime \prime}(x)+a_{1}(x)y^{\prime}(x)+a_{0}(x)y(x)=0
+	\end{equation}
+	\begin{equation}\label{CondFrontera0}
+		\begin{aligned}
+			& \ell_1[y]=0 \\
+			& \ell_2[y]=0
+		\end{aligned}
+	\end{equation}
+	que se llama \textbf{problema de valor l\'imite lineal de dos puntos homog\'eneo}.\\
+	Las condiciones de frontera (\ref{CondFrontera}) son bastante generales y en particular incluyen los casos
+	\begin{itemize}
+		\item Si en (\ref{CondFrontera}) tenemos que $a_{0}=d_{0}=1,\;a_{1}=b_{0}=b_{1}=c_{0}=c_{1}=d_{1}$ tenemos la condici\'on de frontera que se llama \textbf{condici\'on de Dirichlet}
+		\begin{equation}\label{Condirichlet}
+			y(\alpha)=A, \quad y(\beta)=B
+		\end{equation}
+		\item Si en (\ref{CondFrontera}) tenemos que $a_{1}=d_{0}=1,\;a_{0}=b_{0}=b_{1}=c_{0}=c_{1}=d_{1}$ tenemos la condici\'on de frontera que se llama \textbf{condici\'on de Neumann}
+		\begin{equation}\label{Condirichlet}
+			y^{\prime}(\alpha)=A, \quad y^{\prime}(\beta)=B
+		\end{equation}
+		\item Si en (\ref{CondFrontera}) tenemos que $a_{0}=b_{1}=c_{1}=d_{1}=1$ con $a_{1}=b_{0}=c_{0}=d_{0}=0$  tenemos la  condici\'on de frontera que se llama \textbf{condici\'on de Cauchy}  \begin{equation}\label{CondCauchy}
+			\begin{aligned}
+				&y(\alpha)=A, \quad y^{\prime}(\beta)=B\\
+				&y^{\prime}(\alpha)=A, \quad y(\beta)=B
+			\end{aligned}
+		\end{equation}
+		\item Si en (\ref{CondFrontera}) tenemos que $b_{0}=b_{1}=c_{0}=c_{1}=0$  tenemos la condici\'on de frontera que se llama \textbf{condici\'on de Sturm-Liouville } 
+		\begin{equation}\label{Condliouville}
+			\begin{aligned}
+				& a_0 y(\alpha)+a_1 y^{\prime}(\alpha)=A \\
+				& d_0 y(\beta)+d_1 y^{\prime}(\beta)=B
+			\end{aligned}
+		\end{equation} con $a_0^2+a_1^2 \neq 0\; \text {y}\; d_0^2+d_1^2 \neq 0$.
+		\item Si en (\ref{CondFrontera}) tenemos que $a_{0}=c_{1}=1$, $b_{0}=d_{1}=-1,$ con $a_{1}=b_{1}=c_{0}=c_{1}=0$ y $A=B=0$ tenemos la condici\'on de frontera que se llama \textbf{condici\'on de frontera peri\'odica} 
+		\begin{equation}\label{Condliouville}
+			y(\alpha)=y(\beta), \quad y^{\prime}(\alpha)=y^{\prime}(\beta)
+		\end{equation}
+	\end{itemize}
+	El problema  de valores en la frontera (\ref{ED2O}) , (\ref{CondFrontera}) se llama \textbf{regular} si $\alpha$ como $\beta$ son valores finito, y la funci\'on $a_{2}(x)\neq 0$ para toda $x \in I$. Si $\alpha=-\infty$ y/o $\beta=\infty$ y/o $a_{2}(x)=0$ para al menos un valor de $x \in I$, entonces el problema  (\ref{ED2O}) , (\ref{CondFrontera}) se llama \textbf{singular}.\\
+	Una soluci\'on del problema de valores en la frontera (\ref{ED2O}) , (\ref{CondFrontera}), es una soluci\'on de ED (\ref{ED2O}) que satisface las condiciones de fronteras dada en (\ref{CondFrontera}).\\
+	La teoria de la existencia y unicidad de los problemas de valores en la frontera es m\'as exigente que la teor\'ia de los problemas de valores iniciales, en los siguientes ejemplos analizamos la existencia y unicidad de una soluci\'on de cierto problemas de valores iniciales y como cambia el comportamiento de la soluci\'on al resolver la misma ED con condiciones de frontera y viceversa.
+	\Example{ Problema de valores iniciales vs problema de valores en la frontera }{ Analiza la soluci\'on de la ED dada por 
+		\begin{equation}\label{esim}
+			y^{\prime \prime}+y=0
+		\end{equation} sujeta a las condiciones
+		\begin{enumerate}
+			\item \begin{equation}\label{con1}
+				y\left(0\right)=w_{1}\qquad y^{\prime}\left(0\right)=w_{2}\qquad w_{1},w_{2}\in \mathrm{R}
+			\end{equation}
+			\item \begin{equation}\label{con2}
+				y\left(0\right)=0\qquad y\left(\pi\right)=B,\quad B\neq 0
+			\end{equation}
+	\end{enumerate} }
+	\begin{sol}
+		La ecuaci\'on diferencial (\ref{esim}) es un caso particular de la ecuaci\'on diferencial (\ref{ek}) y cuya soluci\'on general est\'a dada por (\ref{solk}), de manera que la soluci\'on de la ecuaci\'on (\ref{esim}) se obtiene de (\ref{solk}) para $k=1$, as\'i
+		\begin{equation}\label{sole}
+			y=c_1 \cos \left(x\right)+c_2\sin\left(x\right)
+		\end{equation}
+		Es la soluci\'on de (\ref{esim}).
+		\begin{enumerate}
+			\item Ahora aplicando las condiciones iniciales tenemos
+			\begin{equation*}
+				y\left(0\right)=c_1 \cos \left(0\right)+c_2\sin\left(0\right)=w_{1}
+			\end{equation*}
+			lo que implica que $c_1=w_{1}$, de manera que
+			\begin{equation*}
+				y=w_{1}\cos \left(x\right)+c_2\sin\left(x\right)
+			\end{equation*}
+			Para aplicar la segunda condici\'on derivamos la expresi\'on anterior
+			\begin{equation*}
+				y=-w_{1}\sin \left(x\right)+c_2\cos\left(x\right)
+			\end{equation*} Evaluando la segunda condici\'on
+			\begin{equation*}
+				y^{\prime}\left(0\right)=-w_{1}\sin \left(0\right)c_2\cos\left(0\right)=w_{2}
+			\end{equation*} De donde $c_{2}=w_{2}$, por lo tanto la soluci\'on al problema esta dado por
+			\begin{equation*}
+				y=w_{1}\cos \left(x\right)+w_2\sin\left(x\right)
+			\end{equation*}
+			\item Evaluamos las condiciones de frontera en la soluci\'on de (\ref{esim}), teniendo 
+			\begin{equation*}
+				y\left(0\right)= c_1 \cos \left(0\right)+c_2\sin\left(0\right)=0
+			\end{equation*} Implicando que $c_{1}=0$ quedandonos asi la soluci\'on de la forma
+			\begin{equation*}
+				y=c_2\sin\left(x\right)
+			\end{equation*} Ahora aplicamos la segunda condici\'on, evaluando tenemos
+			\begin{equation*}
+				y\left(0\right)=c_2\sin\left(0\right)=B
+			\end{equation*} Lo cual nos llega a una contradicci\'on ya que $B\neq 0$, por lo que no existe una soluci\'on para el problema (\ref{esim}),(\ref{con2}).
+		\end{enumerate}
+		En el ejercicio anterior hemos visto que las condiciones iniciales y/o de frontera juegan un papel fundamental para la existencia de una soluci\'on de un problema de valores iniciales o de frontera. A continuaci\'on vamos analizar otro ejercicio con igual naturaleza.
+	\end{sol}
+	\Example{ Soluci\'on \'unica vs Infinitas soluciones }{ Analiza la soluci\'on de la ED dada por 
+		\begin{equation*}
+			y^{\prime \prime}+y=0
+		\end{equation*} sujeta a las condiciones
+		\begin{enumerate}
+			\item $y\left(0\right)=0\qquad y\left(\beta\right)=B\quad 0<\beta<\pi$
+			\item $y\left(0\right)=0\qquad y\left(\pi\right)=0$
+	\end{enumerate} }
+	\begin{sol}
+		\begin{enumerate}
+			Sabemos que la soluci\'on de la ED est\'a dada por la expresi\'on (\ref{sole})
+			\item Aplicando las condiciones tenemos
+			\begin{equation*}
+				y\left(0\right)=c_1 \cos \left(0\right)+c_2\sin\left(0\right)=0
+			\end{equation*} Lo que implica que $c_{1}=0$, qued\'andonos as\'i la soluci\'on de la forma
+			\begin{equation*}
+				y=c_2\sin\left(x\right)
+			\end{equation*} Por la segunda condici\'on tenemos
+			\begin{equation}\label{isol}
+				y\left(\beta\right)=c_2\sin\left(\beta\right)=B
+			\end{equation} Despejando a $c_{2}$
+			\begin{equation*}
+				c_{2}=\displaystyle\frac{B}{\sin\left(\beta\right)}
+			\end{equation*} De manera que reemplazando este valor en (\ref{isol}) obtenemos la soluci\'on \'unica para este problema.
+			\begin{equation*}
+				y=\displaystyle\frac{B}{\sin\left(\beta\right)}\sin\left(x\right)
+			\end{equation*}
+			\item De la primera condici\'on tenemos 
+			\begin{equation*}
+				y=c_2\sin\left(x\right)
+			\end{equation*} Aplicando la segunda condici\'on
+			\begin{equation*}
+				y\left(\pi\right)=c_2\sin\left(\pi\right)=0
+			\end{equation*} Implica que $c_{2}$ puede ser cualquier n\'umero real, obteniendo as\'i infinitas soluciones de la forma
+			\begin{equation*}
+				y=c_2\sin\left(x\right) \qquad c_{2}\in\mathcal{R}
+			\end{equation*}
+		\end{enumerate}
+	\end{sol}
+	Es claro que para el problema (\ref{ED2O}), (\ref{CondFrontera0}) la funci\'on constante $y=0$ (soluci\'on trivial) es siempre una soluci\'on. Sin embargo, con los ejemplos anteriores hemos visto que adem\'as de la soluci\'on trivial el problema con valores en la frontera puede tener soluciones no triviales. Esto nos lleva a cuestionarnos bajo qu\'e condiciones un problema con valores en la frontera tiene soluci\'on \'unica. El siguiente teorema muestra las condiciones suficientes y necesarias para que el problema (\ref{ED2O}), (\ref{CondFrontera0}) tenga \'unicamente la soluci\'on trivial.
+	\Theorem{}{ Sean $y_{1}(x)$ y $y_{2}(x)$ dos soluciones linealmente independientes de la ED homog\'enea (\ref{ED2O}). Entonces el problema con valores en la frontera (\ref{ED2O}), (\ref{CondFrontera0}) tiene la soluci\'on trivial si y solo si
+		\begin{equation}\label{sol0cond}
+			\Delta=\left|\begin{array}{ll}
+				\ell_1\left[y_1\right] & \ell_1\left[y_2\right] \\
+				\ell_2\left[y_1\right] & \ell_2\left[y_2\right]
+			\end{array}\right| \neq 0
+	\end{equation}}\label{thm:teoHM}
+	\begin{demo}
+		Por hip\'otesis $y_{1}(x)$ y $y_{2}(x)$ son soluciones linealmente independiente de (\ref{ED2O}), entonces la soluci\'on general est\'a dada por 
+		\begin{equation*}
+			y(x)=c_1 y_1(x)+c_2 y_2(x)
+		\end{equation*} Esta funci\'on es soluci\'on del problema (\ref{ED2O}), (\ref{CondFrontera0}) si y solo si satisface las condiciones de fronteras, es decir,
+		\begin{equation*}
+			\begin{aligned}
+				\ell_1\left[c_1 y_1+c_2 y_2\right] & =c_1 \ell_1\left[y_1\right]+c_2 \ell_1\left[y_2\right]=0 \\
+				\ell_2\left[c_1 y_1+c_2 y_2\right] & =c_1 \ell_2\left[y_1\right]+c_2 \ell_2\left[y_2\right]=0
+			\end{aligned}
+		\end{equation*}
+		Este es un sistema de dos ecuaciones con dos variables y de algebra lineal sabemos que tiene soluci\'on \'unica si $\Delta\neq 0$.
+	\end{demo}
+	Como consecuencia inmediata del teorema (\ref{teoHM}) se presenta el siguiente corolario.
+	\Corollary{Colorario}{ El problema de valores en la frontera (\ref{ED2O}), (\ref{CondFrontera0}) tienes un n\'umero infinito de soluciones no triviales si y solo si $\Delta=0$}
+	\Definition{Problema de Sturm-Liouville}{Un problema con valores en la frontera que consiste de una ecuaci\'on diferencial
+		\begin{eqnarray}\label{problemaLiouv}
+			\left(p(x) y^{\prime}\right)^{\prime}+q(x) y+\lambda r(x) y=p(y)+\lambda r(x) y&=&0
+		\end{eqnarray}
+		tal que $x \in J=[a, b]$
+		con las condiciones de frontera
+		
+		\begin{eqnarray}\label{condiproblemaLiouv}
+			a_0 y(a)+a_1 y^{\prime}(a)&=&0 \quad \quad a_0^2+a_1^2>0 \\
+			d_0 y(b)+d_1 y^{\prime}(b)&=&0 \quad d_0^2+d_1^2>0
+		\end{eqnarray}Se llama problema de \textbf{Sturm-Liouville}}
+	
+	En la ED \ref{problemaLiouv}, $\lambda$ es un par\'ametro, y las funciones $q, r \in C(J), p \in C^{\prime}(J)$ y $p(x)>0, r(x)>0 \quad$ en $J$.\\
+	El Problema \ref{problemaLiouv} conjunto a las condiciones \ref{condiproblemaLiouv} satisfaciendo las condiciones especificadas anteriormente se dice que es un problema \textbf{Regular de Sturm- Liouville}.\\
+	Claramente, si tomamos $y(x) \equiv 0$ siempre cumplir\'a el problema dado \ref{problemaLiouv} conjuntamente con las condiciones \ref{condiproblemaLiouv}. Resolver un problema como el dado en \ref{problemaLiouv} consiste en encontrar el valor de $\lambda$ llamado \textbf{valor propio} y la soluci\'on correspondiente $\phi_\lambda(x)$ denominada \textbf{funci\'on propia}.\\
+	
+	El conjunto de todo los valores propios de un Problema regular se llama espectro.
+	
+	\Example{Determina los valores y vectores propios}{	Determina los valores y vectores propios del problema con valores en la frontera
+		\begin{eqnarray}\label{prob1}
+			y^{\prime \prime}(x)+\lambda y(x)&=&0
+		\end{eqnarray}
+		sujeto a las condiciones
+		\begin{eqnarray}\label{cond1}
+			y(0)=y(\pi)=0
+	\end{eqnarray}}
+	
+	
+	\begin{sol}
+		Para resolver este ejercicio vamos a suponer dos casos:
+		\begin{enumerate}
+			\item $\lambda =0$\\
+			Si $\lambda=0$, la ecuaci\'on se reduce a $y^{\prime \prime}(x)=0 $ y la soluci\'on general es
+			\begin{eqnarray}\label{solgnal0}
+				% \nonumber % Remove numbering (before each equation)
+				y(x)&=&c_1+c_2 x
+			\end{eqnarray}
+			Ahora aplicando las condiciones
+			$$
+			y(0)=c_1=0
+			$$
+			y
+			$$y(\pi)=\pi c_2=0$$ lo que implica que $c_2=0$.\\
+			Lo que podemos notar que obtenemos la funcion $y(x)\equiv0$ es la solucion trivial y $\lambda=0$ no es un valor propio del problema \ref{prob1} y \ref{cond1}.
+			\item $\lambda \neq0$\\
+			Ahora supondremos $\lambda \neq 0$, y por conveniencia tomaremos  $\lambda=n^2$, donde $n$ puede no ser un numero real. Asi, la ecuaci\'on \ref{prob1} se transforma en
+			\begin{eqnarray*}
+				% \nonumber % Remove numbering (before each equation)
+				y^{\prime \prime}(x)+n^2 y(x)&=&0
+			\end{eqnarray*}
+			cuya soluci\'on general es
+			\begin{eqnarray}\label{solgnal01}
+				y(x)&=&c_1 e^{i n x}+c_2 e^{-i n x}
+			\end{eqnarray}
+			y en t\'ermino de seno y coseno es
+			\begin{eqnarray}\label{solgnal11}
+				y(x)&=&\left(c_1+c_2\right) \cos (n x)+\left(c_1-c_2\right) i \sin (n x)
+			\end{eqnarray}
+			Sustituyendo las condiciones de frontera obtenemos el sistema de ecuaci\'on
+			\begin{eqnarray}\label{sis1}
+				% \nonumber % Remove numbering (before each equation)
+				\left\{\begin{array}{l}
+					c_1+c_2=0 \\
+					c_1 e^{i n \pi}+c_2 e^{-i n \pi}=0
+				\end{array}\right.
+			\end{eqnarray}
+		\end{enumerate}
+		El sistema anterior tiene soluci\'on no trivial, si y solo si, el determinante del sistema es diferente de cero, es decir,
+		$$
+		\left|\begin{array}{cc}
+			1 & 1 \\
+			e^{i n \pi} & e^{-i n \pi}
+		\end{array}\right|=e^{-i n \pi}-e^{i n \pi}=0
+		$$
+		Ahora sea $n=k+i t$, donde $k, t \in \mathbb{R}$
+		$$
+		\begin{aligned}
+			& e^{-i \pi(k+i t)}-e^{i \pi(k+i t)}=0 \\
+			& e^{(t \pi-k \pi i)}-e^{(-t \pi+k \pi i)}=0
+		\end{aligned}
+		$$
+		Por la identidad de Euler
+		\begin{eqnarray*}
+			% \nonumber % Remove numbering (before each equation)
+			e^{t \pi}[\cos (k \pi)-i\sen(k \pi)]-e^{-t \pi}[\cos (k \pi)+i\sen(k \pi)]&=&0
+		\end{eqnarray*}
+		Simplificando
+		$$
+		\left(e^{t \pi}-e^{-t \pi}\right) \cos (k \pi)-i\left(e^{t \pi}-e^{-t \pi}\right)\sen(k \pi)
+		$$
+		utilizando las identidades del seno y coseno hiperb\'olico tenemos
+		$$
+		2 \sinh (t \pi) \cos (k \pi)-2 i \cosh (t \pi)\sen(k \pi)=0
+		$$
+		lo que implica que
+		\begin{eqnarray}\label{Aa}
+			\sinh (t \pi) \cos (k \pi)=0
+		\end{eqnarray}
+		y
+		\begin{eqnarray}\label{Ba}
+			\cosh (t \pi) \operatorname{sen}(k \pi)=0
+		\end{eqnarray}
+		Como $\cosh (t\pi)>0\; \forall t$, la ecuaci\'on \ref{Ba} requiere que
+		$$
+		\operatorname{sen}(k \pi)=0
+		$$
+		lo que implica que $k=m \in Z$. Para esta elecci\'on de $k$, la ecuaci\'on \ref{Aa} se reduce a $$\sinh (t \pi)=0$$ por lo que $t=0$.\\
+		Con este valor para $t$, $k$ debe ser distinto de cero, ya que queremos la soluci\'on no trivial,por lo tanto, $n=k$. De manera que el valor propio es
+		\begin{eqnarray*}
+			% \nonumber % Remove numbering (before each equation)
+			\lambda_k&=&n^2=k^2\quad k=1,2,3, \ldots
+		\end{eqnarray*}
+		Las funciones propias correspondiente a $\lambda_k$
+		son  \begin{eqnarray*}
+			\phi_k(x) & =&c_1 e^{i k x}-c_1 e^{-i k x} \\
+			\phi_k(x) & =&c_1\left(e^{i k x}-e^{-i k x}\right) \\
+			\phi_k(x) & =&2 i c_1 \sen(k x)
+		\end{eqnarray*}
+		o simplemente
+		\begin{eqnarray*}
+			\phi_k(x)&=&\sen(k x)
+		\end{eqnarray*}
+	\end{sol}
+	
+	\Example{Determina los valores y vectores propios del problema \ref{prob1} con las condiciones}{Determina los valores y vectores propios del problema \ref{prob1} con las condiciones
+		\begin{eqnarray}\label{cond,2}
+			y(0)+y^{\prime}(0)=0, \quad y(1)=0
+		\end{eqnarray}
+	}
+	
+	
+	
+	\begin{sol}
+		\begin{enumerate}
+			\item Si $\lambda=0$\\
+			Para $\lambda=0$, la soluci\'on general est\'a dada por
+			\begin{eqnarray*}
+				% \nonumber % Remove numbering (before each equation)
+				y(x)&=&c_1+c_2 x
+			\end{eqnarray*}
+			Las condiciones de frontera implican
+			\begin{eqnarray*}
+				c_1+c_2=0
+			\end{eqnarray*}
+			es decir $c_1=-c_2$.\\
+			Por lo tanto $\lambda=0$ es un valor propio y la correspondiente funci\'on propia es
+			\begin{eqnarray*}
+				% \nonumber % Remove numbering (before each equation)
+				\phi_0(x)&=&1-x
+			\end{eqnarray*}
+			\item Si $\lambda\neq0$\\
+			si $x \neq 0$, y reemplazamos de nuevo $\lambda=n^2$, tenemos que
+			\begin{eqnarray*}
+				y(x)&=&c_1 e^{i n x}+c_2 e^{-i n x}
+			\end{eqnarray*}
+			por las condiciones de frontera tenemos
+			$$
+			\left\{\begin{array}{c}
+				\left(c_1+c_2\right)+i n\left(c_1-c_2\right)=0 \\
+				c_1 e^{i n}+c_2 e^{-i n}=0
+			\end{array}\right.
+			$$
+			El sistema anterior tiene soluci\'on no trivial, si y solo si,
+			$$\left|\begin{array}{cc}
+				1+i n & 1-i n \\
+				e^{i n} & e^{-i n}
+			\end{array}\right|=(1+i n) e^{-i n}-(1-i n) e^{i n}=0$$
+			Desarrollando tenemos
+			\begin{eqnarray*}
+				e^{-i n}+i n e^{-i n}-e^{i n}+i n e^{i n}&=&0
+			\end{eqnarray*}
+			Por factor com\'un
+			\begin{eqnarray*}
+				-\left(e^{i n}-e^{-i n}\right)+n i\left(e^{i n}+e^{-i n}\right)&=&0
+			\end{eqnarray*}
+			por la identidad de seno y coseno hiperb\'olico
+			\begin{eqnarray*}
+				-i \sen(n)+i \cos (n)&=&0
+			\end{eqnarray*}
+			lo que es equivalente a
+			\begin{eqnarray}\label{n}
+				% \nonumber % Remove numbering (before each equation)
+				\tan(n) &=& n
+			\end{eqnarray}
+			para encontrar las soluciones de la ecuaci\'on anterior, graficaremos ambas funciones de manera separada, es decir, $y=n$ y $y=\tan (n)$.\\
+			\textcolor{red}{graficar}\\
+			A partir de la gr\'afica, es claro que la ecuaci\'on \ref{n} tiene un infinito n\'umeros de ra\'ices positiva de la forma
+			\begin{eqnarray*}
+				n_k\simeq(2 k+1) \frac{\pi}{2}
+			\end{eqnarray*} como en la ecuaci\'on \ref{n} podemos reemplazar $n$ por $-n$, tenemos que
+			\begin{eqnarray*}
+				n_k \simeq\pm(2 k+1) \frac{\pi}{2}
+			\end{eqnarray*}
+			por lo tanto, el problema tiene infinitos valores propios, $\lambda_0=0, \lambda_k=(2 k+1)^2 \displaystyle\frac{\pi^2}{4}, k=1,2, \ldots$ y sus funciones propias son
+			$$
+			\begin{aligned}
+				& \phi_0(x)=1-x \\
+				& \phi_k(x)=\operatorname{sen}\left(\sqrt{\lambda_k}(1-x)\right), k=1,2, \ldots
+			\end{aligned}
+			$$
+		\end{enumerate}
+	\end{sol}
+	
+	\Theorem{Los valores propios del problema de Sturm-Liouville}{Los valores propios del problema de Sturm-Liouville dado en (\ref{problemaLiouv}) , (\ref{condiproblemaLiouv}) son simples, es decir, si $\lambda$ es un valor propio de (\ref{problemaLiouv}),(\ref{condiproblemaLiouv}) y $\phi_1(x)$,$\phi_2(x)$ son las correspondientes funciones propias, entonces $\phi_1(x)$, $\phi_2(x)$ son linealmente independientes.}
+	
+	
+	\begin{demo}
+		Como $\phi_1(x)$ y $\phi_2(x)$ son soluciones de (\ref{problemaLiouv}), tenemos
+		\begin{equation}\label{eq21}
+			\left(p(x) \phi_1^{\prime}\right)^{\prime}+q(x) \phi_1+\lambda r(x) \phi_1=0
+		\end{equation}
+		y
+		\begin{equation}\label{eq22}
+			\left(p(x) \phi_2^{\prime}\right)^{\prime}+q(x) \phi_2+\lambda r(x) \phi_2=0 .
+		\end{equation}
+		Multiplicando (\ref{eq21}) por $\phi_2(x)$, y (\ref{eq22}) por $\phi_1(x)$ y restando, tenemos
+		\begin{equation}\label{eq23}
+			\phi_2\left(p(x) \phi_1^{\prime}\right)^{\prime}-\left(p(x) \phi_2^{\prime}\right)^{\prime} \phi_1=0
+		\end{equation}
+		Sin embargo, desde
+		$$
+		\begin{aligned}
+			{\left[\phi_2\left(p(x) \phi_1^{\prime}\right)-\left(p(x) \phi_2^{\prime}\right) \phi_1\right]^{\prime}} & =\phi_2\left(p(x) \phi_1^{\prime}\right)^{\prime}+\phi_2^{\prime}\left(p(x) \phi_1^{\prime}\right)-\left(p(x) \phi_2^{\prime}\right)^{\prime} \phi_1-\left(p(x) \phi_2^{\prime}\right) \phi_1^{\prime} \\
+			& \quad=\phi_2\left(p(x) \phi_1^{\prime}\right)^{\prime}-\left(p(x) \phi_2^{\prime}\right)^{\prime} \phi_1
+		\end{aligned}
+		$$
+		de la expresi\'on (\ref{eq23}) se sigue que
+		$$
+		\left[\phi_2\left(p(x) \phi_1^{\prime}\right)-\left(p(x) \phi_2^{\prime}\right) \phi_1\right]^{\prime}=0
+		$$
+		y por lo tanto
+		\begin{equation}\label{eq24}
+			p(x)\left[\phi_2 \phi_1^{\prime}-\phi_2^{\prime} \phi_1\right]=\mathrm{constant}=C
+		\end{equation}
+		para encontrar el valor de $C$, notemos que $\phi_1$ y $\phi_2$ satisfacen las condiciones de frontera, y por lo tanto
+		$$
+		\begin{aligned}
+			& a_0 \phi_1(\alpha)+a_1 \phi_1^{\prime}(\alpha)=0 \\
+			& a_0 \phi_2(\alpha)+a_1 \phi_2^{\prime}(\alpha)=0
+		\end{aligned}
+		$$
+		lo cual implica que $\phi_1(\alpha) \phi_2^{\prime}(\alpha)-\phi_2(\alpha) \phi_1^{\prime}(\alpha)=0$. Por lo tanto, de la expresi\'on (\ref{eq24}) se sigue que
+		$$
+		p(x)\left[\phi_2 \phi_1^{\prime}-\phi_2^{\prime} \phi_1\right]=0 \quad \text { for all } \quad x \in[a, b]
+		$$
+		Como $p(x)>0$, tenemos $\phi_2 \phi_1^{\prime}-\phi_2^{\prime} \phi_1=0$ para todo $x \in[a, b]$. Pero, esto significa que  $\phi_1$ and $\phi_2$ son linealmente dependientes. $\Box$
+	\end{demo}
+	
+	\Theorem{Sturm-Liouville}{	Let $\lambda_n, n=1,2, \cdots$ be the eigenvalues of the regular Sturm-Liouville problem (\ref{eq13}), (\ref{eq14}) and $\phi_n(x), n=1,2, \cdots$ be the corresponding eigenfunctions. Then, the set $\left\{\phi_n(x): n=1,2, \cdots\right\}$ is orthogonal in $[\alpha, \beta]$ with respect to the weight function $r(x)$.}
+	
+	\begin{demo}
+		Let $\lambda_k$ and $\lambda_{\ell},(k \neq \ell)$ be eigenvalues, and $\phi_k(x)$ and $\phi_{\ell}(x)$ be the corresponding eigenfunctions of (\ref{eq13}), (\ref{eq14}). Since $\phi_k(x)$ and $\phi_{\ell}(x)$ are solutions of (\ref{eq13}), we have
+		\begin{equation}\label{eq25}
+			\left(p(x) \phi_k^{\prime}\right)^{\prime}+q(x) \phi_k+\lambda_k r(x) \phi_k=0
+		\end{equation}
+		and
+		\begin{equation}\label{eq26}
+			\left(p(x) \phi_{\ell}^{\prime}\right)^{\prime}+q(x) \phi_{\ell}+\lambda_{\ell} r(x) \phi_{\ell}=0 .
+		\end{equation}
+		Now following the argument in Theorem-1, we get
+		$$
+		\left[\phi_{\ell}\left(p(x) \phi_k^{\prime}\right)-\left(p(x) \phi_{\ell}^{\prime}\right) \phi_k\right]^{\prime}+\left(\lambda_k-\lambda_{\ell}\right) r(x) \phi_k \phi_{\ell}=0,
+		$$
+		which on integration gives
+		\begin{equation}\label{eq27}
+			\left(\lambda_{\ell}-\lambda_k\right) \displaystyle\int_\alpha^\beta r(x) \phi_k(x) \phi_{\ell}(x) d x=\left.p(x)\left[\phi_{\ell}(x) \phi_k^{\prime}(x)-\phi_{\ell}^{\prime}(x) \phi_k(x)\right]\right|_\alpha ^\beta .
+		\end{equation}
+		Next since $\phi_k(x)$ and $\phi_{\ell}(x)$ satisfy the boundary conditions (\ref{eq14}), i.e.,
+		$$
+		\begin{array}{ll}
+			a_0 \phi_k(\alpha)+a_1 \phi_k^{\prime}(\alpha)=0, & d_0 \phi_k(\beta)+d_1 \phi_k^{\prime}(\beta)=0 \\
+			a_0 \phi_{\ell}(\alpha)+a_1 \phi_{\ell}^{\prime}(\alpha)=0, & d_0 \phi_{\ell}(\beta)+d_1 \phi_{\ell}^{\prime}(\beta)=0
+		\end{array}
+		$$
+		it is necessary that
+		$$
+		\phi_k(\alpha) \phi_{\ell}^{\prime}(\alpha)-\phi_k^{\prime}(\alpha) \phi_{\ell}(\alpha)=\phi_k(\beta) \phi_{\ell}^{\prime}(\beta)-\phi_k^{\prime}(\beta) \phi_{\ell}(\beta)=0 .
+		$$
+		Hence, the identity (\ref{eq27}) reduces to
+		\begin{equation}\label{eq28}
+			\left(\lambda_{\ell}-\lambda_k\right) \displaystyle\int_\alpha^\beta r(x) \phi_k(x) \phi_{\ell}(x) d x=0 .
+		\end{equation}
+		
+		However, since $\lambda_{\ell} \neq \lambda_k$, it follows that $\displaystyle\int_\alpha^\beta r(x) \phi_k(x) \phi_{\ell}(x) d x=0$.\quad $\Box$\\
+	\end{demo}
+	
+	\Corollary{Colorario}{ Let $\lambda_1$ and $\lambda_2$ be two eigenvalues of the regular Sturm-Liouville problem (\ref{eq13}), (\ref{eq14}) and $\phi_1(x)$ and $\phi_2(x)$ be the corresponding eigenfunctions. Then, $\phi_1(x)$ and $\phi_2(x)$ are linearly dependent if and only if $\lambda_1=\lambda_2$.\\}
+	
+	
+	\begin{demo}
+		The proof is a direct consequence of equality (\ref{eq28}).
+		
+	\end{demo}
+	
+	\Theorem{For the regular Sturm-Liouville}{	For the regular Sturm-Liouville problem (\ref{eq13}), (\ref{eq14}) the eigenvalues are real.}
+	
+	
+	\begin{demo}
+		Let $\lambda=a+i b$ be a complex eigenvalue and $\phi(x)=\mu(x)+i \nu(x)$ be the corresponding eigenfunction. Then, we have
+		$$
+		\left(p(x)(\mu+i \nu)^{\prime}\right)^{\prime}+q(x)(\mu+i \nu)+(a+i b) r(x)(\mu+i \nu)=0
+		$$
+		and hence
+		$$
+		\left(p(x) \mu^{\prime}\right)^{\prime}+q(x) \mu+(a \mu-b \nu) r(x)=0
+		$$
+		and
+		$$
+		\left(p(x) \nu^{\prime}\right)^{\prime}+q(x) \nu+(b \mu+a \nu) r(x)=0 .
+		$$
+		Now following exactly the same argument as in  Theorem-1, we get
+		$$
+		\begin{aligned}
+			0=\left.p(x)\left(\nu \mu^{\prime}-\nu^{\prime} \mu\right)\right|_\alpha ^\beta & =\displaystyle\int_\alpha^\beta[-(a \mu-b \nu) \nu r(x)+(b \mu+a \nu) \mu r(x)] d x \\
+			& =b \displaystyle\int_\alpha^\beta r(x)\left(\nu^2(x)+\mu^2(x)\right) d x .
+		\end{aligned}
+		$$
+		Hence, it is necessary that $b=0$, i.e., $\lambda$ is real.\quad $\Box$
+	\end{demo}
+	Since (\ref{eq15}), is a regular Sturm-Liouville problem.\\
+	
+	In the above results we have established several properties of the eigenvalues and eigenfunctions of the regular Sturm-Liouville problem (\ref{eq13}), (\ref{eq14}). In all these results the existence of eigenvalues is tacitly assumed. We now state the following very important result whose proof involves some advanced arguments.
+	
+	\Theorem{For the regular Sturm-Liouville}{For the regular Sturm-Liouville problem (\ref{eq13}), (\ref{eq14}) there exists an infinite number of eigenvalues $\lambda_n, n=1,2, \cdots$. These eigenvalues can be arranged as a monotonically increasing sequence $\lambda_1<\lambda_2<\cdots$ such that $\lambda_n \rightarrow \infty$ as $n \rightarrow \infty$. Further, eigenfunction $\phi_n(x)$ corresponding to the eigenvalue $\lambda_n$ has exactly $(n-1)$ zeros in the open interval $(\alpha, \beta)$.}
+	
+	\begin{demo}
+		Hacer
+	\end{demo}
+	The following examples show that the above properties for singular Sturm-Liouville problems do not always hold.\\
+	
+	\Example{Sturm-Liouville}{Considere el problema singular de Sturm-Liouville dado  (\ref{prob1}), con las condiciones
+		\begin{eqnarray}\label{cond3}
+			y(0)&=&0, \quad|y(x)| \leq M<\infty \quad \text { for all } x \in(0, \infty)
+	\end{eqnarray}}
+	
+	
+	\begin{sol}
+		\begin{enumerate}
+			\item $\lambda=0$\\
+			de la expresi\'on (\ref{solgnal0}) tenemos que la soluci\'on es
+			$$
+			y(x)=c_1+c_2(x)
+			$$
+			aplicando la condici\'on
+			$$
+			y(0)=c_1+c_2(0)\Rightarrow c_1=0
+			$$
+			por lo tanto
+			$$
+			y(x)=c_2 x
+			$$
+			Por la segunda condici\'on
+			$$
+			\begin{aligned}
+				|y(x)| & =&\left|c_2 x\right|<M  \\
+				& =&\left|c_2\right||x|<M
+			\end{aligned}
+			$$
+			como $y=x$ no es acotada en $x\in(0,\infty)$, tenemos
+			$c_2=0$.\\
+			De manera $\lambda=0$ no es un valor propio
+			\item $\lambda\neq0$\\
+			Para el caso de  $\lambda\neq0$ lo analizaremos para el caso positivo y negativo.\\
+			\begin{itemize}
+				\item $\lambda>0$\\
+				La soluci\'on est\'a dada en la expresi\'on (\ref{solgnal11}) que es
+				\begin{eqnarray*}
+					% \nonumber % Remove numbering (before each equation)
+					y(x)&=&\left(c_1+c_2\right) \cos (n x)+\left(c_1-c_2\right) i \sin (n x)
+				\end{eqnarray*}
+				Evaluando la primera condici\'on, tenemos
+				\begin{eqnarray*}
+					y(0)=c_1+c_2=0
+				\end{eqnarray*}
+				por la segunda condici\'on
+				$$
+				\begin{aligned}
+					|y(x)| & =\left|\left(c_1-c_2\right) i \sin (n x)\right| \leqslant M  \\
+					& =\left|c_1-c_2\right||\sin (n x)| \leqslant M \\
+					& =c_1-c_2 \leqslant M
+				\end{aligned}
+				$$
+				Por lo tanto $\lambda_n \in(0, \infty)$ son los valores propios y las funciones propias son $\phi_n(x)=\sin \left(\sqrt{\lambda_n} x\right)$.
+				\item $\lambda<0$\\
+				Si $\lambda<0$, la soluci\'on es
+				\begin{eqnarray*}
+					y(x)&=&c_1 e^{n x}+c_2 e^{-n x}
+				\end{eqnarray*}
+				Aplicando las condiciones
+				\begin{eqnarray*}
+					y(0)&=&c_1+c_2=0 \\
+					|y(x)|&=&\left|c_1 e^{n x}+c_2 e^{-n x}\right| \leqslant M
+				\end{eqnarray*}
+				utilizando la primera ecuaci\'on, tenemos
+				\begin{eqnarray*}
+					|y(x)| & =&\left|c_1 e^{n x}-c_1 e^{-n x}\right| \leq M
+				\end{eqnarray*}
+				por factor com\'un
+				\begin{eqnarray*}
+					|y(x)|&=&\left|c_1\left(e^{n x}-e^{-n x}\right)\right| \leq M
+				\end{eqnarray*}
+				tomando $c_{1}=\displaystyle\frac{k}{2}$ e utilizando la definici\'on del seno hiperb\'olico, llegamos a
+				\begin{eqnarray*}
+					|y(x)|&=&k \sinh (n x) \leq M
+				\end{eqnarray*}
+				Como $\sinh (x)$ es una funci\'on no acotada en $x \in(0, \infty)$, entonces $\lambda<0$ no es un valor propio.
+			\end{itemize}
+		\end{enumerate}
+	\end{sol}
+	
+	\Example{Sturm-Liouville}{Considere el problema singular de Sturm-Liouville dado (\ref{prob1}),
+		\begin{eqnarray}\label{cond4}
+			y(-\pi)=y(\pi), \quad y^{\prime}(-\pi)=y^{\prime}(\pi)
+	\end{eqnarray}}
+	
+	
+	
+	
+	
+	\begin{sol}
+		\begin{enumerate}
+			\item $\lambda=0$\\
+			Para $\lambda=0$, tenemos
+			$$
+			y(x)=c_1+c_2 x
+			$$
+			por la primera condici\'on
+			$$
+			y(-\pi)=c_1-\pi c_2 \text { y } y(\pi)=c_1+\pi c_2
+			$$
+			Asi
+			$$
+			c_1-\pi c_2=c_1+\pi c_2
+			$$
+			por 10 tanto $c_2=0$
+			de tal forma que la soluci\'on toma la siguiente forma $$y(x)=c_1$$
+			La segunda condicion implica que
+			$$
+			0=0
+			$$
+			lo que significa $c_1$ es una constante libre.
+			Por lo tanto $\lambda_0=0$ es un valor propio $y$ $\phi_0(x)=1$ es la funci\'on propia.
+			\item $\lambda\neq0$\\
+			\begin{itemize}
+				\item $\lambda<0$\\
+				Para este caso, la soluci\'on es
+				$$
+				y(x)=c_1 e^{n x}+c_2 e^{-n x}
+				$$
+				Aplicando la primera condici\'on t
+				$$
+				\begin{aligned}
+					& y(\pi)=c_1 e^{n \pi}+c_2 e^{-n \pi} \\
+					& y(-\pi)=c_1 e^{-m \pi}+c_2 e^{n \pi}
+				\end{aligned}$$
+				Igualando las expresiones
+				$$c_1 e^{n \pi}+c_2 e^{-n \pi}=c_1 e^{-n \pi}+c_2 e^{n \pi}$$
+				Tomando factor com\'un y aplicando la definici\'on del seno hiperb\'olico
+				$$
+				2 \sinh (n \pi) c_1-2 \sinh (n \pi) c_2=0
+				$$
+				Simplificando
+				$$
+				c_1-c_2=0
+				$$
+				Por la segunda condici\'on
+				$$
+				\begin{aligned}
+					& y^{\prime}(\pi)=n c_1 e^{n \pi}-n c_2 e^{-n \pi} \\
+					& y^{\prime}(-\pi)=n c_1 e^{-n \pi}-n c_2 e^{n \pi}
+				\end{aligned}
+				$$
+				Igualando
+				$$
+				n c_1 e^{n \pi}-n c_2 e^{-n \pi}=n c_1 e^{-n \pi}-n c_2 e^{n \pi}
+				$$
+				Por factor com\'un
+				$$
+				n c_1\left(e^{n \pi}-e^{-n \pi}\right)+n c_2\left(e^{n \pi}-e^{-n \pi}\right)=0
+				$$
+				lo que implica que
+				$$
+				c_1+c_2=0
+				$$
+				Resolviendo el sistema
+				$$
+				\left\{\begin{array}{l}
+					c_1-c_2=0 \\
+					c_1+c_2=0
+				\end{array}\right.
+				$$
+				tenemos que $c_1=c_2=0$. Por lo tanto $\lambda>0$ no es un valor propio.
+				\item $\lambda>0$\\
+				Evaluando las condiciones en la expresi\'on (\ref{solgnal11}), tenemos
+				$$
+				\begin{aligned}
+					& y(-\pi)=\left(c_1+c_2\right) \cos (n \pi)-\left(c_1-c_2\right) i \sin (n \pi) \\
+					& y(-\pi)=(-1)^n\left(c_1+c_2\right) \\
+					& y(\pi)=\left(c_1+c_2\right) \cos (n \pi)+\left(c_1-c_2\right) i \sin (n \pi) \\
+					& y(\pi)=(-1)^n\left(c_1+c_2\right)
+				\end{aligned}
+				$$
+				Igualando
+				$$
+				(-1)^n\left(c_1+c_2\right)=(-1)^n\left(c_1+c_2\right)
+				$$
+				lo que significa $y(-\pi)=y(\pi)$ para todo valor de $x$.\\
+				Por la segunda condici\'on
+				$$
+				\begin{aligned}
+					& y^{\prime}(\pi)=-n\left(c_1+c_2\right) \sin (n \pi)+n\left(c_1-c_2\right) i \cos (n \pi) \\
+					& y^{\prime}(\pi)=n\left(c_1-c_2\right) i(-1 )^n \\
+					& y^{\prime}(-\pi)=n\left(c_1+c_2\right) \sin (n \pi)+n\left(c_1-c_2\right) i \cos (n \pi) \\
+					& y^{\prime}(-\pi)=n\left(c_1-c_2\right) i(-1)^n
+				\end{aligned}
+				$$
+				por lo que $y^{\prime}(\pi)=y^{\prime}(-\pi)$ para todo valor de $x$.\\
+				As\'i $\lambda_n=n^2$ son valores propios y las funciones propias son $\phi_n(x)=\cos (n x)+\sin (n x)$.
+			\end{itemize}
+		\end{enumerate}
+	\end{sol}
+	
+	\section{Obtenci\'on de los polinomios de Legendre como soluci\'on a S-L}
+	
+	\Example{	Considere el problema de Sturm-Liouville}{	Considere el problema de Sturm-Liouville
+		\begin{eqnarray}\label{LegendreSL}
+			\left(1-x^2\right) y^{\prime \prime}-2 x y^{\prime}+\lambda y=\left(\left(1-x^2\right) y^{\prime}\right)^{\prime}+\lambda y&=&0
+		\end{eqnarray}
+		sujeto a las condiciones
+		\begin{eqnarray}\label{LegendreSLcond}
+			\lim _{x \rightarrow-1} y(x)<\infty, \quad \lim _{x \rightarrow 1} y(x)<\infty .
+		\end{eqnarray}
+		Demuestre que los valores propios de este problema son  $\lambda_n=n(n+1), n=0,1,2, \cdots$ y las correspondientes funciones propias son los polinomios de Legendre $P_n(x)$.}
+	
+	
+	\begin{sol}
+		Utilizando la expresi\'on obtenida en (\ref{solegendrepimpar}) dada por
+		\begin{eqnarray*}
+			y(x)&=&a_0+a_1 x+\displaystyle\sum_{n=2}^{\infty} \frac{n(n+1)-\lambda}{(n+2)(n+1)} a_n x^n
+		\end{eqnarray*}
+		aplicando las condiciones
+		\begin{eqnarray*}
+			\displaystyle\lim _{x \rightarrow-1} y(x)&=&\displaystyle\lim _{x \rightarrow-1}\left\{a_0+a_1 x+\displaystyle\sum_{n=2}^{\infty}\displaystyle \frac{n(n+1)-\lambda}{(n+2)(n+1)} a_n x^n\right\}<\infty
+		\end{eqnarray*}
+		Por propiedad de los l\'imites
+		\begin{eqnarray*}
+			\displaystyle\lim _{x \rightarrow-1} y(x)&=&a_0-a_1+\displaystyle\sum_{n=2}^{\infty} \displaystyle\frac{n(n+1)-\lambda}{(n+2)(n+1)}(-1)^n a_n<\infty
+		\end{eqnarray*}
+		La expresi\'on anterior es una serie infinita de t\'erminos constantes, de la forma que puede ser acotada es que los t\'erminos de la serie se anulen a partir de cierto t\'ermino, esto es que $\lambda=n(n+1)$.\\
+		Lo que significa que los valores propios del problema (\ref{LegendreSL} ) son $\lambda_n=n(n+1)$ y las correspondientes funciones propias son los poliniomios de legendre $P_{n} (x)$.
+	\end{sol}
+	
+	\Example{	Considere el problema de Sturm-Liouville}{Considere el problema de Sturm-Liouville dado en la expresi\'on \ref{LegendreSL}
+		sujeto a las condiciones
+		\begin{eqnarray}\label{LegendreSLcond1}
+			y^{\prime}(0)&=&0, \quad \lim _{x \rightarrow 1} y(x)<\infty
+		\end{eqnarray}
+		Demuestre que los valores propios de este problema son  $\lambda_n=2n(2n+1), n=0,1,2, \cdots$ y las correspondientes funciones propias son los polinomios pares de Legendre $P_{2n}(x)$}
+	
+	\begin{sol}
+		De la expresi\'on (\ref{solegendre}) y la primera condici\'on tenemos
+		\begin{eqnarray*}
+			y(x)&=&a_0\left[1+\displaystyle\sum_{n=1}^{\infty} \frac{(0-\lambda)(6-\lambda) \cdots(2 n(2 n+1)-\lambda)}{(2 n) !} x^{2 n}\right.
+		\end{eqnarray*}
+		Por la segunda condici\'on se tiene que
+		\begin{eqnarray*}
+			\displaystyle\lim _{x \rightarrow 1} y(x)&=&a_0\left[1+\displaystyle\sum_{n=1}^{\infty} \frac{(0-\lambda)(6-\lambda) \cdots(2 n(2 n+1)-\lambda)}{(2 n) !}\right]<\infty
+		\end{eqnarray*}
+		Para que la serie sea acotada, se debe cumplir que $\lambda_n=2 n(2 n+1)$, de manera que son los valores propios del problema (\ref{LegendreSL} )con las condiciones (\ref{LegendreSLcond1}) y las funciones propias correspondientes son polinomios pares de Legendre $P_{2 n}(x)$.
+	\end{sol}
+	
+	\Example{Considere el problema de Sturm-Liouville}{	Considere el problema de Sturm-Liouville dado en la expresi\'on \ref{LegendreSL}
+		sujeto a las condiciones
+		\begin{eqnarray}\label{LegendreSLcond2}
+			y(0)=0, \quad \lim _{x \rightarrow 1} y(x)<\infty
+		\end{eqnarray}
+		Demuestre que los valores propios de este problema son  $\lambda_n=\lambda_n=(2 n+1)(2 n+2), n=0,1,2, \cdots$ y las correspondientes funciones propias son los polinomios impares de Legendre $P_{2n+1}(x)$}
+	
+	
+	\begin{sol}
+		Tomando la expresi\'on obtenida en (\ref{solegendre}) dada por
+		
+		$$
+		\begin{aligned}
+			y(x)= & a_0\left[1+\sum_{n=1}^{\infty} \frac{(0-\lambda)(6-\lambda) \ldots(2 n(2 n+1)-\lambda)}{(2 n) !} x^{2 n}\right] \\
+			& +a_1\left[x+\sum_{n=1}^{\infty} \frac{(2-\lambda)(12-\lambda) \ldots((2 n+2)(2n+1)-\lambda)}{(2 n+3) !} x^{2 n+1}\right]
+		\end{aligned}
+		$$
+		Por las condiciones del problema (\ref{LegendreSLcond2}), tenemos
+		\begin{multline*}
+			y(0)=a_0\left[1+\sum_{n=1}^{\infty} \frac{(0-\lambda)(6-\lambda) \cdots(2 n(2 n+1)-\lambda)}{(2 n+1) !}(0)^{2 n}\right] \\
+			+a_1\left[0+\sum_{n=1}^{\infty} \frac{(2-\lambda)(12-\lambda) \cdots((2 n+2)(2 n+1)-\lambda)}{(2 n+3) !}(0)^{2 n+1}\right] \\
+		\end{multline*}
+		$$y(0)= a_0$$
+		Por lo tanto $a_0=0$.
+		De manera que
+		\begin{eqnarray*}
+			y(x)&=&a_1\left[x+\displaystyle\sum_{n=1}^{\infty} \displaystyle\frac{(2-\lambda)(12-\lambda) \ldots((2 n+2)(2 n+1)-\lambda)}{(2 n+3) !} x^{2 n+1}\right]
+		\end{eqnarray*}
+		Ahora queremos que
+		\begin{eqnarray*}
+			\displaystyle\lim _{x \rightarrow 1} y(x)<\infty
+		\end{eqnarray*}
+		\begin{eqnarray*}
+			\displaystyle\lim _{x \rightarrow 1} y(x)&=&\displaystyle\lim _{x \rightarrow 1}\left\{a_1\left[x+\sum_{n=1}^{\infty} \frac{(2-\lambda)(12-\lambda) \cdots((2 n+2)(2 n+1)-\lambda)}{(2 n+3) !} x^{2 n+1}\right]\right\}<\infty
+		\end{eqnarray*}
+		Por propiedad de los l\'imites
+		$$
+		\begin{aligned}
+			& \lim _{x \rightarrow 1} y(x)=a_1\left[1+\sum_{n=1}^{\infty} \frac{(2-\lambda)(12-\lambda) \cdots((2 n+2)(2 n+1)-\lambda)}{(2 n+3) !}(1)\right]<\infty \\
+			& \lim _{x \rightarrow 1} y(x)=a_1\left[1+\sum_{n=1}^{\infty} \frac{(2-\lambda)(12-\lambda) \cdots((2 n+2)(2 n+1)-\lambda)}{(2 n+3) !}\right]<\infty
+		\end{aligned}
+		$$
+		La serie anterior es finita si los t\'erminos de anulan para eso
+		$$
+		(2 n+2)(2 n+1)-\lambda=0
+		$$
+		lo que implica que $\lambda=(2 n+2)(2 n+1)$. De tal manera gue los valores propios son $\lambda_n=(2n+2)(2n+1)$ y las funciones propias son los polinomios $P_{2 n+1}(x)$ de Legendre.
+	\end{sol}
+	
+	\section{Obtenci\'on de los polinomios de Hermite  como soluci\'on a S-L}
+	
+	\Example{Considere el problema de Sturm-Liouville}{Considere el problema de Sturm-Liouville
+		\begin{eqnarray}\label{hermiteSL}
+			y^{\prime \prime}-2 x y^{\prime}+\lambda y&=0=&\left(e^{-x^2} y^{\prime}\right)^{\prime}+\lambda e^{-x^2} y
+		\end{eqnarray}
+		sujeto a las condiciones
+		\begin{eqnarray}\label{HermiteSLcond}
+			\lim _{x \rightarrow-\infty} \frac{y(x)}{|x|^k}<\infty, \quad \lim _{x \rightarrow \infty} \frac{y(x)}{x^k}<\infty
+		\end{eqnarray}
+		para alg\'un entero positivo $k$.
+		Demuestre que los valores propios de este problema son $\lambda_n=2 n, n=0,1,2, \cdots$ y las correspondientes funciones propias son los polinomios de Hermite $H_{n}(x)$.
+	}
+	
+	
+	
+	
+	\begin{sol}
+		kl
+	\end{sol}
+	\section{Obtenci\'on de los polinomios de Laguerre  como soluci\'on a S-L}
+	
+	\Example{Ejemplo}{Considere el problema de Sturm-Liouville
+		\begin{eqnarray}\label{LaguerreeSL}
+			x y^{\prime \prime}+(1-x) y^{\prime}+\lambda y&=0=&\left(x e^{-x} y^{\prime}\right)^{\prime}+\lambda e^{-x} y
+		\end{eqnarray}
+		sujeto a las condiciones
+		\begin{eqnarray}\label{LaguerreSLcond}
+			\lim _{x \rightarrow 0}|y(x)|<\infty, \quad \lim _{x \rightarrow \infty} \frac{y(x)}{x^k}<\infty
+		\end{eqnarray}
+		Para alg\'un entero positivo $k$.
+		Demuestre que los valores propios de este problema son $\lambda_n=n, n=0,1,2, \cdots$ y las correspondientes funciones propias son los polinomios de Laguerre $L_{n}(x)$.}
+	
+	
+	\begin{sol}
+		kl
+	\end{sol}
+	
+	\section{Obtenci\'on de la funci\'on de Bessel como soluci\'on a S-L}
+	
+	\Example{Ejemplo}{Sea $a \geq 0$ un n\'umero fijo, y $b_n, n=0,1,2, \cdots$ los ceros de la funci\'on de Bessel  $J_a(x)$. Considere el problema de Sturm-Liouville
+		\begin{eqnarray}\label{besselSL}
+			x^2 y^{\prime \prime}+x y^{\prime}+\left(\lambda x^2-a^2\right) y&=0=&\left(x y^{\prime}\right)^{\prime}+\left(\lambda x-\frac{a^2}{x}\right)y
+		\end{eqnarray}
+		sujeto a las condiciones
+		\begin{eqnarray}\label{besselSLcond}
+			\lim _{x \rightarrow 0} y(x)<\infty, \quad y(1)=0
+		\end{eqnarray}
+		Demuestre que los valores propios de este problema son $\lambda_n=b_n^2, n=0,1,2, \cdots$  y las correspondientes funciones propias son las funciones de Bessel $J_a\left(b_n x\right)$.}
+	
+	
+	
+	\begin{sol}
+		kl
+	\end{sol}
+	
+	\section{Obtenci\'on de los polinomios de Chebyshev de 3er y 4to tipo como soluci\'on a S-L}
+	\subsection{Obtenci\'on de los polinomios de Chebyshev de 3er tipo como soluci\'on a un S-L}
+	La ecuaci\'on diferencial que define los polinomios de Chebyshev de 3er tipo, como vimos en el cap\'itulo anterior es:
+	$$
+	\left(1-x^2\right) y^{\prime \prime}+(1-2 x) y^{\prime}+\lambda y=0 ;
+	$$
+	consideremos las condicciones que vimos para un problema de S-L singular, para este caso:
+	$$
+	\begin{gathered}
+		p(1)=0 \\
+		p(-1)=0 \\
+		y(x) \quad \text { regular en } x=1, x=-1
+	\end{gathered}
+	$$
+	Como vimos en (3.1.3.1) esta ecuaci\'on se puede expres ar en forma de una ecuaci\'on de S-L :
+	Con $\lambda=m(m+1)$ Tenemos:
+	$$
+	\frac{d}{d x}\left[(1+x)^{3 / 2}(1-x)^{1 / 2} \frac{d y_m(x)}{d x}\right]+m(m+1) \sqrt{\frac{1+x}{1-x}} y_m(x)=0
+	$$
+	donde $p(x)=(1+x)^{3 / 2}(1-x)^{1 / 2}, q(x)=0$ y $w(x)=\sqrt{\frac{1+x}{1-x}}$.
+	Es evidente devido a las condiciones que nuestro problemas es singular, de hecho $w(x)$ no es continua en uno de los extremos. Y se verifica que $p(-1)=p(1)=0$
+	
+	Sabemos que la ecuaci\'on (4.4.1), al resolverla por medio de la sustituci\'on trigonom\'etrica que hicimos en el cap\'itulo anterior, tiene dos soluciones:
+	$$
+	y_1(x)=\frac{\cos \left[\left(n+\frac{1}{2}\right) \theta\right]}{\cos \left(\frac{\theta}{2}\right)} ; \quad y_2(x)=\frac{\operatorname{sen}\left[\left(n+\frac{1}{2}\right) \theta\right]}{\cos \left(\frac{\theta}{2}\right)}
+	$$
+	Como $x=\cos (\theta)$, tenemos que $x=-1 \Rightarrow \theta=\pi$ y $x=1 \Rightarrow \theta=0$. Vemos que la singularidad esta en $\theta=\pi$, puesto que $\cos (\pi / 2)=0$.
+	$$
+	y_2(\pi)=\frac{\operatorname{sen}\left[\left(n+\frac{1}{2}\right) \pi\right]}{\cos \left(\frac{\pi}{2}\right)}=\frac{(-1)^n}{0}=\infty,
+	$$
+	por otro lado
+	$$
+	y_1(\pi)=\frac{\cos \left[\left(n+\frac{1}{2}\right) \pi\right]}{\cos \left(\frac{\pi}{2}\right)}=\frac{0}{0},
+	$$
+	aplicando L'Hopital, tenemos
+	$$
+	\displaystyle\lim_{\theta \rightarrow \pi} y_1(\cos \theta)=\frac{\left[\left(n+\frac{1}{2}\right)\right] \operatorname{sen}\left[\left(n+\frac{1}{2}\right) \pi\right]}{1 / 2 \operatorname{sen}(\pi / 2)}=\frac{(2 n+1)(-1)^n}{1}=(2 n+1)(-1)^n,
+	$$
+	lo cual es un valor finito para n finito, asi se concluye que los polinomios de Chebyshev de 3er tipo son soluci\'on de la ecuaci\'on de S-L vista, es decir, $\lambda=m(m+1)$ son los autovalores al problema singular de S-L y $V_m(x)$ sus correspondiente autofunciones. La constante albitraria se toma de modo que el coeficiente principal sea $2^n$.
+	
+	\subsection{Obtenci\'on de los polinomios de Chebyshev de 4to tipo como soluci\'on a un S-L}
+	La ecuaci\'on diferencial que define los polinomios de Chebyshev de 4to tipo, como vimos en el capitulo anterior es:
+	$$
+	\left(1-x^2\right) y^{\prime \prime}-(1+2 x) y^{\prime}+\lambda y=0
+	$$
+	consideremos las condicciones que vimos para un problema de S-L singular, para este caso:
+	$$
+	\begin{gathered}
+		p(1)=0 \\
+		p(-1)=0 \\
+		y(x) \quad \text { regular en } x=1, x=-1
+	\end{gathered}
+	$$
+	Como vimos en (3.2.3.1) esta ecuaci\'on se puede expresar en forma de una ecuaci\'on de S-L : Con $\lambda=m(m+1)$ Tenemos:
+	$$
+	\begin{gathered}
+		\frac{d}{d x}\left[(1-x)^{3 / 2}(1+x)^{1 / 2} \frac{d y_m(x)}{d x}\right]+m(m+1) \sqrt{\frac{1-x}{1+x}} y_m(x)=0 \\
+		\text { donde } p(x)=(1-x)^{3 / 2}(1+x)^{1 / 2}, q(x)=0 \mathrm{y} w(x)=\sqrt{\frac{1-x}{1+x}} .
+	\end{gathered}
+	$$
+	Es evidente devido a las condiciones que nuestro problemas es singular.\\
+	Como vimos en el cap\'itulo anterior al resolver esta EDO por medio de una sustituci\'on trigonom\'etrica, tenemos dos soluciones. Puesto que es evidente que $p(-1)=p(1)=0$, veremos que una de las dos soluciones obtenidas verifica la condicci\'on restante.
+	$$
+	y_1(x)=\frac{\cos \left[\left(n+\frac{1}{2}\right) \theta\right]}{\operatorname{sen}\left(\frac{\theta}{2}\right)} ; \quad y_2(x)=\frac{\operatorname{sen}\left[\left(n+\frac{1}{2}\right) \theta\right]}{\operatorname{sen}\left(\frac{\theta}{2}\right)}
+	$$
+	Como $x=\cos (\theta)$, tenemos que $x=-1 \Rightarrow \theta=\pi \mathrm{y} x=1 \Rightarrow \theta=0$. Vemos que la singularidad esta en $\theta=0$, puesto que $\operatorname{sen}(\pi / 2)=0$.
+	$$
+	y_1(0)=\frac{\cos (0)}{\operatorname{sen}(0)}=\frac{1}{0}=\infty,
+	$$
+	por otro lado
+	$$
+	y_2(0)=\frac{\operatorname{sen}(0)}{\operatorname{sen}(0)}=\frac{0}{0},
+	$$
+	aplicando L'Hopital, tenemos
+	$$
+	\displaystyle\lim_{\theta \rightarrow 0} y_2(\cos 0)=2 \frac{\left[\left(n+\frac{1}{2}\right)\right] \cos (0)}{\cos (0)}=2 n+1,
+	$$
+	lo cual es un valor finito para n finito, asi se concluye que los polinomios de Chebyshev de 4to tipo son soluci\'on de la ecuaci\'on de S-L vista, es decir, $\lambda=m(m+1)$ son los autovalores al problema irregular de S-L y $W_m(x)$ sus correspondiente autofunciones. La constante albitraria se tomo de modo que el coeficiente principal sea $2^n$.
+	\textcolor[rgb]{1.00,0.00,0.00}{anterior de tesis de pablo}
+	
+	\Example{Ejemplo}{Considere el problema de Sturm-Liouville
+		\begin{equation}\label{eq36}
+			\left(1-x^2\right) y^{\prime \prime}-2 x y^{\prime}+\lambda y=\left(\left(1-x^2\right) y^{\prime}\right)^{\prime}+\lambda y=0
+		\end{equation}
+		con las condiciones
+		\begin{equation}\label{eq38}
+			y^{\prime}(0)=0, \quad \lim _{x \rightarrow 1} y(x)<\infty
+		\end{equation}
+		Demuestre que los valores propios del problema son $\lambda_n=2 n(2 n+1), n=$ $0,1,2, \cdots$ y las correspondientes funciones propias son los polinomios pares de Legendre $P_{2 n}(x)$.}
+	
+	
+	
+	
+	\begin{sol}
+		Para resolver este problema de Sturm-Liouville necesitamos conocer las soluciones de la ecuaci\'on de Legendre, la cual se analiz\'o en la secci\'on  \ref{Legendre}, donde la soluci\'on general dada en \ref{solegendre} es
+		\begin{multline*}
+			y(x) =a_{0}\bigg[1+\displaystyle\sum_{n=1}^{\infty}\left[\displaystyle\frac{(0-\lambda)(6-\lambda)\cdots (2n(2n+1)-\lambda)}{(2n)!} \right]x^{2n}\bigg] \\
+			+a_{1}\bigg[x+\displaystyle\sum_{n=1}^{\infty}\left[ \displaystyle\frac{(2-\lambda)(12-\lambda) \cdots((2n+1)(2 n+2)-\lambda)}{(2 n+3)!}\right]x^{2n+1}\bigg]
+		\end{multline*}
+		Aplicando las condiciones, tenemos
+		$$
+		\begin{aligned}
+			y^{\prime}(x)= & a_0 \sum_{n=1}^{\infty}\left[\frac{(0-1)(6-\lambda) \ldots(2 n(2 n+1)-\lambda)}{(2 n) !}\right](2 n) x^{2n-1} \\
+			& +a_1 \sum_{\pi=1}^{\infty}\left[\frac{(2-\lambda)(12-\lambda) \cdots((2n+1)(2 n+2)-\lambda)}{(2 n+3) !}\right](2n+1) x^{2n}
+		\end{aligned}
+		$$
+		As\'i
+		$$
+		y^{\prime}(0)=a_1=0
+		$$
+		De manera que la soluci\'on es
+		\begin{eqnarray}\label{12.}
+			y(x)=a_0\left[1+\sum_{n=1}^{\infty}\left[\frac{(0-x)(6-x) \cdots(2 n(2 n+1)-x)}{(2 n) !}\right] x^{2 n}\right.
+		\end{eqnarray}
+		Por la segunda condici\'on
+		$$
+		\lim _{x \rightarrow 1} a_0\left[1+\sum_{n=1}\left[\frac{(2-\lambda)(6-\lambda) \cdots(2 n(2 n+1)-\lambda)}{(2 n) !}\right] x^{2 n}<\infty\right.
+		$$
+		como los coeficientes est\'an dado en t\'ermino de productoria, de manera que algunos de ellos es cero si $\exists n \geq 1\quad \text{tal que} \quad \lambda=2n(2n-1)$.
+		Por lo tanto la expresi\'on \ref{12.} representa los polinomios pares de Legendre
+		\begin{eqnarray*}
+			P_{2n}(x)&=&a_0\left[1+\sum_{n=1}^{\infty}\left[\frac{(0-x)(6-x) \cdots(2 n(2 n+1)-x)}{(2 n) !}\right] x^{2 n}\right.
+		\end{eqnarray*}
+	\end{sol}
+	
+	\Example{Ejemplo}{Considere la ED \ref{eq36} con las condiciones
+		\begin{equation}\label{eq39}
+			y(0)=0, \quad \displaystyle\lim _{x \rightarrow 1} y(x)<\infty
+		\end{equation}
+		Demuestre que los valores propios son  $\lambda_n=(2 n+1)(2 n+2), n=$ $0,1,2, \cdots$ y las correspondientes funciones propias son los polinomios impares de de Legendre $P_{2 n+1}(x)$.}
+	
+	
+	\begin{sol}
+		Sabemos que la soluci\'on general de ED de Legendre es
+		\begin{multline*}
+			y(x) =a_{0}\bigg[1+\displaystyle\sum_{n=1}^{\infty}\left[\displaystyle\frac{(0-\lambda)(6-\lambda)\cdots (2n(2n+1)-\lambda)}{(2n)!} \right]x^{2n}\bigg] \\
+			+a_{1}\bigg[x+\displaystyle\sum_{n=1}^{\infty}\left[ \displaystyle\frac{(2-\lambda)(12-\lambda) \cdots((2n+1)(2 n+2)-\lambda)}{(2 n+3)!}\right]x^{2n+1}\bigg]
+		\end{multline*}
+		Ahora aplicaremos las condiciones indicadas en la expresi\'on \ref{eq39}. Evaluando la soluci\'on en $x=0$
+		\begin{multline*}
+			y(0)=a_{0}\bigg[1+\displaystyle\sum_{n=1}^{\infty}\left[\displaystyle\frac{(0-\lambda)(6-\lambda)\cdots (2n(2n+1)-\lambda)}{(2n)!} \right](0)^{2n}\bigg] \\
+			+a_{1}\bigg[0+\displaystyle\sum_{n=1}^{\infty}\left[ \displaystyle\frac{(2-\lambda)(12-\lambda) \cdots((2n+1)(2 n+2)-\lambda)}{(2 n+3)!}\right](0)^{2n+1}\bigg]=0
+		\end{multline*}
+		La expresi\'on anterior implica que $a_{1}=0$. As\'i
+		\begin{eqnarray*}
+			% \nonumber % Remove numbering (before each equation)
+			y(x) &=& a_{1}\bigg[0+\displaystyle\sum_{n=1}^{\infty}\left[ \displaystyle\frac{(2-\lambda)(12-\lambda) \cdots((2n+1)(2 n+2)-\lambda)}{(2 n+3)!}\right](0)^{2n+1}\bigg]
+		\end{eqnarray*}
+		La expresi\'on anterior debe ser finita por la segunda condici\'on, as\'i
+		\begin{eqnarray*}
+			% \nonumber % Remove numbering (before each equation)
+			\displaystyle\lim_{x\rightarrow 1} a_{1}\bigg[x+\displaystyle\sum_{n=1}^{\infty}\left[ \displaystyle\frac{(2-\lambda)(12-\lambda) \cdots((2n+1)(2 n+2)-\lambda)}{(2 n+3)!}\right]x^{2n+1}\bigg]<\infty
+		\end{eqnarray*}
+		podemos notar que la funci\'on es finita si algunos de sus coeficientes para alg\'un valor $\lambda$, por lo tanto esto ocurre si $\lambda=(2n+1)(2n+2)$, as\'i obteniendo los polinomios impares de Legendre
+		\begin{eqnarray*}
+			% \nonumber % Remove numbering (before each equation)
+			P_{2n+1}(x) &=& a_{1}\bigg[x+\displaystyle\sum_{n=1}^{\infty}\left[ \displaystyle\frac{(2-\lambda)(12-\lambda) \cdots((2n+1)(2 n+2)-\lambda)}{(2 n+3)!}\right]x^{2n+1}\bigg]
+		\end{eqnarray*}
+	\end{sol}
+	
+	\Example{ Sturm-Liouville}{
+		
+		Considere el problema singular de  Sturm-Liouville
+		\begin{equation}\label{eq40}
+			y^{\prime \prime}-2 x y^{\prime}+\lambda y=0=\left(e^{-x^2} y^{\prime}\right)^{\prime}+\lambda e^{-x^2} y
+		\end{equation}
+		Sujeto a las condiciones
+		\begin{equation}\label{eq41}
+			\displaystyle\lim _{x \rightarrow-\infty} \frac{y(x)}{|x|^k}<\infty, \quad \displaystyle\lim_{x \rightarrow \infty} \frac{y(x)}{x^k}<\infty
+		\end{equation}
+		para alg\'in entero positvo  $k$. Demuestre que los valores propios son  $\lambda_n=2 n, n=0,1,2, \cdots$ y las correspondientes funciones propias son los polinomios de Hermite $H_n(x)$.}
+	
+	
+	
+	\begin{sol}
+		De la secci\'on \ref{Hermite} Sabemos que la soluci\'on  de la ED de Hermite est\'a dada por la expresi\'on
+		\begin{eqnarray*}
+			% \nonumber % Remove numbering (before each equation)
+			y(x) &=&\displaystyle\sum_{n=0}^{\infty} c_{n}x^{n}
+		\end{eqnarray*}
+		donde $c_{n}$ est\'a dada por la expresi\'on \ref{H4}, de manera que la expresi\'on anterior es
+		$$
+		y(x)=a_{0}+a_{1}x+\displaystyle\sum_{n=2}^{\infty} \frac{(\lambda-2 n)c_{n}}{(n+2)(n+1)} x^n
+		$$
+		Aplicando las candiciones tenemos
+		\begin{eqnarray*}
+			% \nonumber % Remove numbering (before each equation)
+			\lim _{x \rightarrow \infty}[a_{0}+a_{1}x+ \sum_{n=2}^{\infty}  \frac{(\lambda-2 n)c_{n}}{(n+2)(n-1))} \frac{x^n}{x^k}]<\infty
+		\end{eqnarray*}
+		La expresi\'on anterior es finta, si existe un $n \in Z^{+}$ tal que $\lambda-2n=0$ lo que implica que $ \lambda=2 n$.\\
+		Por la otra condici\'on
+		$$
+		\lim _{x \rightarrow-\infty} [a_{0}+a_{1}x+ \sum_{n=2}^{\infty} \frac{(\lambda-2 n)c_{n}}{(n+2)(n+1)} \frac{x^n}{|x|^k}]<\infty
+		$$
+		de iqual manera, para que la expresi\'on anterior sea finita, se debe cumplir que $\lambda-2 n=0$ para ang\'un $n \in z^{+}$, lo que implica que $\lambda=2 n$.\\
+		Por lo tanto los valores propios son $\lambda n=2 n$ y las correspondientes fanciones propias son los polinomios de Hermite $H_{n}(x).$
+	\end{sol}
+	
+	\Example{Considere el problema regular de Sturm-Liouville}{
+		
+		Considere el problema regular de Sturm-Liouville
+		\begin{equation}\label{eq42}
+			x y^{\prime \prime}+(1-x) y^{\prime}+\lambda y=0=\left(x e^{-x} y^{\prime}\right)^{\prime}+\lambda e^{-x} y
+		\end{equation}
+		con
+		\begin{equation}\label{eq43}
+			\begin{aligned}
+				\displaystyle\lim _{x \rightarrow 0}|y(x)|<\infty, \quad \displaystyle\lim_{x \rightarrow \infty} \frac{y(x)}{x^k}<\infty \text { para alg\'un entero positivo } k .
+			\end{aligned}
+		\end{equation}
+		Demuestre que los valores propios del problema son  $\lambda_n=n, n=0,1,2, \cdots$ y las correspondientes funciones propias est\'an dadas por los polinomios de Laguerre  $L_n(x)$.}
+	
+	
+	\begin{sol}
+		khkhkf
+	\end{sol}
+	
+	
+	\setboolean{firstanswerofthechapter}{true}
+	\begin{multicols}{2}
+		\begin{Answer}[ref={EX41}]
+			\Question 
+			\begin{tasks}
+				\task This is a solution of Ex 1
+				\task This is a solution of Ex 2 
+				\task This is a solution of Ex 3 
+				\task This is a solution of Ex 4 
+				\task This is a solution of Ex 5 
+				\task This is a solution of Ex 6 
+				\task This is a solution of Ex 7 
+				\task This is a solution of Ex 8 
+				\task[9] This is a solution of Ex 9
+				\task[10] This is a solution of Ex 10 
+				\task[11] This is a solution of Ex 11
+				\task[12] This is a solution of Ex 12
+				\task[13] This is a solution of Ex 13
+				\task[14] This is a solution of Ex 14 
+				\task[15] This is a solution of Ex 15
+				\task[16] This is a solution of Ex 16
+			\end{tasks}
+		\end{Answer}
+	\end{multicols}

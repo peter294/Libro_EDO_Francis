@@ -1,0 +1,1034 @@
+\mychapter{Series de Fourier en bases a funciones especiales }{\begin{wrapfigure}{l}{0.45\textwidth}
+		\centering
+		\includegraphics[width=0.45\textwidth]{imagen/img11.png}
+	\end{wrapfigure} En el estudio del análisis matemático y sus aplicaciones, las series especiales constituyen una herramienta fundamental para la representación y aproximación de funciones. Entre estas destacan, por un lado, las series de Fourier-Bessel, que surgen de la resolución de problemas con condiciones de frontera en coordenadas cilíndricas, y que tienen una importancia crucial en la física matemática, especialmente en fenómenos de propagación de ondas y conducción de calor. Por otro lado, los polinomios de Chebyshev representan una de las familias de polinomios ortogonales más relevantes en la aproximación de funciones, ya que permiten minimizar el error de interpolación y facilitan la construcción de expansiones eficientes.
+	
+	\vspace{0.5cm}
+	
+	En este capítulo se abordarán, en primer lugar, las series de Fourier-Bessel, enfatizando sus propiedades, condiciones de ortogonalidad y aplicaciones típicas en problemas con simetría radial. Posteriormente, se presentará la aproximación de funciones mediante los polinomios de Chebyshev de tercera y cuarta especie, resaltando su papel en el desarrollo de series de Fourier generalizadas. La combinación de estas herramientas ofrece un marco poderoso no solo para la teoría matemática, sino también para la resolución práctica de ecuaciones diferenciales y problemas aplicados en ingeniería, física y computación científica.}
+	
+	\addtocontents{toc}{\protect\figuretoc{imagen/img11.png}}
+	
+	
+	% Capitulo 5
+	
+	\Example{Find the Fourier series}{	$$
+		|\sin x|=\displaystyle\sum_{n=-\infty}^{\infty} c_n e^{i 2 n x},\quad \text { for } x \in[-\pi, \pi].
+		$$}
+	
+	
+	\begin{demo}
+		The coefficients $\left\{c_n\right\}$ are given by
+		$$
+		c_n=\frac{1}{\pi} \int_0^\pi|\sin x| e^{-i 2 n x} d x=\frac{1}{\pi} \int_0^\pi \sin x e^{-i 2 n x} d x .
+		$$
+		We can expand $\sin x$ into exponentials to obtain
+		$$
+		\begin{aligned}
+			c_n & =\frac{1}{2 \pi i} \int_0^\pi\left(e^{i x}-e^{-i x}\right) e^{-i 2 n x} d x \\
+			& =\frac{1}{2 \pi i}\left[\int_0^\pi e^{-i(2 n-1) x} d x-\int_0^\pi e^{-i(2 n+1) x} d x\right] \\
+			& =\frac{1}{2 \pi i}\left[\frac{i}{2 n-1}\left(e^{-i(2 n-1) \pi}-1\right)-\frac{i}{2 n+1}\left(e^{-i(2 n+1) \pi}-1\right)\right] \\
+			& =\frac{1}{2 \pi i}(-2 i)\left[\frac{1}{2 n-1}-\frac{1}{2 n+1}\right] \\
+			& =-\frac{2}{\pi} \frac{1}{4 n^2-1}
+		\end{aligned}
+		$$
+		Therefore,
+		$$
+		|\sin x|=\sum_{n=-\infty}^{\infty}-\frac{2}{\pi} \frac{1}{4 n^2-1} e^{i 2 n x}=\frac{2}{\pi}-\sum_{n=1}^{\infty} \frac{4}{\pi} \frac{1}{4 n^2-1} \cos 2 n x .
+		$$
+		Notice that this can be used in order to compute infinite sums. Evaluating this at $x=0$, we have that
+		$$
+		\sum_{n=1}^{\infty} \frac{1}{4 n^2-1}=\frac{1}{2},
+		$$
+		whereas evaluating this at $x=\pi / 2$, we have that
+		$$
+		\sum_{n=1}^{\infty} \frac{(-1)^n}{4 n^2-1}=\frac{2-\pi}{4}
+		$$
+	\end{demo}
+	
+	\section{Series Fourier-Bessel}
+	\textcolor[rgb]{1.00,0.00,0.00}{sistemas ortogonales milane}
+	
+	\Example{Find the Bessel series expansion}{Find the Bessel series expansion with respect to $J_\nu\left(\lambda_k x\right)$ for the function $x^\nu, \nu \geq 0$}
+	
+	
+	\begin{demo}
+		In this case the coefficients in the series are given by the formula
+		$$
+		c_k=\frac{2}{\left[J_{\nu+1}\left(\lambda_k\right)\right]^2} \displaystyle\int_0^1 x^{\nu+1} J_\nu\left(\lambda_k x\right) d x
+		$$
+		and can be evaluated by setting $t=\lambda_k x$ and using Formula (\ref{eq46}), as follows:
+		$$
+		\begin{aligned}
+			\displaystyle\int_0^1 x^{\nu+1} J_\nu\left(\lambda_k x\right) d x  =\frac{1}{\lambda_k^{\nu+2}} \displaystyle\int_0^{\lambda_k} t^{\nu+1} J_\nu(t) d t  =\frac{1}{\lambda_k^{\nu+2}} \displaystyle\int_0^{\lambda_k} \frac{d}{d t}\left[t^{\nu+1} J_{\nu+1}(t)\right] d t  &=\frac{1}{\lambda_k^{\nu+2}}\left[t^{\nu+1} J_{\nu+1}(t)\right]_0^{\lambda_k}\\
+			&=\frac{1}{\lambda_k} J_{\nu+1}\left(\lambda_k\right)
+		\end{aligned}
+		$$
+		Thus
+		$$
+		c_k=\frac{2}{\lambda_k J_{\nu+1}\left(\lambda_k\right)}, \quad k=1,2, \ldots,
+		$$
+		\begin{equation}\label{eq75}
+			x^\nu=2\left[\frac{J_\nu\left(\lambda_1 x\right)}{\lambda_1 J_{\nu+1}\left(\lambda_1\right)}+\frac{J_\nu\left(\lambda_2 x\right)}{\lambda_2 J_{\nu+1}\left(\lambda_2\right)}+\frac{J_\nu\left(\lambda_3 x\right)}{\lambda_3 J_{\nu+1}\left(\lambda_3\right)}+\cdots\right],
+		\end{equation}
+		where the series converges in the mean in $\mathcal{P C}[0,1]$, pointwise in $(0,1)$, and uniformly on any closed subinterval of $(0,1)$.
+		In particular, when $\nu=0,(\ref{eq75})$ yields the formula
+		\begin{equation}\label{eq76}
+			\displaystyle\sum_{k=1}^{\infty} \frac{J_0\left(\lambda_k x\right)}{\lambda_k J_1\left(\lambda_k\right)}=\frac{1}{2}, \quad 0<x<1 .
+		\end{equation}
+	\end{demo}
+	
+	\Example{Ejemplo}{Expand  $x^2, 0<x<1$, as a series in  $J_0\left(\lambda_k x\right)$}
+	
+	
+	\begin{demo}
+		\vspace{.1cm}
+		
+		Here
+		$$
+		c_k=\frac{2}{\left[J_1\left(\lambda_k\right)\right]^2} \displaystyle\int_0^1 x^3 J_0\left(\lambda_k x\right) d x
+		$$
+		and, reasoning as in the preceding example, we find that
+		$$
+		\begin{aligned}
+			\displaystyle\int_0^1 x^3 J_0\left(\lambda_k x\right) d x & =\frac{1}{\lambda_k^4} \displaystyle\int_0^{\lambda_k} t^3 J_0(t) d t \\
+			& =\frac{1}{\lambda_k^4} \displaystyle\int_0^{\lambda_k} t^2 \frac{d}{d t}\left[t J_1(t)\right] d t \\
+			& =\frac{1}{\lambda_k^4}\left[\left.t^3 J_1(t)\right|_0 ^{\lambda_k}-2 \displaystyle\int_0^{\lambda_k} t^2 J_1(t) d t\right] \\
+			& =\frac{J_1\left(\lambda_k\right)}{\lambda_k}-\frac{2}{\lambda_k^4} \displaystyle\int_0^{\lambda_k} t^2 J_1(t) d t .
+		\end{aligned}
+		$$
+		But
+		$$
+		\begin{aligned}
+			\displaystyle\int_0^{\lambda_k} t^2 J_1(t) d t & =-\displaystyle\int_0^{\lambda_k} t^2 \frac{d}{d t} J_0(t) d t \\
+			& =-\left.t^2 J_0(t)\right|_0 ^{\lambda_k}+2\displaystyle \int_0^{\lambda_k} t J_0(t) d t \\
+			& =2 \displaystyle\int_0^{\lambda_k} \frac{d}{d t}\left[t J_1(t)\right] d t \\
+			& =2 \lambda_k J_1\left(\lambda_k\right)
+		\end{aligned}
+		$$
+		and it follows that
+		$$
+		\displaystyle\int_0^1 x^3 J_0\left(\lambda_k x\right) d x=\frac{J_1\left(\lambda_k\right)}{\lambda_k}-\frac{4 J_1\left(\lambda_k\right)}{\lambda_k^3}
+		$$
+		Thus
+		$$
+		c_k=\frac{2}{J_1\left(\lambda_k\right)}\left[\frac{1}{\lambda_k}-\frac{4}{\lambda_k^3}\right],
+		$$
+		and
+		$$
+		x^2=2 \displaystyle\sum_{k=1}^{\infty} \frac{1}{J_1\left(\lambda_k\right)}\left(\frac{1}{\lambda_k}-\frac{4}{\lambda_k^3}\right) J_0\left(\lambda_k x\right), \quad 0<x<1 $$
+		$$
+		x^2=2 \displaystyle\sum_{k=1}^{\infty} \frac{1}{J_1\left(j_{0,k}\right)}\left(\frac{1}{j_{0,k}}-\frac{4}{j_{0,k}^3}\right) J_0\left(j_{0,k} x\right), \quad 0<x<1
+		$$
+		
+		$$
+		x^2\approx\sum_{k=1}^1 \frac{2\left(\frac{1}{j_{0, k}}-\frac{4}{\left(j_{0, k}\right)^3}\right) J_0\left(x j_{0, k}\right)}{J_1\left(j_{0, k}\right)}=\frac{2\left(\left(j_{0,1}\right)^2-4\right) J_0\left(x j_{0,1}\right)}{\left(j_{0,1}\right)^3 J_1\left(j_{0,1}\right)}
+		$$
+		\textcolor[rgb]{1.00,0.00,0.00}{agregar grafica}
+	\end{demo}
+	
+	\Example{Ejemplo}{Prove that
+		$$
+		1-x^2=8 \displaystyle\sum_{k=1}^{\infty} \frac{J_0\left(\lambda_k x\right)}{\lambda_k^3 J_1\left(\lambda_k\right)}, \quad \text{for $0<x<1$.}
+		$$
+	}
+	
+	\begin{demo}
+		$$
+		f(x)=\displaystyle\sum_{k=1}^{\infty} c_k J_\nu\left(\lambda_k x\right),\qquad  c_k=\frac{2}{\left[J_{\nu+1}\left(\lambda_k\right)\right]^2} \displaystyle\int_0^1 f(x) J_\nu\left(\lambda_k x\right) x d x .
+		$$
+		$$
+		\begin{aligned}
+			& C_k=\frac{2}{\left[J_1\left(\lambda_k\right)\right]^2} \displaystyle\int_0^1 (1- x^2)x J_0\left(\lambda_k x\right) d x \\
+			& C_k=\frac{2}{\left[J_1\left(\lambda_k\right)\right]^2}\left[\displaystyle\int_0^1 x J_0\left(\lambda_kx\right) d x-\displaystyle\int_0^1 x^3 J_0\left(\lambda_k x\right) d x\right]
+		\end{aligned}
+		$$
+		$t=\lambda_k x \quad 0<t<\lambda_k$
+		$$
+		\begin{aligned}
+			& C_k=\frac{2}{\left[J_1\left(\lambda_k\right)\right]^2}\left[\displaystyle\int_0^{\lambda_k} \frac{t}{\lambda_k} J_0(t) \frac{d t}{\lambda_k}-\displaystyle\int_0^\lambda x^3 J_0\left(\lambda_k x\right) d x\right] \\
+			& C_k=\frac{2}{\left[J_1\left(\lambda_k\right)\right]^2}\left[\frac{1}{\lambda_k^2} \displaystyle\int_0^{\lambda_k} t J_0(t) d t-\left(\frac{J_1\left(\lambda_k\right)}{\lambda_k}-\frac{4 J_1\left(\lambda_k\right)}{\lambda^3}\right)\right]\\
+			& C_k=\frac{2}{\left[J_1\left(\lambda_k\right)\right]^2}\left[\frac{1}{\lambda_k^2} \displaystyle\int_0^{\lambda_k} \frac{d}{d t}\left[t J_1(t)\right] d t-J_1\left(\lambda_k\right)\left(\frac{1}{\lambda_k}-\frac{4}{\lambda_k^3}\right)\right] \\
+			& C_k=\frac{2}{\left[J_1\left(\lambda_k\right)\right]^2}\left[\frac{1}{\lambda_k^2}\left[t J_1(t)\right]_0^{\lambda_k}-J_1\left(\lambda_k\right)\left(\frac{1}{\lambda_k}-\frac{4}{\lambda_k^3}\right)\right]\\
+			& C_k=\frac{2}{J_1\left(\lambda_k\right)}\left[\frac{1}{\lambda_k}-\frac{1}{\lambda_k}+\frac{4}{\lambda_k^3}\right] \\
+			& C_k=\frac{8}{\lambda_k^3 J_1\left(\lambda_k\right)}
+		\end{aligned}
+		$$
+		$$
+		1-x^2=8 \displaystyle\sum_{k=1}^{\infty} \frac{J_0\left(\lambda_k x\right)}{\lambda_k^3 J_1\left(\lambda_k\right)} ;\quad  0<x<1
+		$$
+	\end{demo}
+	
+	
+	\section{Aproximaci\'on de funciones utilizando los polinomios de Chebyshev III, IV}
+	Como hemos estado viendo los polinomios de chebyshev de 3er y 4to tipo forman un sistema ortogonal cada uno, uno de los resultados importante de la teor\'ia de Sturm-Liouville es que las autofunciones de los problemas de autovalores de S-L son importantes para aproximar funciones continuas o suaves a trozo. A continuaci\'on veremos como usar los polinomios que est amos tratando para tales fines.
+	\subsection{ Series de Fourier Chebyshev III }
+	Sea $\mathrm{f}$ una funci\'on continua en $(-1,1)$, supongamos que esta tiene un desarrollo convergente en series de Fourier de la siguiente forma:
+	$$
+	f(x) \approx \sum_{n=0}^{\infty} c_n V_n(x),
+	$$
+	Donde $V_n(x)$ son los polinomios de Chebyshev de 3er tipo.
+	"Nuestro problema seria encontrar los $c_n "$, con
+	$$
+	w(x)=\sqrt{\frac{1+x}{1-x}},
+	$$
+	Si multiplicamos esta expresi\'on en ambos lados por $w(x) V_m(x)$ ), (con $m<n$ fijo) e integrando entre $-1$ y 1 , (suponiendo que la integraci\'on de la serie es t\'ermino a t\'ermino), tenemos que:
+	$$
+	\begin{gathered}
+		\int_{-1}^1 w(x) V_m(x) f(x) d x=\int_{-1}^1 \sum_{n=0}^{\infty} c_n w(x) V_m(x) V_n(x) d x=\sum_{n=0}^{\infty} c_n \int_{-1}^1 w(x) V_m(x) V_n(x) d x \\
+		=c_0 \int_{-1}^1 w(x) V_m(x) V_0(x) d x+c_1 \int_{-1}^1 w(x) V_m(x) V_1(x) d x+\ldots+ \\
+		c_m \int_{-1}^1 w(x) V_m(x) V_m(x) d x+\ldots+c_n \int_{-1}^1 w(x) V_m(x) V_n(x) d x
+	\end{gathered}
+	$$
+	Por ortogonalidad,
+	$$
+	\int_{-1}^1 w(x) V_m(x) f(x) d x=c_m \int_{-1}^1 w(x) V_m^2(x) d x
+	$$
+	Haciendo un cambio $x=\cos \theta \Rightarrow d x=-\operatorname{sen} \theta d \theta$ se tiene
+	$$
+	\int_{-1}^1 w(x) V_m^2(x) d x=-\int_0^\pi \sqrt{\frac{1+x}{1-x}} \frac{\cos ^2\left[\left(n+\frac{1}{2}\right) \theta\right]}{\cos ^2\left(\frac{\theta}{2}\right)}(-\operatorname{sen} \theta d \theta)=2 \int_0^\pi \cos ^2\left[n+\frac{1}{2}\right] \theta d \theta=\pi
+	$$
+	por lo que
+	$$
+	\int_{-1}^1 w(x) V_m(x) f(x) d x=c_m \int_{-1}^1 w(x) V_m^2(x) d x=c_m \pi,
+	$$
+	$$
+	c_m=\frac{1}{\pi} \int_{-1}^1 w(x) V_m(x) f(x) d x
+	$$
+	y de esta forma obtenemos los coeficientes.
+	
+	\Example{Ejemplo}{Obtenga los primeros 5 t\'erminos del desarrollo en series de Fourier-Chebyshev III de la funci\'on $f(x)=x$.}
+	
+	\begin{demo}
+		Tenemos
+		$$
+		\begin{gathered}
+			f(x)=x \approx \sum_{n=0}^4 c_n V_n(x) \\
+			c_n=\frac{1}{\pi} \int_{-1}^1 x w(x) V_n(x) \\
+			x \approx \sum_{n=0}^4 c_n V_n(x)=c_0 V_0(x)+c_1 V_1(x)+c_2 V_2(x)+c_3 V_3(x)+c_4 V_4(x)
+		\end{gathered}
+		$$
+		donde
+		Sabemos que:\\
+		$ V_0(x)=1, V_1(x)=2 x-1, V_2(x)=4 x^2-2 x-1 V_3(x)=8 x^3-4 x^2-4 x+1, V_4(x)=16 x^4-8 x^3-12 x^2+4 x+1 $
+		$\begin{aligned}
+			& c_0=\frac{1}{\pi} \int_{-1}^1 x \sqrt{\frac{1+x}{1-x}} V_0(x) d x=\frac{1}{\pi} \int_{-1}^1 x \sqrt{\frac{1+x}{1-x}} d x=\frac{1}{\pi} \frac{\pi}{2}=\pi \\
+			& c_1=\frac{1}{\pi} \int_{-1}^1 x \sqrt{\frac{1+x}{1-x}}(2 x-1) d x=\frac{1}{\pi} \int_{-1}^1\left(2 x^2-x\right) \sqrt{\frac{1+x}{1-x}} d x=\frac{2}{\pi} \int_{-1}^1 x^2 \sqrt{\frac{1+x}{1-x}} d x-\frac{1}{\pi} \int_{-1}^1 x \sqrt{\frac{1+x}{1-x}} d x \\
+			& =\frac{2}{\pi}\left(\frac{\pi}{2}\right)-\frac{\pi}{2}=\frac{1}{2} \\
+			& c_2=\frac{1}{\pi} \int_{-1}^1 x\left(4 x^2-2 x-1\right) \sqrt{\frac{1+x}{1-x}} d x=\frac{1}{\pi}\left(4 \int_{-1}^1 x^3 \sqrt{\frac{1+x}{1-x}} d x-2 \int_{-1}^1 x^2 \sqrt{\frac{1+x}{1-x}} d x-\int_{-1}^1 x \sqrt{\frac{1+x}{1-x}} d x\right) \\
+			& =\frac{1}{\pi}\left[\frac{3 \pi}{2}-\pi-\frac{\pi}{2}\right]=0 \\
+			&
+		\end{aligned}
+		$
+		$\begin{aligned}
+			& c_3=\frac{1}{\pi} \int_{-1}^1 x\left(8 x^3-4 x^2-4 x+1\right) \sqrt{\frac{1+x}{1-x}} d x=\frac{1}{\pi} \int_{-1}^1\left(8 x^4-4 x^3-4 x^2+x\right) \sqrt{\frac{1+x}{1-x}} d x \\
+			& =\frac{1}{\pi}\left[8 \int_{-1}^1 x^4 \sqrt{\frac{1+x}{1-x}} d x-4 \int_{-1}^1 x^3 \sqrt{\frac{1+x}{1-x}} d x-4 \int_{-1}^1 x^2 \sqrt{\frac{1+x}{1-x}} d x+\int_{-1}^1 x \sqrt{\frac{1+x}{1-x}} d x\right] \\
+			& =\frac{1}{\pi}\left[3 \pi-\frac{3 \pi}{2}-2 \pi+\frac{\pi}{2}\right]=0 \\
+			& c_4=\frac{1}{\pi} \int_{-1}^1 x\left(16 x^4-8 x^3-12 x^2+4 x+1\right) \sqrt{\frac{1+x}{1-x}} d x \\
+			& =\frac{1}{\pi}\left[16 \int_{-1}^1 x^5 \sqrt{\frac{1+x}{1-x}} d x-8 \int_{-1}^1 x^4 \sqrt{\frac{1+x}{1-x}} d x-12 \int_{-1}^1 x^3 \sqrt{\frac{1+x}{1-x}} d x\right] \\
+			& +\frac{1}{\pi}\left[4 \int_{-1}^1 x^2 \sqrt{\frac{1+x}{1-x}} d x+\int_{-1}^1 x \sqrt{\frac{1+x}{1-x}} d x\right] \\
+			& =\frac{1}{\pi}\left[5 \pi-3 \pi-\frac{9 \pi}{2}+2 \pi+\frac{\pi}{2}\right]=0 \\
+			&
+		\end{aligned}$
+		Por lo que tenemos que:
+		$$
+		\begin{gathered}
+			c_0=\frac{1}{2}, c_1=\frac{1}{2}, c_2=c_3=c_4 \\
+			f(x)=x \approx \frac{1}{2}(1+2 x-1)=x
+		\end{gathered}
+		$$
+		Por lo que la funci\'on aproximada es igual a la funci\'on original.
+		\textcolor[rgb]{1.00,0.00,0.00}{hacer grafica}
+	\end{demo}
+	
+	\Example{Ejemplo}{	Obtenga los primeros 5 t\'erminos del desarrollo en serie Fourier-Chebyshev III de la funci\'on $f(x)=(1-x)^{1 / 2}(1+x)^{-1 / 2}$ en $(-1,1)$.}
+	
+	\begin{demo}
+		Tenemos
+		$$
+		f(x) \approx \sum_{n=0}^4 c_n V_n(x),
+		$$
+		donde
+		$$
+		\begin{gathered}
+			c_n=\frac{1}{\pi} \int_{-1}^1 \sqrt{\frac{1-x}{1+x}} \sqrt{\frac{1+x}{1-x}} V_n(x) d x=\frac{1}{\pi} \int_{-1}^1 V_n(x) d x \\
+			f(x) \approx \sum_{n=0}^4 c_n V_n(x)=c_0 V_0(x)+c_1 V_1(x)+c_2 V_2(x)+c_3 V_3(x)+c_4 V_4(x) \\
+			c_0=\frac{1}{\pi} \int_{-1}^1 V_0(x) d x=\frac{1}{\pi}(1+1)=\frac{2}{\pi}
+		\end{gathered}
+		$$
+		$$\begin{gathered}
+			c_1=\frac{1}{\pi} \int_{-1}^1 V_1(x) d x=\frac{1}{\pi} \int_{-1}^1(2 x-1) d x=\frac{2}{\pi} \int_{-1}^1 x d x-\frac{1}{\pi} \int_{-1}^1 d x=-\frac{2}{\pi} \\
+			c_2=\frac{1}{\pi} \int_{-1}^1 V_2(x) d x=\frac{1}{\pi} \int_{-1}^1\left(4 x^2-2 x-1\right) d x=\frac{2}{3 \pi} \\
+			c_3=\frac{1}{\pi} \int_{-1}^1 V_3(x) d x=\frac{1}{\pi} \int_{-1}^1\left(8 x^3-4 x^2-4 x+1\right) d x=-\frac{2}{3 \pi} \\
+			c_4=\frac{1}{\pi} \int_{-1}^1 V_4(x) d x=\frac{1}{\pi} \int_{-1}^1\left(16 x^4-8 x^3-12 x^2+4 x+1\right) d x=\frac{2}{5 \pi},
+		\end{gathered}$$
+		por lo que,
+		$$
+		c_0=\frac{2}{\pi}, c_1=-\frac{2}{\pi}, c_2=\frac{2}{3 \pi}, c_3=-\frac{2}{3 \pi}, c_4=\frac{2}{5 \pi}
+		$$
+		$$
+		\sqrt{\frac{1-x}{1+x}} \approx \frac{2}{\pi}-\frac{2}{\pi}(2 x-1)+\frac{2}{3 \pi}\left(4 x^2-2 x-1\right)-\frac{2}{3 \pi}\left(8 x^3-4 x^2-4 x+1\right)+\frac{2}{5 \pi}\left(16 x^4-8 x^3-12 x^2+4 x+1\right)
+		$$
+		\textcolor[rgb]{1.00,0.00,0.00}{hacer la grafica}
+	\end{demo}
+	
+	\Example{Ejemplo}{Obtenga los primeros 5 t\'erminos del desarrollo en serie Fourier-Chebyshev III de la funci\'on $f(x)=e^x$ en $(-1,1)$.}
+	
+	\begin{demo}
+		$$\begin{gathered}
+			e^x \approx \sum_{n=0}^4 c_n V_n(x) \\
+			c_0=\frac{1}{\pi} \int_{-1}^1 e^x \sqrt{\frac{1+x}{1-x}} d x=\frac{5.75}{\pi} \\
+			c_1=\frac{1}{\pi} \int_{-1}^1 e^x \sqrt{\frac{1+x}{1-x}}(2 x-1) d x=\frac{0.20}{\pi} \\
+			c_2=\frac{1}{\pi} \int_{-1}^1 e^x \sqrt{\frac{1+x}{1-x}}\left(4 x^2-2 x-1\right) d x=\frac{0.496}{\pi} \\
+			c_3=\frac{1}{\pi} \int_{-1}^1 e^x \sqrt{\frac{1+x}{1-x}}\left(8 x^3-4 x^2-4 x+1\right) d x=\frac{0.08}{\pi} \\
+			c_4=\frac{1}{\pi} \int_{-1}^1 e^x \sqrt{\frac{1+x}{1-x}}\left(16 x^4-8 x^3-12 x^2+4 x+1\right) d x=\frac{0.009}{\pi}
+		\end{gathered}$$
+		Por lo que
+		$$
+		e^x \approx \frac{5.75}{\pi}+\frac{0.20}{\pi}(2 x-1)+\frac{0.496}{\pi}\left(4 x^2-2 x-1\right)+\frac{0.08}{\pi}\left(8 x^3-4 x^2-4 x+1\right)+\frac{0.009}{\pi}\left(16 x^4-8 x^3-12 x^2+4 x+1\right)
+		$$
+		\textcolor[rgb]{1.00,0.00,0.00}{hacer la grafica}
+	\end{demo}
+	
+	\Example{Ejemplo}{	Obtenga los primeros 5 t\'erminos del desarrollo en serie Fourier-Chebyshev III de la funci\'on $f(x)=\operatorname{sen}(x)$ en $(-1,1)$.}
+	
+	\begin{demo}
+		$$\begin{gathered}
+			\operatorname{sen}(x) \approx \sum_{n=0}^4 c_n V_n(x) \\
+			c_0=\frac{1}{\pi} \int_{-1}^1 \operatorname{sen}(x) \sqrt{\frac{1+x}{1-x}} d x=\frac{1.38}{\pi} \\
+			c_1=\frac{1}{\pi} \int_{-1}^1 \operatorname{sen}(x) \sqrt{\frac{1+x}{1-x}}(2 x-1) d x=\frac{1.38}{\pi} \\
+			c_2=\frac{1}{\pi} \int_{-1}^1 \operatorname{sen}(x) \sqrt{\frac{1+x}{1-x}}\left(4 x^2-2 x-1\right) d x=-\frac{0.06}{\pi} \\
+			c_3=\frac{1}{\pi} \int_{-1}^1 \operatorname{sen}(x) \sqrt{\frac{1+x}{1-x}}\left(8 x^3-4 x^2-4 x+1\right) d x=-\frac{0.06}{\pi} \\
+			c_4=\frac{1}{\pi} \int_{-1}^1 \operatorname{sen}(x) \sqrt{\frac{1+x}{1-x}}\left(16 x^4-8 x^3-12 x^2+4 x+1\right) d x=\frac{0.0008}{\pi}
+		\end{gathered}$$
+		Por lo que
+		$$
+		\operatorname{sen}(x) \approx \frac{1.38}{\pi}+\frac{1.38}{\pi}(2 x-1)-\frac{0.06}{\pi}\left(4 x^2-2 x-1\right)-\frac{0.06}{\pi}\left(8 x^3-4 x^2-4 x+1\right)+\frac{0.0008}{\pi}\left(16 x^4-8 x^3-12 x^2+4 x+1\right)
+		$$
+		\textcolor[rgb]{1.00,0.00,0.00}{hacer la grafica}
+	\end{demo}
+	
+	\Example{Ejemplo}{Obtenga los primeros 5 t\'erminos del desarrollo en serie Fourier-Chebyshev III de la funci\'on $f(x)=\cos (x)$ en $(-1,1)$.}
+	
+	\begin{demo}
+		$$
+		\begin{gathered}
+			\cos (x) \approx \sum_{n=0}^4 c_n V_n(x) \\
+			c_0=\frac{1}{\pi} \int_{-1}^1 \cos (x) \sqrt{\frac{1+x}{1-x}} d x=\frac{2.40}{\pi} \\
+			c_1=\frac{1}{\pi} \int_{-1}^1 \cos (x) \sqrt{\frac{1+x}{1-x}}(2 x-1) d x=-\frac{0.36}{\pi} \\
+			c_2=\frac{1}{\pi} \int_{-1}^1 \cos (x) \sqrt{\frac{1+x}{1-x}}\left(4 x^2-2 x-1\right) d x=-\frac{0.36}{\pi} \\
+			c_3=\frac{1}{\pi} \int_{-1}^1 \cos (x) \sqrt{\frac{1+x}{1-x}}\left(8 x^3-4 x^2-4 x+1\right) d x=\frac{0.008}{\pi} \\
+			c_4=\frac{1}{\pi} \int_{-1}^1 \cos (x) \sqrt{\frac{1+x}{1-x}}\left(16 x^4-8 x^3-12 x^2+4 x+1\right) d x=\frac{0.008}{\pi}
+		\end{gathered}
+		$$
+		Por lo que
+		$$
+		\cos (x) \approx \frac{2.40}{\pi}-\frac{0.36}{\pi}(2 x-1)-\frac{0.36}{\pi}\left(4 x^2-2 x-1\right)+\frac{0.008}{\pi}\left(8 x^3-4 x^2-4 x+1\right)+\frac{0.008}{\pi}\left(16 x^4-8 x^3-12 x^2+4 x+1\right)
+		$$
+	\end{demo}
+	
+	\subsection{ Series de Fourier Chebyshev IV }
+	En el caso de los polinomios de Chebyshev IV podemos aproximar funciones al igual que como lo hicimos para los de 3er tipo. Si $f(x)$ es una funci\'on continua o suave a trozos podemos aproximarla de la siguiente manera:
+	$$
+	f(x) \approx \sum_{n=0}^{\infty} c_n W_n(x),
+	$$
+	Donde $W_n(x)$ son los polinomios de Chebyshev de 4to tipo $\mathrm{y}$
+	$$
+	\begin{gathered}
+		c_n=\frac{1}{\pi} \int_{-1}^1 w(x) W_n(x) f(x) d x \\
+		w(x)=\sqrt{\frac{1-x}{1+x}}
+	\end{gathered}
+	$$
+	Veamos algunos ejemplos de funciones polinomiales, ya que cuando la funci\'on $\mathrm{f}$ es polinomial la aproximaci\'on es muy buena.
+	
+	\Example{Ejemplo}{	Sea $f(x)=x^2$, encuentre la aproximaci\'on Fourier-Chebyshev IV con 5 t\'erminos en $(-1,1)$}
+	
+	\begin{demo}
+		$$
+		x^2 \approx \sum_{n=0}^4 c_n W_n(x)=c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x)
+		$$
+		donde
+		$$
+		c_0=\frac{1}{\pi} \int_{-1}^1 \sqrt{\frac{1-x}{1+x}} W_0(x) x^2 d x=\frac{1}{\pi} \int_{-1}^1 x^2 \sqrt{\frac{1-x}{1+x}} d x=\frac{1}{\pi}\left(\frac{\pi}{2}\right)=\frac{1}{2}
+		$$
+		$$\begin{gathered}
+			c_1=\frac{1}{\pi} \int_{-1}^1 \sqrt{\frac{1-x}{1+x}} W_1(x) x^2 d x=\frac{1}{\pi} \int_{-1}^1 x^2 \sqrt{\frac{1-x}{1+x}}(2 x+1) d x=\frac{1}{\pi}\left(2 \int_{-1}^1 x^3 \sqrt{\frac{1-x}{1+x}} d x+\int_{-1}^1 x^2 \sqrt{\frac{1-x}{1+x}} d x\right) \\
+			=\frac{1}{\pi}\left(-2 \frac{3 \pi}{8}+\frac{\pi}{2}\right)=\frac{1}{2}-\frac{3}{4}=-\frac{1}{4} \\
+			c_2=\frac{1}{\pi} \int_{-1}^1 \sqrt{\frac{1-x}{1+x}} W_2(x) x^2 d x=\frac{1}{\pi} \int_{-1}^1 x^2 \sqrt{\frac{1-x}{1+x}}\left(4 x^2+2 x-1\right) d x \\
+			=\frac{1}{\pi}\left(4 \int_{-1}^1 x^4 \sqrt{\frac{1-x}{1+x}} d x+2 \int_{-1}^1 x^3 \sqrt{\frac{1-x}{1+x}} d x-\int_{-1}^1 x^2 \sqrt{\frac{1-x}{1+x}} d x\right) \\
+			=\frac{1}{\pi}\left(4\left(\frac{3 \pi}{8}\right)+2\left(-\frac{3 \pi}{8}\right)-\frac{\pi}{2}\right)=\frac{1}{4}
+		\end{gathered}$$
+		
+		$$\begin{gathered}
+			c_3=\frac{1}{\pi} \int_{-1}^1 \sqrt{\frac{1-x}{1+x}} W_3(x) x^2 d x=\frac{1}{\pi} \int_{-1}^1 x^2 \sqrt{\frac{1-x}{1+x}}\left(8 x^3+4 x^2-4 x-1\right) d x\\
+			c_3=\frac{1}{\pi}\left(8 \int_{-1}^1 x^5 \sqrt{\frac{1-x}{1+x}} d x+4 \int_{-1}^1 x^4 \sqrt{\frac{1-x}{1+x}} d x-4 \int_{-1}^1 x^3 \sqrt{\frac{1-x}{1+x}} d x-\int_{-1}^1 x^2 \sqrt{\frac{1-x}{1+x}} d x\right) \\
+			=\frac{1}{\pi}\left(8\left(-\frac{5 \pi}{16}\right)+4\left(\frac{3 \pi}{8}\right)-4\left(-\frac{3 \pi}{8}\right)-\frac{\pi}{2}\right)=0
+		\end{gathered}$$
+		$$\begin{gathered}
+			c_4=\frac{1}{\pi} \int_{-1}^1 \sqrt{\frac{1-x}{1+x}} W_4(x) x^2 d x=\frac{1}{\pi} \int_{-1}^1 \sqrt{\frac{1-x}{1+x}}\left(16 x^4+8 x^3-12 x^2-4 x+1\right) x^2 d x \\
+			=\frac{1}{\pi}\left(16 \int_{-1}^1 x^6 \sqrt{\frac{1-x}{1+x}} d x+8 \int_{-1}^1 x^5 \sqrt{\frac{1-x}{1+x}} d x-12 \int_{-1}^1 x^4 \sqrt{\frac{1-x}{1+x}} d x-4 \int_{-1}^1 x^3 \sqrt{\frac{1-x}{1+x}} d x\right) \\
+			+\frac{1}{\pi}\left(\int_{-1}^1 x^2 \sqrt{\frac{1-x}{1+x}} d x\right) \\
+			=\frac{1}{\pi}\left(16\left(\frac{5 \pi}{16}\right)+8\left(-\frac{5 \pi}{16}\right)-12\left(\frac{3 \pi}{8}\right)+4\left(\frac{3 \pi}{8}\right)+\left(\frac{\pi}{2}\right)\right)=0 \\
+		\end{gathered}$$
+		Por lo que
+		$$
+		c_0=\frac{1}{2}, \quad c_1=-\frac{1}{4}, \quad c_2=\frac{1}{4}, c_3=c_4=0
+		$$
+		As\'i tenemos:
+		$$
+		\begin{gathered}
+			x^2 \approx c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x) \\
+			=\frac{1}{2}-\frac{1}{4}(2 x+1)+\frac{1}{4}\left(4 x^2+2 x-1\right)=x^2
+		\end{gathered}
+		$$
+		\textcolor[rgb]{1.00,0.00,0.00}{hacer la grafica}\\
+		Por lo que se tiene que la aproximaci\'on es exacta. A demas se puede observar que las constantes $c_n$ se hacen cero cuando $n+1$ es mayor que el grado del polinomio que se esta aproximando.
+	\end{demo}
+	
+	\Example{Ejemplo}{Sea $f(x)=5 x^3-3 x+8$, encuentre la aproximaci\'on Fourier-Chebyshev IV con 4 t\'erminos en $(-1,1)$}
+	
+	
+	\begin{demo}
+		$$
+		5 x^3-3 x+8 \approx \sum_{n=0}^3 c_n W_n(x)=c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x),
+		$$
+		donde
+		$$
+		\begin{gathered}
+			c_0=\frac{1}{\pi} \int_{-1}^1 \sqrt{\frac{1-x}{1+x}} W_0(x)\left(5 x^3-3 x+8\right) d x=\frac{1}{\pi} \int_{-1}^1\left(5 x^3-3 x+8\right) \sqrt{\frac{1-x}{1+x}} d x \\
+			=\frac{1}{\pi}\left(5 \int_{-1}^1 x^3 \sqrt{\frac{1-x}{1+x}} d x-3 \int_{-1}^1 x \sqrt{\frac{1-x}{1+x}} d x+8 \int_{-1}^1 \sqrt{\frac{1-x}{1+x}} d x\right) \\
+			=\frac{1}{\pi}\left(-5\left(\frac{3 \pi}{8}\right)+3\left(\frac{\pi}{2}\right)+8(\pi)\right)=\frac{37}{8}
+		\end{gathered}
+		$$
+		$$\begin{gathered}
+			c_1=\frac{1}{\pi} \int_{-1}^1 \sqrt{\frac{1-x}{1+x}} W_1(x)\left(5 x^3-3 x+8\right) d x=\frac{1}{\pi} \int_{-1}^1\left(5 x^3-3 x+8\right)(2 x+1) \sqrt{\frac{1-x}{1+x}} d x \\
+			=\frac{1}{\pi}\left(\int_{-1}^1\left(10 x^4+5 x^3-6 x^2+13 x+8\right) \sqrt{\frac{1-x}{1+x}} d x\right) \\
+			=\frac{1}{\pi}\left(10 \int_{-1}^1 x^4 \sqrt{\frac{1-x}{1+x}} d x+5 \int_{-1}^1 x^3 \sqrt{\frac{1-x}{1+x}} d x-6 \int_{-1}^1 x^2 \sqrt{\frac{1-x}{1+x}} d x\right) \\
+			+\left(13 \int_{-1}^1 x \sqrt{\frac{1-x}{1+x}} d x+8 \int_{-1}^1 \sqrt{\frac{1-x}{1+x}} d x\right) \\
+			=\frac{1}{\pi}\left(10\left(\frac{3 \pi}{8}\right)+5\left(-\frac{3 \pi}{8}\right)-6\left(\frac{\pi}{2}\right)+13\left(-\frac{\pi}{2}\right)+8\left(-\frac{\pi}{2}\right)\right)=-\frac{93}{8}
+		\end{gathered}$$
+		$$
+		\begin{aligned}
+			c_2=\frac{1}{\pi} \int_{-1}^1 \sqrt{\frac{1-x}{1+x}}\left(4 x^2+2 x-1\right)\left(5 x^3-3 x+8\right) d x & =\frac{1}{\pi} \int_{-1}^1\left(20 x^5+10 x^4-17 x^3+26 x^2+19 x-8\right) \sqrt{\frac{1-x}{1+x}} d x \\
+			=\frac{20}{\pi} \int_{-1}^1 x^5 \sqrt{\frac{1-x}{1+x}} d x+ & \frac{10}{\pi} \int_{-1}^1 x^4 \sqrt{\frac{1-x}{1+x}} d x-\frac{17}{\pi} \int_{-1}^1 x^3 \sqrt{\frac{1-x}{1+x}} d x+\frac{26}{\pi} \int_{-1}^1 x^2 \sqrt{\frac{1-x}{1+x}} d x \\
+			& +\frac{19}{\pi} \int_{-1}^1 x \sqrt{\frac{1-x}{1+x}} d x+\frac{8}{\pi} \int_{-1}^1 \sqrt{\frac{1-x}{1+x}} d x \\
+			& =-\frac{100}{16}+\frac{30}{8}+\frac{51}{8}+\frac{26}{2}-\frac{19}{2}-8=-\frac{57}{8}
+		\end{aligned}$$
+		$$
+		\begin{gathered}
+			c_3=\frac{1}{\pi} \int_{-1}^1 \sqrt{\frac{1-x}{1+x}}\left(8 x^3+4 x^2-2 x-1\right)\left(5 x^3-3 x+8\right) d x\\
+			=\frac{1}{\pi} \int_{-1}^1\left(40 x^6+20 x^5-34 x^4+47 x^3+38 x^2-13 x-8\right) \sqrt{\frac{1-x}{1+x}} d x \\
+			=\frac{40}{\pi} \int_{-1}^1 x^6 \sqrt{\frac{1-x}{1+x}} d x+\frac{20}{\pi} \int_{-1}^1 x^5 \sqrt{\frac{1-x}{1+x}} d x-\frac{34}{\pi} \int_{-1}^1 x^4 \sqrt{\frac{1-x}{1+x}} d x \\
+			+\frac{47}{\pi} \int_{-1}^1 x^3 \sqrt{\frac{1-x}{1+x}} d x+\frac{38}{\pi} \int_{-1}^1 x^2 \sqrt{\frac{1-x}{1+x}} d x-\frac{13}{\pi} \int_{-1}^1 x \sqrt{\frac{1-x}{1+x}} d x-\frac{8}{\pi} \int_{-1}^1 \sqrt{\frac{1-x}{1+x}} d x \\
+			=40\left(\frac{5}{16}\right)-\frac{100}{16}-\frac{51}{4}-47\left(\frac{3}{8}\right)+19+\frac{13}{2}-8=\frac{47}{8}
+		\end{gathered}
+		$$
+		$$
+		\begin{gathered}
+			c_4=\frac{1}{\pi} \int_{-1}^1 \sqrt{\frac{1-x}{1+x}}\left(16 x^4+8 x^3-12 x^2-4 x+1\right)\left(5 x^3-3 x+8\right) d x \\
+			=\frac{1}{\pi} \int_{-1}^1\left(80 x^7+40 x^6-108 x^5+84 x^4+105 x^3-84 x^2-35 x+8\right) \sqrt{\frac{1-x}{1+x}} d x \\
+			=\frac{80}{\pi} \int_{-1}^1 x^7 \sqrt{\frac{1-x}{1+x}} d x+\frac{40}{\pi} \int_{-1}^1 x^6 \sqrt{\frac{1-x}{1+x}} d x-\frac{108}{\pi} \int_{-1}^1 x^5 \sqrt{\frac{1-x}{1+x}} d x \\
+			+\frac{84}{\pi} \int_{-1}^1 x^4 \sqrt{\frac{1-x}{1+x}} d x+\frac{105}{\pi} \int_{-1}^1 x^3 \sqrt{\frac{1-x}{1+x}} d x-\frac{84}{\pi} \int_{-1}^1 x^2 \sqrt{\frac{1-x}{1+x}} d x \\
+			\quad-\frac{35}{\pi} \int_{-1}^1 x \sqrt{\frac{1-x}{1+x}} d x+\frac{8}{\pi} \int_{-1}^1 \sqrt{\frac{1-x}{1+x}} d x=0
+		\end{gathered}
+		$$
+		Por lo que
+		$$
+		c_0=\frac{37}{8}, \quad c_1=-\frac{93}{8}, \quad c_2=-\frac{57}{8}, c_3=\frac{47}{8}, c_4=0
+		$$
+		As\'i tenemos:
+		$$
+		\begin{gathered}
+			5 x^3-3 x+8 \approx c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x) \\
+			=\frac{37}{8}-\frac{93}{8}(2 x+1)-\frac{57}{8}\left(4 x^2+2 x-1\right)+\frac{47}{8}\left(8 x^3+4 x^2-4 x-1\right)=5 x^3-3 x+8
+		\end{gathered}
+		$$
+		Por lo que se tiene que la aproximaci\'on es exacta.
+	\end{demo}
+	
+	\Example{Ejemplo}{Sea $f(x)=\tan (x)$, encuentre la aproximaci\'on Fourier-Chebyshev IV con 5 t\'erminos en $(-1,1)$}
+	
+	\begin{demo}
+		$$ \begin{aligned}
+			& \qquad \tan (x) \approx \sum_{n=0}^4 c_n W_n(x)=c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x) \\
+			& c_0=\frac{1}{\pi} \int_{-1}^1 \tan (x) \sqrt{\frac{1-x}{1+x}} d x=-\frac{2.17}{\pi} \\
+			& \text { donde } \\
+			& c_1=\frac{1}{\pi} \int_{-1}^1 \tan (x) \sqrt{\frac{1-x}{1+x}}(2 x+1) d x=\frac{2.17}{\pi} \\
+			& c_2=\frac{1}{\pi} \int_{-1}^1 \tan (x) \sqrt{\frac{1-x}{1+x}}\left(4 x^2+2 x-1\right) d x=-\frac{0.243}{\pi} \\
+			& c_3=\frac{1}{\pi} \int_{-1}^1 \tan (x) \sqrt{\frac{1-x}{1+x}}\left(8 x^3+4 x^2-4 x-1\right) d x=\frac{0.243}{\pi} \\
+			& c_4=\frac{1}{\pi} \int_{-1}^1 \tan (x) \sqrt{\frac{1-x}{1+x}}\left(16 x^4+8 x^3-12 x^2-4 x+1\right) d x=-\frac{0.03}{\pi} \\
+			& \text { As\'i tenemos: } \tan (x) \approx c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x) \\
+			& =-\frac{2.17}{\pi}+\frac{2.17}{\pi}(2 x+1)-\frac{0.243}{\pi}\left(4 x^2+2 x-1\right)+\frac{0.243}{\pi}\left(8 x^3+4 x^2-4 x-1\right)-\frac{0.03}{\pi}\left(16 x^4+8 x^3-12 x^2-4 x+1\right)
+		\end{aligned}$$
+	\end{demo}
+	
+	\Example{Ejemplo}{Sea $f(x)=5^x-4 \cos (x)$, encuentre la aproximaci\'on Fourier-Chebyshev IV con 5 t\'erminos en $(-1,1)$}
+	
+	\begin{demo}
+		$$
+		5^x-4 \cos (x) \approx \sum_{n=0}^4 c_n W_n(x)=c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x),
+		$$
+		donde
+		$$
+		\begin{gathered}
+			c_0=\frac{1}{\pi} \int_{-1}^1\left(5^x-4 \cos (x)\right) \sqrt{\frac{1-x}{1+x}} d x=-\frac{7.53}{\pi} \\
+			c_1=\frac{1}{\pi} \int_{-1}^1\left(5^x-4 \cos (x)\right) \sqrt{\frac{1-x}{1+x}}(2 x+1) d x=\frac{0.74}{\pi} \\
+			c_2=\frac{1}{\pi} \int_{-1}^1\left(5^x-4 \cos (x)\right) \sqrt{\frac{1-x}{1+x}}\left(4 x^2+2 x-1\right) d x=\frac{2.379}{\pi} \\
+			c_3=\frac{1}{\pi} \int_{-1}^1\left(5^x-4 \cos (x)\right) \sqrt{\frac{1-x}{1+x}}\left(8 x^3+4 x^2-4 x-1\right) d x=\frac{0.289}{\pi} \\
+			c_4=\frac{1}{\pi} \int_{-1}^1\left(5^x-4 \cos (x)\right) \sqrt{\frac{1-x}{1+x}}\left(16 x^4+8 x^3-12 x^2-4 x+1\right) d x=\frac{0.02}{\pi}
+		\end{gathered}
+		$$
+		As\'i tenemos:
+		$$
+		\begin{gathered}
+			5^x-4 \cos (x) \approx c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x) \\
+			=-\frac{7.53}{\pi}+\frac{0.74}{\pi}(2 x+1)+\frac{2.379}{\pi}\left(4 x^2+2 x-1\right)+\frac{0.289}{\pi}\left(8 x^3+4 x^2-4 x-1\right)+\frac{0.02}{\pi}\left(16 x^4+8 x^3-12 x^2-4 x+1\right)
+		\end{gathered}
+		$$
+		\textcolor[rgb]{1.00,0.00,0.00}{hacer grafica}
+	\end{demo}
+	
+	\Example{Ejemplo}{Sea $f(x)=\sqrt{1-x^2}$, encuentre la aproximaci\'on Fourier-Chebyshev IV con 5 t\'erminos en $(-1,1)$}
+	
+	\begin{demo}
+		$$
+		\begin{gathered}
+			\sqrt{1-x^2} \approx \sum_{n=0}^4 c_n W_n(x)=c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x), \\
+			\left.c_0=\frac{1}{\pi} \int_{-1}^1 \sqrt{1-x^2}\right) \sqrt{\frac{1-x}{1+x}} d x=\frac{2}{\pi} \\
+			\text { donde } \\
+			c_1=\frac{1}{\pi} \int_{-1}^1 \sqrt{1-x^2} \sqrt{\frac{1-x}{1+x}}(2 x+1) d x=\frac{0.67}{\pi} \\
+			c_2=\frac{1}{\pi} \int_{-1}^1 \sqrt{1-x^2} \sqrt{\frac{1-x}{1+x}}\left(4 x^2+2 x-1\right) d x=-\frac{0.67}{\pi} \\
+			c_3=\frac{1}{\pi} \int_{-1}^1 \sqrt{1-x^2} \sqrt{\frac{1-x}{1+x}}\left(8 x^3+4 x^2-4 x-1\right) d x=\frac{0.13}{\pi} \\
+			c_4=\frac{1}{\pi} \int_{-1}^1 \sqrt{1-x^2} \sqrt{\frac{1-x}{1+x}}\left(16 x^4+8 x^3-12 x^2-4 x+1\right) d x=-\frac{0.13}{\pi}
+		\end{gathered}
+		$$
+		As\'i tenemos:
+		$$
+		\begin{gathered}
+			\sqrt{1-x^2} \approx c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x) \\
+			=\frac{2}{\pi}+\frac{0.67}{\pi}(2 x+1)-\frac{0.67}{\pi}\left(4 x^2+2 x-1\right)+\frac{0.13}{\pi}\left(8 x^3+4 x^2-4 x-1\right)-\frac{0.13}{\pi}\left(16 x^4+8 x^3-12 x^2-4 x+1\right)
+		\end{gathered}
+		$$
+	\end{demo}
+	
+	\Example{Ejemplo}{Existe una funci\'on, denominada la funci\'on del amor, puest o que al graficarla, la gr\'afica toma la forma de un coraz\'on. Sea $f_1(x)=\left(x^2\right)^{1 / 3}+\sqrt{1-x^2}$ y $f_2(x)=\left(x^2\right)^{1 / 3}-\sqrt{1-x^2}$, si graficamos estas dos funciones en el mismo plano, tenemos:\\
+		\textcolor[rgb]{1.00,0.00,0.00}{hacer la grafica}\\
+		encuentre la aproximaci\'on Fourier-Chebyshev IV con 5 t\'erminos en $(-1,1)$ de ambas funciones y su gr\'afica en el mismo plano.}
+	
+	\begin{demo}
+		Para $f_1(x)$
+		$$
+		\left(x^2\right)^{1 / 3}+\sqrt{1-x^2} \approx \sum_{n=0}^4 c_n W_n(x)=c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x),
+		$$
+		donde
+		$$\begin{gathered}
+			c_0=\frac{1}{\pi} \int_{-1}^1\left(\left(x^2\right)^{1 / 3}+\sqrt{1-x^2}\right) \sqrt{\frac{1-x}{1+x}} d x=\frac{4.24}{\pi} \\
+			c_1=\frac{1}{\pi} \int_{-1}^1\left(\left(x^2\right)^{1 / 3}+\sqrt{1-x^2}\right) \sqrt{\frac{1-x}{1+x}}(2 x+1) d x=\frac{0.107}{\pi} \\
+			c_2=\frac{1}{\pi} \int_{-1}^1\left(\left(x^2\right)^{1 / 3}+\sqrt{1-x^2}\right) \sqrt{\frac{1-x}{1+x}}\left(4 x^2+2 x-1\right) d x=-\frac{0.107}{\pi} \\
+			c_3=\frac{1}{\pi} \int_{-1}^1\left(\left(x^2\right)^{1 / 3}+\sqrt{1-x^2}\right) \sqrt{\frac{1-x}{1+x}}\left(8 x^3+4 x^2-4 x-1\right) d x=\frac{0.29}{\pi} \\
+			c_4=\frac{1}{\pi} \int_{-1}^1\left(\left(x^2\right)^{1 / 3}+\sqrt{1-x^2}\right) \sqrt{\frac{1-x}{1+x}}\left(16 x^4+8 x^3-12 x^2-4 x+1\right) d x=-\frac{0.29}{\pi}
+		\end{gathered}$$
+		As\'i tenemos:
+		$$
+		\begin{gathered}
+			\left(x^2\right)^{1 / 3}+\sqrt{1-x^2} \approx c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x) \\
+			=\frac{4.24}{\pi}+\frac{0.107}{\pi}(2 x+1)-\frac{0.107}{\pi}\left(4 x^2+2 x-1\right)+\frac{0.29}{\pi}\left(8 x^3+4 x^2-4 x-1\right)-\frac{0.29}{\pi}\left(16 x^4+8 x^3-12 x^2-4 x+1\right)
+		\end{gathered}
+		$$
+		Para $f_2(x)$
+		$$
+		\left(x^2\right)^{1 / 3}-\sqrt{1-x^2} \approx \sum_{n=0}^4 c_n W_n(x)=c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x) \text {, }
+		$$
+		donde
+		$$\begin{gathered}
+			c_0=\frac{1}{\pi} \int_{-1}^1\left(\left(x^2\right)^{1 / 3}-\sqrt{1-x^2}\right) \sqrt{\frac{1-x}{1+x}} d x=\frac{0.24}{\pi} \\
+			c_1=\frac{1}{\pi} \int_{-1}^1\left(\left(x^2\right)^{1 / 3}-\sqrt{1-x^2}\right) \sqrt{\frac{1-x}{1+x}}(2 x+1) d x=-\frac{1.27}{\pi} \\
+			c_2=\frac{1}{\pi} \int_{-1}^1\left(\left(x^2\right)^{1 / 3}-\sqrt{1-x^2}\right) \sqrt{\frac{1-x}{1+x}}\left(4 x^2+2 x-1\right) d x=\frac{1.27}{\pi} \\
+			c_3=\frac{1}{\pi} \int_{-1}^1\left(\left(x^2\right)^{1 / 3}-\sqrt{1-x^2}\right) \sqrt{\frac{1-x}{1+x}}\left(8 x^3+4 x^2-4 x-1\right) d x=\frac{0.027}{\pi} \\
+			c_4=\frac{1}{\pi} \int_{-1}^1\left(\left(x^2\right)^{1 / 3}-\sqrt{1-x^2}\right) \sqrt{\frac{1-x}{1+x}}\left(16 x^4+8 x^3-12 x^2-4 x+1\right) d x=-\frac{0.027}{\pi}
+		\end{gathered}$$
+		As\'i tenemos:
+		$$
+		\begin{gathered}
+			\left(x^2\right)^{1 / 3}-\sqrt{1-x^2} \approx c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x) \\
+			=\frac{0.24}{\pi}-\frac{1.27}{\pi}(2 x+1)+\frac{1.27}{\pi}\left(4 x^2+2 x-1\right)+\frac{0.027}{\pi}\left(8 x^3+4 x^2-4 x-1\right)-\frac{0.027}{\pi}\left(16 x^4+8 x^3-12 x^2-4 x+1\right)
+		\end{gathered}
+		$$
+		Si graficamos estas dos expresiones en el mismo plano mostrado anteriormente tenemos
+		\textcolor[rgb]{1.00,0.00,0.00}{hacer grafica con la aproximacion}
+	\end{demo}
+	
+	\Example{Ejemplo}{Sea $f(x)=|x|$, encuentre la aproximaci\'on Fourier-Chebyshev IV con 5 t\'erminos en $(-1,1)$}
+	
+	\begin{demo}
+		$$
+		|x| \approx \sum_{n=0}^4 c_n W_n(x)=c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x),
+		$$
+		donde
+		$$\begin{gathered}
+			c_0=\frac{1}{\pi} \int_{-1}^1|x| \sqrt{\frac{1-x}{1+x}} d x=\frac{2}{\pi} \\
+			c_1=\frac{1}{\pi} \int_{-1}^1|x| \sqrt{\frac{1-x}{1+x}}(2 x+1) d x=-\frac{0.07}{\pi} \\
+			c_2=\frac{1}{\pi} \int_{-1}^1|x| \sqrt{\frac{1-x}{1+x}}\left(4 x^2+2 x-1\right) d x=\frac{0.07}{\pi} \\
+			c_3=\frac{1}{\pi} \int_{-1}^1|x| \sqrt{\frac{1-x}{1+x}}\left(8 x^3+4 x^2-4 x-1\right) d x=\frac{0.13}{\pi} \\
+			c_4=\frac{1}{\pi} \int_{-1}^1|x| \sqrt{\frac{1-x}{1+x}}\left(16 x^4+8 x^3-12 x^2-4 x+1\right) d x=-\frac{0.13}{\pi}
+		\end{gathered}$$
+		As\'i tenemos:
+		$$
+		\begin{gathered}
+			|x| \approx c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x) \\
+			=\frac{2}{\pi}-\frac{0.07}{\pi}(2 x+1)+\frac{0.07}{\pi}\left(4 x^2+2 x-1\right)+\frac{0.13}{\pi}\left(8 x^3+4 x^2-4 x-1\right)-\frac{0.13}{\pi}\left(16 x^4+8 x^3-12 x^2-4 x+1\right)
+		\end{gathered}
+		$$
+		\textcolor[rgb]{1.00,0.00,0.00}{hacer grafica}
+	\end{demo}
+	
+	\Example{Ejemplo}{	Sea $f(x)=\operatorname{sen}\left(\frac{x}{2}\right)+3^x$, encuentre la aproximaci\'on Fourier-Chebyshev IV con 5 t\'erminos en $(-1,1)$}
+	
+	\begin{demo}
+		$$
+		\operatorname{sen}\left(\frac{x}{2}\right)+3^x \approx \sum_{n=0}^4 c_n W_n(x)=c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x),
+		$$
+		donde
+		$$
+		\begin{gathered}
+			c_0=\frac{1}{\pi} \int_{-1}^1\left(\operatorname{sen}\left(\frac{x}{2}\right)+3^x\right) \sqrt{\frac{1-x}{1+x}} d x=\frac{1.4}{\pi} \\
+			c_1=\frac{1}{\pi} \int_{-1}^1\left(\operatorname{sen}\left(\frac{x}{2}\right)+3^x\right) \sqrt{\frac{1-x}{1+x}}(2 x+1) d x=\frac{2.24}{\pi} \\
+			c_2=\frac{1}{\pi} \int_{-1}^1\left(\operatorname{sen}\left(\frac{x}{2}\right)+3^x\right) \sqrt{\frac{1-x}{1+x}}\left(4 x^2+2 x-1\right) d x=\frac{0.44}{\pi} \\
+			c_3=\frac{1}{\pi} \int_{-1}^1\left(\operatorname{sen}\left(\frac{x}{2}\right)+3^x\right) \sqrt{\frac{1-x}{1+x}}\left(8 x^3+4 x^2-4 x-1\right) d x=\frac{0.07}{\pi} \\
+			c_4=\frac{1}{\pi} \int_{-1}^1\left(\operatorname{sen}\left(\frac{x}{2}\right)+3^x\right) \sqrt{\frac{1-x}{1+x}}\left(16 x^4+8 x^3-12 x^2-4 x+1\right) d x=\frac{0.01}{\pi}
+		\end{gathered}
+		$$
+		As\'i tenemos:
+		$$
+		\begin{gathered}
+			\operatorname{sen}\left(\frac{x}{2}\right)+3^x \approx c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x) \\
+			=\frac{1.4}{\pi}+\frac{2.24}{\pi}(2 x+1)+\frac{0.44}{\pi}\left(4 x^2+2 x-1\right)+\frac{0.07}{\pi}\left(8 x^3+4 x^2-4 x-1\right)+\frac{0.01}{\pi}\left(16 x^4+8 x^3-12 x^2-4 x+1\right)
+		\end{gathered}
+		$$
+		\textcolor[rgb]{1.00,0.00,0.00}{hacer grafica}
+	\end{demo}
+	
+	
+	\Example{Ejemplo}{Sea $f(x)=\cosh (x)$, encuentre la aproximaci\'on Fourier-Chebyshev IV con 5 t\'erminos en $(-1,1)$}
+	
+	\begin{demo}
+		$$\begin{aligned}
+			& \qquad \cosh (x) \approx \sum_{n=0}^4 c_n W_n(x)=c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x) \\
+			& \text { donde } \\
+			& c_0=\frac{1}{\pi} \int_{-1}^1 \cosh (x) \sqrt{\frac{1-x}{1+x}} d x=\frac{3.98}{\pi} \\
+			& c_1=\frac{1}{\pi} \int_{-1}^1 \cosh (x) \sqrt{\frac{1-x}{1+x}}(2 x+1) d x=-\frac{0.426}{\pi} \\
+			& c_2=\frac{1}{\pi} \int_{-1}^1 \cosh (x) \sqrt{\frac{1-x}{1+x}}\left(4 x^2+2 x-1\right) d x=\frac{0.426}{\pi} \\
+			& c_3=\frac{1}{\pi} \int_{-1}^1 \cosh (x) \sqrt{\frac{1-x}{1+x}}\left(8 x^3+4 x^2-4 x-1\right) d x=-\frac{0.009}{\pi} \\
+			& c_4=\frac{1}{\pi} \int_{-1}^1 \cosh (x) \sqrt{\frac{1-x}{1+x}}\left(16 x^4+8 x^3-12 x^2-4 x+1\right) d x=\frac{0.009}{\pi} \\
+			& \cosh (x) \approx c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x) \\
+			& \text { As\'i tenemos: } \\
+			& =\frac{3.98}{\pi}-\frac{0.426}{\pi}(2 x+1)+\frac{0.426}{\pi}\left(4 x^2+2 x-1\right)-\frac{0.009}{\pi}\left(8 x^3+4 x^2-4 x-1\right)+\frac{0.009}{\pi}\left(16 x^4+8 x^3-12 x^2-4 x+1\right)
+		\end{aligned}$$
+	\end{demo}
+	
+	\Example{Ejemplo}{Sea $f(x)=\operatorname{senh}(x)$, encuentre la aproximaci\'on Fourier-Chebyshev IV con 5 t\'erminos en $(-1,1)$}
+	
+	\begin{demo}
+		$$\begin{aligned}
+			& \qquad \operatorname{senh}(x) \approx \sum_{n=0}^4 c_n W_n(x)=c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x) \\
+			& c_0=\frac{1}{\pi} \int_{-1}^1 \operatorname{senh}(x) \sqrt{\frac{1-x}{1+x}} d x=-\frac{1.78}{\pi} \\
+			& \text { donde } \\
+			& c_1=\frac{1}{\pi} \int_{-1}^1 \operatorname{senh}(x) \sqrt{\frac{1-x}{1+x}}(2 x+1) d x=\frac{1.78}{\pi} \\
+			& c_2=\frac{1}{\pi} \int_{-1}^1 \operatorname{senh}(x) \sqrt{\frac{1-x}{1+x}}\left(4 x^2+2 x-1\right) d x=-\frac{0.07}{\pi} \\
+			& c_3=\frac{1}{\pi} \int_{-1}^1 \operatorname{senh}(x) \sqrt{\frac{1-x}{1+x}}\left(8 x^3+4 x^2-4 x-1\right) d x=\frac{0.07}{\pi} \\
+			& c_4=\frac{1}{\pi} \int_{-1}^1 \operatorname{senh}(x) \sqrt{\frac{1-x}{1+x}}\left(16 x^4+8 x^3-12 x^2-4 x+1\right) d x=-\frac{8.5(10)^{-4}}{\pi} \\
+			& \operatorname{senh}(x) \approx c_0 W_0(x)+c_1 W_1(x)+c_2 W_2(x)+c_3 W_3(x)+c_4 W_4(x) \\
+			& \text { As\'i tenemos: } \\
+			& =-\frac{1.78}{\pi}+\frac{1.78}{\pi}(2 x+1)-\frac{0.07}{\pi}\left(4 x^2+2 x-1\right)+\frac{0.07}{\pi}\left(8 x^3+4 x^2-4 x-1\right)-\frac{8.5(10)^{-4}}{\pi}\left(16 x^4+8 x^3-12 x^2-4 x+1\right)
+		\end{aligned}$$
+	\end{demo}
+	
+	\Example{Ejemplo}{	Sea $f(x)=|x|$
+		$$
+		f(x)=\sum_{n=0}^{\infty} c_n p_n(x)\quad-1<x<1
+		$$}
+	
+	\begin{demo}
+		Para obtener la representaci\'on haremos uso de (Demostrar la identidad)
+		\textcolor{blue}{
+			$$
+			P_{n+1}^{\prime}(x)-P_{n-1}^{\prime}(x)=(2 n+1) P_{n}(x), \quad n=1,2, \ldots  \quad (6)
+			$$
+		}
+		$$
+		\begin{gathered}
+			f(x)=|x| \text { es una funci\'on par } \\
+			f(x) \sim \displaystyle\sum_{n=0}^{\infty} a_{n} P_{n}(x),\quad-1<x<1
+		\end{gathered}
+		$$
+		
+		\[
+		a_{n}=\left(n+\frac{1}{2}\right) \displaystyle\int_{-1}^{1} f(x) P_{n}(x) d x, \quad n=0,1,2, \ldots
+		\]
+		Se puede ver que si n es un n es un n\'umero par, entonces los polinomios de Legendre seran pares ya que el producto de funciones pares es par, los coeficientes se cancelaran para el caso que sea par, por esta raz\'on tendremos los coeficientes para el caso impar.\\ we can see that if n is an odd number, then the Legendre polynomials will be odd and since the product of an even function by an odd function is odd, the coefficients will cancel for the odd case, for this reason, we will only have coefficients left for the even case .
+		$$
+		\begin{aligned}
+			&\text { That is, }\quad -P_{2 n+1}(x)=P_{2 n+1}(-x)\quad  \text { are odd functions } \\
+			&f(-x)=f(x)\quad  \text { is an even function  } \\
+			&\Rightarrow \quad f(-x) P_{2 n+1}(-x)=-f(x) P_{2 n+1}(x)\quad  \text {are odd functions }
+		\end{aligned}
+		$$
+		
+		
+		therefore $$
+		c_{2 n+1}=0 \quad \forall n \geq 0
+		$$
+		Thus,
+		
+		$$
+		\begin{aligned}
+			&c_{2 n}=\left(2 n+\frac{1}{2}\right) \displaystyle\int_1^1|x| P_{2 n}(x) d x ; \quad P_{2 n}(-x)=P_{2 n}(x) \\
+			&c_{2 n}=2\left(2 n+\frac{1}{2}\right) \displaystyle\int_0^1 x P_{2 n}(x) d x
+		\end{aligned}
+		$$
+		
+		$$
+		\begin{aligned}
+			&c_{2 n}=(4 n+1) \displaystyle\int_0^1 x P_{2 n}(x) d x \\
+			&\frac{c_{2 n}}{(4 n+1)}=\displaystyle\int_0^1 x P_{2 n}(x) d x
+		\end{aligned}
+		$$
+		$c_0 =\displaystyle\int_0^1 x P_{0}(x) d x=\frac{1}{2},\qquad c_2= 5 \int_0^1 \frac{1}{2} x\left(-1+3 x^2\right) d x=\frac{5}{8}$
+		
+		integrating by parts
+		$$
+		\begin{array}{rl}
+			u=x & d v=P_{2 n}(x) d x \\
+			d u=d x & \displaystyle\int d v=\displaystyle\int P_{2 n}(x) d x, \quad  v=\displaystyle\int P_{2 n}(x) d x
+		\end{array}
+		$$
+		we know that:
+		$$
+		P_n(x)=\frac{1}{2 n+1}\left[P_{n+1}^{\prime}(x)-P_{n-1}^{\prime}(x)\right] ; n=1,2,3,\dots
+		$$
+		so,
+		$$
+		P_{2 n}(x)=\frac{1}{4 n+1}\left[P_{2 n+1}^{\prime}(x)-P_{2 n-1}^{\prime}(x)\right] ; n=2,3,\dots
+		$$
+		then,
+		$$
+		\begin{aligned}
+			&v=\displaystyle\int P_{2 n}(x) d x \\
+			&v=\frac{1}{(4 n+1)} \displaystyle\int\left[P_{2 n+1}^{\prime}(x)-P_{2 n-1}^{\prime}(x)\right] d x\\
+			&v=\frac{1}{(4 n+1)}\left[P_{2 n +1}(x)-P_{2 n-1}(x)\right]
+		\end{aligned}
+		$$
+		$$
+		\frac{c_{2 n}}{(4 n+1)}=\left.\frac{x}{(4 n+1)}\left[P_{2 n+1}(x)-P_{2 n-1}(x)\right]\right|_0 ^1-\displaystyle\int_0^1 \frac{1}{(4 n+1)}\left[P_{2 n+1}(x)-P_{2n-1}(x)\right] d x
+		$$
+		we know that:\quad $P_n(1)=1 \quad \forall n \in N$
+		so,
+		$$
+		\frac{c_{2 n}}{(4 n+1)}=\frac{1}{(4 n+1)} \displaystyle\int_0^1\left[P_{2 n-1}(x)-P_{2 n+1}(x)\right] d x
+		$$
+		$$
+		c_{2 n}=\displaystyle\int_0^1 P_{2 n-1}(x) d x-\displaystyle\int_0^1 P_{2 n+1}(x) d x
+		$$
+		Following the same process as before, we get
+		$$
+		\begin{aligned}
+			&I_1=\displaystyle\int_0^1 P_{2 n-1}(x) d x \\
+			&I_1=\frac{2(2 n-1)+1}{2(2n-1)+1} \displaystyle\int_0^1 P_{2 n-1}(x) d x \\
+			&I_1=\frac{1}{(4 n-1)} \displaystyle\int_0^1(4 n-1) P_{2 n-1}(x) d x=\frac{1}{(4 n-1)} \displaystyle\int_0^1\left[P_{2 n-1+1}^{\prime}(x)-P_{2 n-1-1}^{\prime}(x)\right] d x\\
+			&I_1=\left.\frac{1}{(4 n-1)}\left[P_{2 n}(x)-P_{2 n-2}(x)\right]\right|_0 ^1=\frac{1}{(4 n-1)}\left[P_{2 n-2}(0)-P_{2 n}(0)\right]
+		\end{aligned}
+		$$
+		We can use the Generator function to get
+		$$
+		P_{2 n}(0)=(-1)^n \displaystyle\frac{(2 n-1) ! !}{(2 n) ! !}
+		$$
+		$$
+		H\left(x,r\right)=\frac{1}{\sqrt{1-2 x r+r^{2}}}=\displaystyle\sum_{n=0}^{\infty} P_{n}(x) r^{n} \quad (1).
+		$$
+		
+		$$
+		\begin{aligned}
+			H(0,r)=\displaystyle\sum_{n=0}^{\infty} P_n(0) r^n =P_0(0)+P_1(0) t+P_2(0) r^2+P_3(0) r^3+\ldots
+		\end{aligned}
+		$$
+		
+		$$
+		\begin{aligned}
+			\text{Remembering:}\quad (1-u)^{\alpha} =\displaystyle\sum_{k=0}^{\infty}(-1)^k \left(\begin{array}{l}
+				\alpha \\
+				k
+			\end{array}\right) u^{k}
+			=1-\alpha u+\frac{\alpha(\alpha-1)}{2 !} u^{2}-\cdots
+		\end{aligned}
+		$$
+		
+		$$
+		H\left(0,r\right)=\frac{1}{\sqrt{1+r^2}}=1-\frac{1}{2} r^2+\frac{3}{8} r^4+\ldots
+		$$
+		Comparing these expansions, we have the $P_n(0)=0$ for $n$ odd and for even integers one can show, that
+		$$
+		P_{2 n}(0)=(-1)^n \frac{(2 n-1) ! !}{(2 n) ! !},
+		$$
+		where $n ! !$ is the double factorial,
+		$$
+		n ! != \begin{cases}n(n-2) \ldots(3) 1, & n>0, \text { odd } \\ n(n-2) \ldots(4) 2, & n>0, \text { even } \\ 1, & n=0,-1\end{cases},\quad (2 n) ! !=2^n n !,\quad (2 n-1) ! !=\frac{(2 n) !}{(2 n) ! !}=\frac{(2 n) !}{2^n n !}
+		$$
+		$$
+		\begin{aligned}
+			I_1 &=\frac{1}{(4 n-1)}\left[P_{2 n-2}(0)-P_{2 n}(0)\right] \\
+			&=\frac{1}{(4 n-1)}\left[(-1)^{n-1} \frac{(2 n-3) ! !}{(2 n-2) ! !}-(-1)^n \frac{(2 n-1) ! !}{(2 n) !}\right] \\
+			&=\frac{-1}{(4 n-1)}(-1)^n \frac{(2 n-3) ! !}{(2 n-2) ! !}\left[1+\frac{2 n-1}{2 n}\right] \\
+			&=\frac{-1}{(4 n-1)}(-1)^n \frac{(2 n-3) ! !}{(2 n-2) ! !}\left[\frac{4 n-1}{2 n}\right]\\
+			&=-\frac{1}{2 n}(-1)^n \frac{(2 n-3) ! !}{(2 n-2) ! !}\\
+			&=-(-1)^n \frac{(2 n-3) ! !}{(2 n) ! !}\\
+			&=(-1)^{n+1} \frac{(2 n) !}{2^n n !((n-1)} \div 2^n n !\\
+			&=(-1)^{n+1} \frac{(2 n) !}{\left[2^n n !\right]^2(2 n-1)}
+		\end{aligned}
+		$$
+		$(2 n-1) ! !=(2 n-1)(2 n-3) ! !\Rightarrow(2 n-3) !!=\frac{(2 n-1) ! !}{(2 n-1)}=\frac{(2 n) !}{2^n n !(2 n-1)}$
+		Let take
+		$$I_1=B_n $$
+		Then
+		$$
+		\begin{aligned}
+			B_n=\frac{1}{(4 n-1)}\left[P_{2 n-2}(0)-P_{2 n}(0)\right]=(-1)^{n+1} \frac{(2 n) !}{\left[2^n n !\right]^2(2 n-1)}
+		\end{aligned}
+		$$
+		Then, we have:
+		$$
+		\begin{aligned}
+			I_2=B_{n+1}=\frac{1}{[4(n+1)-1]}\left[P_{2(n+1)-2}(0)-P_{2(n+1)}(0)\right]=(-1)^{n+2} \frac{[2 n+2] !}{\left[2^{n+1}(n+1) !\right]^2(2 n+1)}\\
+		\end{aligned}
+		$$
+		$$
+		\begin{aligned}
+			-I_2=-B_{n+1}=(-1)^{n+1} \frac{(2 n+2)(2 n+1)(2 n) !}{\left[2*2^n(n+1)(n) !\right]^2(2 n+1)}
+		\end{aligned}
+		$$
+		$$
+		\begin{aligned}
+			&c_{2 n}=I_1-I_2\\
+			&=(-1)^{n+1} \frac{(2 n) !}{\left[2^n n !\right]^2(2 n-1)}+\frac{(-1)^{n+1}(2 n) ! 2(n+1)(2 n+1)}{\left[2^n n !\right]^2 2^2(n+1)^2(2 n+1)}\\
+			&=(-1)^{n+1} \frac{(2 n) !}{[2 n !]^n}\left[\frac{1}{2 n-1}+\frac{1}{2 n+2}\right]\\
+			&c_{2 n}=(-1)^{n+1} \frac{(2 n) !}{2(2 n-1)(n+1)\left[2^n n !\right]^2}
+		\end{aligned}
+		$$
+		
+		$$
+		\Rightarrow|x|= \frac{1}{2} P_0(x)+\frac{5}{8} P_2(x)+\frac{1}{2} \displaystyle\sum_{n=2}^{\infty} \frac{(-1)^n \quad P_{2 n}(x)}{(1-2 n)(n+1)\left[2^n n !\right]^2};\qquad -1<x<1.
+		$$
+	\end{demo}
+	
+	\Example{Ejemplo}{Prove the following.
+		
+		i) If $f$ is periodic and equal to $\operatorname{sign} x$ in $(-\pi, \pi)$, then
+		$$
+		f(x) \sim \frac{4}{\pi}\left\{\sin x+\frac{\sin 3 x}{3}+\frac{\sin 5 x}{5}+\cdots\right\}
+		$$
+		ii) Let $0<h<\frac{1}{2} \pi$, and let $f$ be the "triangular" function defined as follows: $f$ is periodic, even, continuous, $f(0)=1, f(x)=0$ for $2 h \leq x \leq \pi, f$ is linear in $(0,2 h)$. Then
+		$$
+		f \sim \frac{2 h}{\pi}\left[\frac{1}{2}+\displaystyle\sum_{k=1}^{\infty}\left(\frac{\sin k h}{k h}\right)^{2} \cos k x\right]=\frac{h}{\pi}\left[1+\displaystyle\sum_{-\infty}^{+\infty}\left(\frac{\sin k h}{k h}\right)^{2} e^{i k x}\right]
+		$$
+		iii) Let $g$ be periodic and equal to $\frac{1}{2} \log \left[1 /\left|2 \sin \frac{1}{2} x\right|\right]$ in $(-\pi, \pi)$. Then $\quad
+		g \sim \displaystyle\sum_{k=1}^{\infty} \frac{\cos k x}{k}
+		$\\
+		
+		[HINT: For iii), one may either integrate by parts in the formula for the cosine coefficients of $g$, or consider the real part of the series integrate by parts in the formula for the cosine coefficients of $g$, or consider the real part of the series
+		$$
+		\displaystyle\sum_{k=1}^{\infty} \frac{z^{k}}{k}=\log \frac{1}{1-z}, \quad z=r e^{i x}
+		$$
+		for $r<1$, and then let $r \rightarrow 1$.]}
+	
+	\begin{demo}
+		i) We know that the Fourier series of a function $f(t)$ over $[-\pi, \pi]$, is given by
+		$$
+		f(t)=\frac{1}{2} a_{0}+\displaystyle\sum_{n=1}^{\infty} a_{n} \cos (n t)+\displaystyle\sum_{n=1}^{\infty} b_{n} \sin (n t)
+		$$
+		where
+		$$
+		\begin{aligned}
+			&a_{0}=\frac{1}{\pi} \displaystyle\int_{-\pi}^{\pi} f(t) d t \\
+			&a_{n}=\frac{1}{\pi} \displaystyle\int_{-\pi}^{\pi} f(t) \cos (n t) d t \\
+			&b_{n}=\frac{1}{\pi} \displaystyle\int_{-\pi}^{\pi} f(t) \sin (n t) d t
+		\end{aligned}
+		$$
+		$
+		\operatorname{sign}(t)=\left\{\begin{aligned}
+			1 & \text { if } t>0 \\
+			0 & \text { if } t=0 \\
+			-1 & \text { if } t<0
+		\end{aligned}\right.
+		$
+		The function $f(t)$  is odd, therefore;
+		$$
+		\begin{aligned}
+			&a_{0}=\frac{1}{\pi} \displaystyle\int_{-\pi}^{\pi} sign(t) d t=0 \\
+			&a_{n}=\frac{1}{\pi} \displaystyle\int_{-\pi}^{\pi} sign(t) \cos (n t) d t=0 \\
+		\end{aligned}
+		$$
+		
+		And,
+		$$
+		b_{n}=\frac{2}{\pi} \displaystyle\int_{0}^{\pi} sign(t) \sin (n t) dt =\frac{2}{\pi} \displaystyle\int_{0}^{\pi} \sin (n t) dt=\displaystyle\frac{2(1-\cos (\pi n))}{\pi n}=\frac{4}{\pi (2n-1)}
+		$$
+		
+		Then,
+		$$
+		\textcolor{blue}{\operatorname{sign}(t)\sim \frac{4}{\pi}\displaystyle\sum_{n=1}^{\infty}\frac{\sin(2n-1)t}{(2n-1)}}
+		$$
+		ii) Let $0<h<\frac{1}{2} \pi$, and let $f$ be the "triangular" function defined as follows: $f$ is periodic, even, continuous, $f(0)=1, f(x)=0$ for $2 h \leq x \leq \pi, f$ is linear in $(0,2 h)$. Then
+		$$
+		f \sim \frac{2 h}{\pi}\left[\frac{1}{2}+\displaystyle\sum_{k=1}^{\infty}\left(\frac{\sin k h}{k h}\right)^{2} \cos k x\right]=\frac{h}{\pi}\left[1+\displaystyle\sum_{-\infty}^{+\infty}\left(\frac{\sin k h}{k h}\right)^{2} e^{i k x}\right]
+		$$
+		\textbf{\textcolor{red}{Soluci\'on}}
+		$$
+		\begin{aligned}
+			&f(x)=\displaystyle\sum_{-\infty}^{\infty} C_{n} e^{i \frac{\pi n x}{p}} \\
+			&C_{n}=\frac{1}{2 p} \displaystyle\int_{-p}^{p} f(x) e^{\frac{-i n \pi x}{p}} d x
+		\end{aligned}
+		$$
+		$$
+		\begin{aligned}
+			&C_{0}=\frac{1}{2 \pi} \displaystyle\int_{-\pi}^{\pi} f(x) d x \\
+			&C_{0}=\frac{1}{\pi} \displaystyle\int_{0}^{\pi} f(x) d x \\
+			&C_{0}=\frac{1}{\pi} \displaystyle\int_{0}^{\pi}-\frac{1}{2 h}(x-2 h) d x\\
+			&C_{0}=\frac{1}{\pi} \displaystyle\int_{0}^{2h}-\frac{1}{2 h}(x-2 h) d x\\
+			&C_{0}=\frac{h}{\pi}
+		\end{aligned}
+		$$
+		\textcolor{blue}{$C_{0}=\frac{h}{\pi}$}
+		$
+		C_{n}=\frac{1}{2 \pi} \displaystyle\int_{-\pi}^{\pi} f(x) e^{-i n x} d x,\qquad  C_{n}=\frac{1}{2 \pi} \displaystyle\int_{-\pi}^{\pi} f(x)[\cos (n x)-i \sin(n x)] d x
+		$
+		$$
+		\begin{aligned}
+			&\text { because } f(-x)=f(x) \text { is even, then}\\
+			&\displaystyle\int_{-\pi}^{\pi} f(x) \sin(n x) d x=0\\
+			&C_{n}=\frac{1}{\pi} \displaystyle\int_{0}^{\pi} f(x) \cos (n x) d x ; \quad n \geq 1
+		\end{aligned}
+		$$
+		$$
+		\begin{aligned}
+			&C_{n}=\frac{1}{\pi} \displaystyle\int_{0}^{\pi}-\frac{1}{2 h}(x-2 h) \cos (n x) d x \\
+			&C_{n}=\frac{-1}{2 \pi h} \displaystyle\int_{0}^{2 h}(x-2 h) \cos (n x) d x
+		\end{aligned}
+		$$
+		Integrating by parts we obtain
+		$$
+		\begin{aligned}
+			&\textcolor{blue}{C_{n}=\frac{\operatorname{san}^{2}(h n)}{\pi h n^{2}} ; n \geq 1} \\
+			&f(x)=C_{0}+\displaystyle\sum_{n=-\infty}^{\infty} C_{n} e^{i n x} \\
+			&f(x)=\frac{h}{\pi}+\displaystyle\sum_{-\infty}^{\infty} \frac{\sin^{2}(h n)}{\pi h n^{2}} e^{i n x} \\
+			&\textcolor{blue}{f(x)=\frac{h}{\pi}\left[1+\displaystyle\sum_{n=-\infty}^{\infty}\left(\frac{\sin(h n)}{h n}\right)^{2} e^{i n x}\right]}
+		\end{aligned}
+		$$
+		Now I am going to demonstrate the equivalence of the representation of the Fourier series, and I will do it by converting the left side of the equality to the right side.
+		$$
+		f\sim \frac{h}{\pi}\left[1+\displaystyle\sum_{-\infty}^{+\infty}\left(\frac{\sin k h}{k h}\right)^{2} e^{i k x}\right]= \frac{2 h}{\pi}\left[\frac{1}{2}+\displaystyle\sum_{k=1}^{\infty}\left(\frac{\sin k h}{k h}\right)^{2} \cos k x\right]
+		$$
+		$
+		f(x)=\displaystyle\frac{h}{\pi}\left[1+\displaystyle\sum_{n=-\infty}^{\infty}\left(\frac{\sin(h n)}{h n}\right)^{2} e^{i n x}\right],\quad \text{Let}\left(\frac{\sin(h n)}{h n}\right)^{2}=B_{n} \Rightarrow B_{n}=B_{-n},\quad  f(x)=\frac{h}{\pi}\left[1+\displaystyle\sum_{-\infty}^{\infty} B_{n} e^{i n x}\right]$
+		$$
+		\begin{aligned}
+			f(x)=\frac{2 h}{\pi}\left[\frac{1}{2}+\frac{1}{2} \displaystyle\sum_{-\infty}^{\infty} B_{n} e^{i n x}\right] &=\frac{2 h}{\pi}\left[\frac{1}{2}+\frac{1}{2} \displaystyle\sum_{n=1}^{\infty} B_{n} e^{i n x}+\frac{1}{2} \displaystyle\sum_{-\infty}^{-1} B_{n} e^{i n x}\right].\\
+			&f(x)=\frac{2 h}{\pi}\left[\frac{1}{2}+\frac{1}{2} \displaystyle\sum_{n=1}^{\infty} B_{n}{e}^{i n x}+\frac{1}{2} \displaystyle\sum_{n=1}^{\infty} B_{-n} e^{-i n x}\right]\\
+			&f(x)=\frac{2 h}{\pi}\left[\frac{1}{2}+\displaystyle\sum_{n=1}^{\infty} B_{n}\left(\frac{e^{i n x}+e^{-i nx}}{2}\right)\right]\\
+			&f(x)=\frac{2 h}{\pi}\left[\frac{1}{2}+\displaystyle\sum_{n=1}^{\infty} B_{n} \cos (n x)\right],\quad \cos (n x)=\frac{e^{i n x}+e^{-i n x}}{2}
+		\end{aligned}
+		$$
+		\textcolor{blue}{
+			$$
+			\Rightarrow f(x)=\frac{2 h}{\pi}\left[\frac{1}{2}+\displaystyle\sum_{n=1}^{\infty}\left(\frac{\sin(h n)}{n h}\right)^{2} \cos (n x)\right]
+			$$
+		}
+		iii) Let $g$ be periodic and equal to $\frac{1}{2} \log \left[1 /\left|2 \sin \frac{1}{2} x\right|\right]$ in $(-\pi, \pi)$. Then
+		$$
+		g \sim \displaystyle\sum_{k=1}^{\infty} \frac{\cos k x}{k}
+		$$
+		
+		[HINT: For iii), one may either integrate by parts in the formula for the cosine coefficients of $g$, or consider the real part of the series integrate by parts in the formula for the cosine coefficients of $g$, or consider the real part of the series
+		$$
+		\displaystyle\sum_{k=1}^{\infty} \frac{z^{k}}{k}=\log \frac{1}{1-z}, \quad z=r e^{i x}
+		$$
+		for $r<1$, and then let $r \rightarrow 1$.]
+		\vspace{0.2cm}
+		
+		\textbf{\textcolor{red}{Soluci\'on}}
+		\vspace{0.2cm}
+		
+		
+		The goal is to compute the Fourier series of $g(x)=-\frac{1}{2}\log |2\sin( x/2)|$ over $[-\pi, \pi],$ or the Fourier series of $g(x)=-\frac{1}{2}\log |2\sin(x)|$ over $[-2\pi, 2\pi].$
+		I'll do this, getting the fourier series of $f(x)=\log \cos \frac{x}{2}$ over $[-\pi, \pi]$, and then I will arrive at the desired result, making a translation of the series of f (x).\\
+		Since $f(x)$ is an even function, we have to compute:
+		$$
+		a_{k}=\frac{1}{\pi} \displaystyle\int_{-\pi}^{+\pi} \cos (k x) \log \cos \frac{x}{2} d x=\frac{2}{\pi} \displaystyle\int_{0}^{\pi} \cos (k x) \log \cos \frac{x}{2} d x
+		$$
+		for any $k \geq 1$ to be able to state:
+		$$
+		f(x)=\frac{1}{2 \pi} \displaystyle\int_{-\pi}^{\pi} f(x) d x+\displaystyle\sum_{k \geq 1} a_{k} \cos (k x)=\frac{a_{0}}{2}+\displaystyle\sum_{k \geq 1} a_{k} \cos (k x)
+		$$
+		for any $x \in(-\pi, \pi)$. Integration by parts gives:
+		$$
+		a_{k}=\frac{2}{\pi}\left(\left.\frac{1}{k} \sin (n x) \log \cos \frac{x}{2}\right|_{0} ^{\pi}+\frac{1}{2 k} \displaystyle\int_{0}^{\pi} \sin (k x) \tan \frac{x}{2} d x\right)
+		$$
+		or just:
+		$$
+		a_{k}=\frac{1}{\pi k} \displaystyle\int_{0}^{\pi} \frac{\sin (k x) \sin (x / 2)}{\cos (x / 2)} d x=\frac{2}{\pi k} \displaystyle\int_{0}^{\pi / 2} \frac{\sin (2 k x) \sin x}{\cos x} d x
+		$$
+		Since $\cos ((2 k+1) x)=2 \cos x \cos (2 k x)-\cos ((2 k-1) x)$, we have:
+		$$
+		a_{k}=\frac{1}{\pi k} \displaystyle\int_{0}^{\pi / 2} \displaystyle\sum_{n=1}^{k} \cos ((2 n-1) x) d x=\frac{(-1)^{k+1}}{k}
+		$$
+		$$
+		\text{This gives:}\quad \log \cos \frac{x}{2}=\frac{a_{0}}{2}+\displaystyle\sum_{k \geq 1} \frac{(-1)^{k+1}}{k} \cos (k x)
+		$$
+		for any $x \in(-\pi, \pi)$. In order to find $a_{0}$, we can simply match $f(0)=0$ with the series on the right hand side. Since:
+		$$
+		\displaystyle\sum_{k \geq 1} \frac{(-1)^{k+1}}{k}=\displaystyle\int_{0}^{1} \frac{d x}{1+x}=\log 2
+		$$
+		we have:
+		$$
+		\log \cos \frac{x}{2}=-\log 2+\displaystyle\sum_{k \geq 1} \frac{(-1)^{k+1}}{k} \cos (k x) \quad \forall x \in(-\pi, \pi)
+		$$
+		and by translating the variable:
+		$$
+		\log \cos \left(\frac{x-\pi}{2}\right)=-\log 2+\displaystyle\sum_{k \geq 1} \frac{(-1)^{k+1}}{k} \cos (k( x-\pi)) \quad \forall x \in(-2\pi, 2\pi)
+		$$
+		then
+		\textcolor{blue}{
+			$$
+			\begin{array}{ll}
+				\log \sin \frac{x}{2}=-\log 2-\displaystyle\sum_{k \geq 1} \frac{1}{k} \cos (k x) & \forall x \in(0,2 \pi),\quad \heartsuit
+			\end{array}
+			$$
+		}
+		or
+		$$
+		\begin{array}{ll}
+			\log \sin x=-\log 2-\displaystyle\sum_{k \geq 1} \frac{1}{k} \cos (2 k x) & \forall x \in(0, \pi)
+		\end{array}
+		$$
+		
+		now we are ready to write the series of g (x).\\
+		
+		$g(x)=-\frac{1}{2}\log(2) -\frac{1}{2}\log \sin( x/2).$\\
+		
+		Then from \textcolor{blue}{$\heartsuit,$}  we have,
+		\textcolor{blue}{
+			$$
+			\begin{array}{ll}
+				-\frac{1}{2}\log \sin \frac{x}{2}=\frac{1}{2}\log 2+\frac{1}{2}\displaystyle\sum_{k \geq 1} \frac{1}{k} \cos (k x) & \forall x \in(0,2 \pi),\quad \heartsuit
+			\end{array}
+			$$
+		}
+		\textcolor{blue}{
+			$$
+			\begin{array}{ll}
+				g(x)=-\frac{1}{2}\log 2-\frac{1}{2}\log \sin \frac{x}{2}=\frac{1}{2}\displaystyle\sum_{k \geq 1} \frac{1}{k} \cos (k x) & \forall x \in(0,2 \pi),\quad \heartsuit
+			\end{array}
+			$$
+		}
+		as wanted.
+	\end{demo}
+	
+	

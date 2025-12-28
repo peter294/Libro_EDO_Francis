@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{marginnote}
+\usepackage{caption}
+\usepackage{lipsum} % Para generar texto de ejemplo
+
+\begin{document}
+	
+	\lipsum[1] % Texto de ejemplo para ver cómo se comportan las imágenes en el margen
+	
+	% Imágenes en el margen de la primera página
+	\marginnote{\includegraphics[width=3cm]{imagen1.png}\\ \small a) Imagen 1}[-10mm]
+	\marginnote{\includegraphics[width=3cm]{imagen2.png}\\ \small b) Imagen 2}[0mm]
+	\marginnote{\includegraphics[width=3cm]{imagen3.png}\\ \small c) Imagen 3}[10mm]
+	\marginnote{\includegraphics[width=3cm]{imagen4.png}\\ \small d) Imagen 4}[20mm]
+	
+	\newpage % Forzamos una nueva página
+	
+	\lipsum[2] % Más texto para mantener el flujo del documento
+	
+	% Imágenes en el margen de la segunda página
+	\marginnote{\includegraphics[width=3cm]{imagen5.png}\\ \small e) Imagen 5}[-10mm]
+	\marginnote{\includegraphics[width=3cm]{imagen6.png}\\ \small f) Imagen 6}[0mm]
+	
+\end{document}

@@ -1,0 +1,35 @@
+% Notaciones.tex
+\chapter*{Notación}
+\addcontentsline{toc}{chapter}{Notación}
+\markboth{Notación}{Notación}
+
+% Que la tabla use todo el ancho
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+
+\begin{longtable}{p{0.28\textwidth} p{0.68\textwidth}}
+\hline
+\textbf{Notación} & \textbf{Significado} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Notación} & \textbf{Significado} \\
+\hline
+\endhead
+\hline
+\endfoot
+
+$\mathbb{R}, \mathbb{C}$ & Conjuntos de números reales y complejos. \\
+$[a,b]$ & Intervalo cerrado de $a$ a $b$. \\
+$\Gamma(a)$ & Función gamma; ver \eqref{representacion de Gamma}. \\
+$B(a,b)$ & Función beta. \\
+$(a)_n$ & Símbolo de Pochhammer (factorial ascendente). \\
+$\partial_x f$ & Derivada parcial de $f$ respecto a $x$. \\
+$\dot{x}(t)$ & Derivada temporal de $x(t)$. \\
+$C^k(\Omega)$ & Funciones con derivadas continuas hasta orden $k$ en $\Omega$. \\
+$\nabla f$ & Gradiente de $f$. \\
+$\Delta f$ & Laplaciano de $f$. \\
+$\mathrm{diag}(a_1,\dots,a_n)$ & Matriz diagonal con entradas $a_1,\dots,a_n$. \\
+% --- Añade tus propias filas debajo:
+% \alpha & Tu descripción aquí. \\
+\end{longtable}

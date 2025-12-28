@@ -1,0 +1,1081 @@
+\mychapter{Funciones especiales a partir de la Funci\'on Hipergeom\'etrica }{\begin{wrapfigure}{l}{0.45\textwidth}
+		\centering
+		\includegraphics[width=0.45\textwidth]{imagen/img9.png}
+	\end{wrapfigure} Las funciones especiales constituyen un pilar fundamental en el estudio de las matemáticas aplicadas y la física matemática. Aunque su denominación pueda sugerir un carácter excepcional, en realidad se trata de funciones que aparecen de manera recurrente al resolver ecuaciones diferenciales de gran relevancia en la ciencia y la ingeniería.
+	
+	\vspace{0.5cm}
+	
+	En este capítulo abordaremos funciones como la hipergeométrica, la confluente, las funciones de Laguerre y las funciones de Hermite. Todas ellas surgen de problemas concretos: desde la descripción de sistemas cuánticos y modelos de osciladores, hasta la propagación de ondas y fenómenos de difusión.
+	
+	\vspace{0.5cm}
+	
+	El estudio de estas funciones no solo amplía el repertorio de herramientas analíticas disponibles, sino que también abre la puerta a una comprensión más profunda de los modelos que gobiernan la naturaleza. Cada subsección desarrollará tanto la teoría matemática como las aplicaciones más relevantes, complementadas con representaciones gráficas que ilustran su comportamiento y propiedades.}
+ \addtocontents{toc}{\protect\figuretoc{imagen/img9.png}}
+
+En este capítulo se introducen las funciones hipergeométricas generales \({}_r F_s\), junto con el estudio de sus propiedades fundamentales, tales como la ecuación diferencial que satisfacen, sus relaciones de recurrencia, representaciones integrales, fórmulas de suma, entre otras. Asimismo, se presentan diversos casos particulares, los cuales abarcan la mayoría de las funciones elementales clásicas, así como nuevas funciones de interés, cuya exploración detallada se desarrollará en los capítulos posteriores.
+
+\medskip
+
+\noindent
+Además, se mostrará cómo algunas funciones especiales, tales como los polinomios de Legendre, Chebyshev y otras familias ortogonales, pueden obtenerse como casos particulares de la ecuación hipergeométrica, lo que permite un tratamiento unificado y sistemático de dichas funciones dentro del marco general de la teoría hipergeométrica.
+
+\section{Funci\'on Hipergeom\'etrica}
+\Definition{Serie Hipergeométrica }{
+Sean \( p \) y \( q \) dos enteros positivos, y sean \( a_1, a_2, \ldots, a_p, c_1, c_2, \ldots, c_q \) números reales tales que \( c_j \notin \mathbb{Z}_{\leq 0} \) para todo \( j = 1, 2, \ldots, q \). La serie hipergeométrica con parámetros \( a_1, \ldots, a_p, c_1, \ldots, c_q \) se define para todo \( x \in \mathbb{R} \) mediante
+
+\begin{equation}\label{hiperpq}
+{}_p F_q\left(\left. \begin{array}{l}
+a_1, \ldots, a_p \\
+c_1, \ldots, c_q
+\end{array} \right\rvert\, x \right)
+= \displaystyle\sum_{k=0}^{+\infty} \dfrac{(a_1)_k \cdots (a_p)_k}{(c_1)_k \cdots (c_q)_k\, k!} \, x^k,
+\end{equation}
+
+donde \(\displaystyle (a)_n\) denota el símbolo de Pochhammer, definido en (\ref{P1}).}\label{def:fhper} En esta definición general, se debe suponer que \( \displaystyle c_j \notin \mathbb{Z}_{\leq 0} \) para todo \( j = 1, 2, \ldots, q \). En efecto, si \( \displaystyle c_j \in \mathbb{Z}_{\leq 0} \), entonces para \( \displaystyle n \geq -c_j + 1 \) se tiene
+
+\[
+\displaystyle
+(c_j)_n = c_j(c_j+1) \cdots \left(c_j + (-c_j + 1) - 1\right) \cdots (c_j + n - 1) = 0
+\]
+
+lo que hace que el denominador de los términos de la serie se anule a partir de cierto orden, provocando una indeterminación. Sin embargo, un caso especial importante es el de los polinomios hipergeométricos: la serie hipergeométrica se convierte en en un polinomio si alguno de los parámetros \( a_i \) es un entero negativo o cero. En efecto, si \( a_i \in \mathbb{Z}_{\leq 0} \), entonces la expresión (\ref{hiperpq}) se reduce a
+
+\begin{equation}\label{polihiper}
+{}_p F_q\left(\left. \begin{array}{c}
+a_1, \ldots, a_p \\
+c_1, \ldots, c_q
+\end{array} \right\rvert\, x \right)
+= \displaystyle\sum_{k=0}^{-a_i} \dfrac{(a_1)_k \cdots (a_p)_k}{(c_1)_k \cdots (c_q)_k\, k!} \, x^k
+\end{equation}
+ya que \((a_i)_n = 0\) para \( n \geq -a_i + 1 \). En este caso, los parámetros \( c_j \) pueden ser enteros negativos o cero, siempre que se cumpla \( c_j \leq a_i \).\\
+
+Ahora vamos analizar algunos casos particulares permiten extender la definición general de la serie hipergeométrica (\ref{hiperpq}) a situaciones en las que el número de parámetros en el numerador (\(p\)) o en el denominador (\(q\)) es cero. Cuando \(p = 0\), la serie hipergeométrica no contiene factores del tipo \((a_i)_k\) en el numerador, y se reduce a una serie de potencias con coeficientes dependientes únicamente de los parámetros del denominador. Por otro lado, cuando \(q = 0\), no hay restricciones en el denominador, y la serie se convierte en una serie generalizada de tipo binomial, cuya convergencia depende del valor de \(x\).
+
+\begin{align}
+{}_0 F_q\left(\begin{array}{c|c}
+\cdot & x \\
+c_1, \ldots, c_q
+\end{array}\right) 
+&= \displaystyle\sum_{k=0}^{+\infty} \dfrac{x^k}{(c_1)_k \cdots (c_q)_k\, k!} \label{oq} \\[1em]
+%
+{}_p F_0\left(\left. \begin{array}{c}
+a_1, \ldots, a_p \\
+\cdot
+\end{array} \right|\, x \right) 
+&= \displaystyle\sum_{k=0}^{+\infty} \dfrac{(a_1)_k \cdots (a_p)_k}{k!} \, x^k \label{po} \\[1em]
+%
+{}_0 F_0(\cdot \mid x) 
+&= \displaystyle\sum_{k=0}^{+\infty} \dfrac{x^k}{k!} = e^x \label{ex}
+\end{align}
+Antes de continuar con el desarrollo formal y el estudio detallado de la serie hipergeométrica general \({}_pF_q\), resulta esencial determinar el intervalo de convergencia de dicha serie, ya que este delimita el dominio sobre el cual las expresiones obtenidas representan funciones bien definidas. El análisis de la convergencia no solo establece la validez de la representación en serie de potencias, sino que también permite comprender las propiedades analíticas de las funciones hipergeométricas, tales como su carácter de funciones enteras, multivaluadas o con singularidades aisladas.
+\begin{enumerate}
+  \item Si $p > q+1$
+
+\[
+{}_p F_q\left(\left.\begin{array}{l}
+a_1, \ldots, a_q, a_{q+1}, \ldots, a_{q+i} \\
+c_1, \ldots, c_q
+\end{array} \right\rvert\, x\right)
+= \displaystyle\sum_{k=0}^{\infty} 
+\dfrac{(a_1)_k \cdots (a_q)_k (a_{q+1})_k \cdots (a_{q+i})_k}
+{(c_1)_k \cdots (c_q)_k \, k!} \, x^k
+\]
+
+Sean
+
+\[
+\begin{aligned}
+B_k &= \displaystyle\dfrac{(a_1)_k \cdots (a_q)_k (a_{q+1})_k \cdots (a_{q+i})_k}
+{(c_1)_k \cdots (c_q)_k} \, x^k \\
+B_{k+1} &= \displaystyle\dfrac{(a_1)_{k+1} \cdots (a_q)_{k+1} (a_{q+1})_{k+1} \cdots (a_{q+i})_{k+1}}
+{(c_1)_{k+1} \cdots (c_q)_{k+1} \, (k+1)!} \, x^{k+1}
+\end{aligned}
+\]
+
+Por el criterio de la razón y propiedades de Pochhammer
+
+\[
+\begin{aligned}
+\lim_{k \rightarrow \infty} \left| \dfrac{B_{k+1}}{B_k} \right| 
+&= \lim_{k \rightarrow \infty} 
+\left| \dfrac{(a_1 + k) \cdots (a_q + k)(a_{q+1} + k) \cdots (a_{q+i} + k)}
+{(k+1)(c_1 + k) \cdots (c_q + k)} \right| \\
+&= \infty
+\end{aligned}
+\]
+
+El límite anterior no existe $\forall x \neq 0$.
+
+  \item Para el caso de $p = q + 1$, tenemos
+
+\[
+\begin{aligned}
+\displaystyle\lim_{k \rightarrow \infty} \left| \dfrac{B_{k+1}}{B_k} \right| 
+&=\displaystyle \lim_{k \rightarrow \infty} 
+\left| \dfrac{(a_1 + k) \cdots (a_q + k)(a_{q+1} + k)}
+{(k+1)(c_1 + k) \cdots (c_q + k)} \right| \\
+&= \displaystyle |x|
+\end{aligned}
+\]
+
+El límite anterior converge si $|x| < 1$.
+
+
+  \item Si $p \leq q$
+
+\[
+\begin{aligned}
+\lim_{k \rightarrow \infty} \left| \dfrac{B_{k+1}}{B_k} \right| 
+&= \lim_{k \rightarrow \infty} 
+\left| \dfrac{(a_1 + k)(a_2 + k) \cdots (a_{q - i} + k)}
+{(k+1)(c_1 + k) \cdots (c_q + k)} \, x \right| \\
+&= 0 \cdot |x|
+\end{aligned}
+\]
+
+El límite anterior converge para todo $x \in \mathbb{R}$.
+
+\end{enumerate}
+Ya establecidos los intervalos en los que la función hipergeométrica converge, procederemos ahora a definir la función hipergeométrica como un caso particular de la definición (\ref{def:fhper}), lo cual nos permitirá situarla dentro de un marco teórico más amplio y comprender mejor sus propiedades y aplicaciones.
+como caso particular de la funci\'on Hipergeom\'etrica.
+\Definition{Función Hipergeométrica}{
+	
+La \textbf{función hipergeométrica generalizada} se denota por ${}_pF_q$ y se define como la serie de potencias
+
+\begin{equation}\label{hipergene}
+{}_pF_q\left(\left.\begin{array}{l}
+a_1, \ldots, a_p \\
+c_1, \ldots, c_q
+\end{array} \right\rvert\, x\right)
+= \displaystyle\sum_{k=0}^{+\infty} 
+\dfrac{(a_1)_k \cdots (a_p)_k}
+{(c_1)_k \cdots (c_q)_k \, k!} \, x^k
+\end{equation}
+}
+
+La función hipergeométrica generalizada posee una notable riqueza estructural que permite representar, de manera unificada, una amplia variedad de funciones conocidas. A través de los siguientes ejemplos, se pondrá de manifiesto cómo diversas expresiones funcionales pueden reescribirse en términos de esta función, revelando así conexiones formales que articulan muchas construcciones del análisis clásico.
+\Example{ Serie Geom\'etrica }{ Expresa la serie geom\'etrica
+\begin{equation}\label{serieg}
+\dfrac{1}{1-x} =\displaystyle\sum_{k=0}^{\infty} x^k  \quad|x|<1
+  \end{equation} 
+como un caso de la serie hipergeom\'etrica.}
+\begin{sol}
+Es claro que si en la expresi\'on (\ref{hiperpq}) tomamos $p=1$ y $q=0$ obtenemos
+\[
+\begin{aligned}
+{}_1F_0\left(\left.\begin{array}{c}
+1 \\
+\cdot
+\end{array} \right\rvert\, x\right) 
+&= \displaystyle\sum_{k=0}^{+\infty} \dfrac{(1)_k}{k!} x^k \\
+&= \displaystyle\sum_{k=0}^{+\infty} x^k \\
+&= \dfrac{1}{1 - x}
+\end{aligned}
+\]
+\end{sol}
+\Example{ Serie de $\dfrac{\ln(1 - x)}{x}$}{
+Expresa la función
+\begin{equation*}
+  f(x) = \dfrac{\ln(1 - x)}{x}
+\end{equation*}
+como una serie hipergeométrica en el intervalo \( (-1,0) \cup (0,1) \).
+}
+\begin{sol}
+Integrando la serie geom\'etrica tenemos
+\begin{align*}
+\displaystyle\sum_{k=0}^{+\infty} \dfrac{x^{k+1}}{k+1} 
+&= -\ln(1 - x)\\[1ex]
+%
+-\ln(1 - x) 
+&= \displaystyle x \sum_{k=0}^{+\infty} \dfrac{x^k}{k+1} 
+= x \displaystyle\sum_{k=0}^{+\infty} \dfrac{k!}{(k+1)!} x^k \\[1ex]
+%
+&= \displaystyle x \sum_{k=0}^{+\infty} \dfrac{k! \cdot k!}{(k+1)! \cdot k!} x^k \\[1ex]
+&= x\displaystyle \sum_{k=0}^{+\infty} \dfrac{(1)_k \cdot (1)_k}{(2)_k \cdot k!} x^k 
+\tag*{para todo \( x \in (-1,1) \)} \\[1ex]
+%
+\displaystyle{}_2F_1\left(\left.\begin{array}{c}
+1,\ 1 \\
+2
+\end{array} \right\rvert\, x\right) 
+&=- \dfrac{\ln(1 - x)}{x}
+\tag*{para todo \( x \in (-1,0) \cup (0,1) \)}
+\end{align*}
+\end{sol}
+Presentamos ahora un criterio sencillo que permite determinar si una serie de potencias dada puede expresarse como una serie hipergeométrica.
+\Theorem{Caracterización Hipergeométrica de Series de Potencias}{
+Sea \( y = \displaystyle\sum_{k=0}^{+\infty} \lambda_k x^k \) una serie de potencias con radio de convergencia \( R > 0 \). Supongamos que existen números reales \( a_1, a_2, \ldots, a_r \), \( c_1, c_2, \ldots, c_s \), y un número real no nulo \( A \) tales que, para todo entero \( k \geq 0 \), se cumple:
+
+\begin{equation}\label{chiperfun}
+\lambda_{k+1} = A \cdot \displaystyle\dfrac{(k + a_1)(k + a_2) \cdots (k + a_r)}{(k+1)(k + c_1)(k + c_2) \cdots (k + c_s)} \cdot \lambda_k.
+\end{equation}
+
+Entonces,
+
+\begin{equation}\label{hiperfun}
+y = \lambda_0 \cdot \displaystyle{}_rF_s\left(\left.\begin{array}{c}
+a_1, \ldots, a_r \\
+c_1, \ldots, c_s
+\end{array} \right\rvert\, A x\right), \quad \left(|x| < \dfrac{R}{|A|}\right).
+\end{equation}}\label{thm:fhper}
+\begin{demo}
+dsd
+\end{demo} 
+\Example{ Serie hipergeom\'etrica de $\sin(x), \cos(x)$ }{ Obtenga la representacion en la serie hipergeom\'etrica de las funciones trigonom\'etricas seno y coseno}
+\begin{sol}
+\begin{enumerate}
+  \item \textbf{Seno}\\
+  Sabemos que \[\sin(x)=\displaystyle\sum_{k=0}^{+\infty} \dfrac{(-1)^k x^{2 k+1}}{(2 k+1)!}=x \displaystyle\sum_{k=0}^{+\infty} \dfrac{(-1)^k\left(x^2\right)^k}{(2 k+1)!} \]
+  Por la expresi\'on (\ref{chiperfun}) del teorema (\ref{thm:fhper}) tenemos $\forall k\geq 1$
+ \[ \dfrac{\lambda_{k+1}}{\lambda_k}=-\dfrac{(2 k+1)!}{(2 k+3)!}=-\dfrac{1}{2(k+1)(2 k+3)}=-\dfrac{1}{4} \dfrac{1}{(k+1)\left(k+\dfrac{3}{2}\right)} \]
+ con 
+ \[r=0, s=1, c_1=\dfrac{3}{2}, \lambda_0=1, \text { y } A=-\dfrac{1}{4} \]
+ Por lo tanto
+ \begin{equation}\label{senohiper}
+   \sin(x)=x \cdot{ }_0 F_1\left(\left.\begin{array}{c}
+\cdot \\
+\dfrac{3}{2}
+\end{array} \right\rvert\,-\dfrac{x^2}{4}\right) \quad(x \in \mathbb{R}) .
+ \end{equation}
+  \item \textbf{Coseno}\\
+    Sabemos que \[\cos(x)=\displaystyle\sum_{k=0}^{+\infty} \dfrac{(-1)^k x^{2 k}}{(2 k)!}\]
+     Por la expresi\'on (\ref{chiperfun}) del teorema (\ref{thm:fhper}) tenemos $\forall k\geq 1$
+ \[ \dfrac{\lambda_{k+1}}{\lambda_k}=-\dfrac{(2 k)!}{(2 k+2)!}=-\dfrac{1}{4(k+1)(k+1/2)}=-\dfrac{1}{4} \dfrac{1}{(k+1)\left(k+\dfrac{1}{2}\right)} \]
+  con 
+ \[r=0, s=1, c_1=\dfrac{1}{2}, \lambda_0=1, \text { y } A=-\dfrac{1}{4} \]\
+  Por lo tanto
+ \begin{equation}\label{cosenohiper}
+ \cos x={ }_0 F_1\left(\left.\begin{array}{c}
+\cdot \\
+\dfrac{1}{2}
+\end{array} \right\rvert\,-\dfrac{x^2}{4}\right) \quad(x \in \mathbb{R}) .
+ \end{equation}
+\end{enumerate}
+\end{sol}
+\subsection{Funciones hipergeométricas clásicas}
+\subsubsection{Primer caso: $s=0$}
+\begin{itemize}
+  \item Si $r=0$ se obteniene la funci\'on exponencial (\ref{ex}).
+  \item Cuando $r=1$, la funci\'on hipergeom\'etrica ${ }_1 F_0$ se reduce a la funci\'on binomial. Es decir, $\forall x\in \left(-1,1\right)$
+  \begin{equation}\label{hiperbino}
+    { }_1 F_0\left(\begin{array}{c|c}
+a & x \\
+\cdot & x
+\end{array}\right)=\displaystyle\sum_{k=0}^{+\infty} \dfrac{(a)_k}{k!} x^k=\displaystyle\sum_{k=0}^{+\infty}\binom{-a}{k}(-x)^k=(1-x)^{-a} 
+  \end{equation}
+\end{itemize}
+\subsubsection{Segundo caso: $s=1$}
+Consideramos tres casos. Corresponden a nuevas funciones de gran importancia.
+\begin{itemize}
+
+\item Para \( r = 0 \), la función hipergeométrica \( {}_0F_1 \) está relacionada con las funciones de Bessel.
+\begin{equation}\label{besselhiper}
+{}_0F_1(\cdot \mid x) = \displaystyle\sum_{k=0}^{+\infty} \dfrac{x^k}{(c)_k \, k!} \quad \text{para todo } x \in \mathbb{R}.
+\end{equation}
+
+\item Para \( r = 1 \), se obtiene la función hipergeométrica de Kummer \( {}_1F_1 \), también conocida como función hipergeométrica confluente.
+\begin{equation}\label{confluentehip}
+{}_1F_1\left(\left.\begin{array}{l}
+a \\
+c
+\end{array} \right\rvert\, x\right) = \displaystyle\sum_{k=0}^{+\infty} \dfrac{(a)_k}{(c)_k \, k!} \, x^k \quad \text{para todo } x \in \mathbb{R}.
+\end{equation}
+
+\item Para \( r = 2 \), se obtiene la función hipergeométrica de Gauss \( {}_2F_1 \).
+\begin{equation}\label{funcionhipergeometrica}
+{}_2F_1\left(\left.\begin{array}{c}
+a,\, b \\
+c
+\end{array} \right\rvert\, x\right) = \displaystyle\sum_{k=0}^{+\infty} \dfrac{(a)_k (b)_k}{(c)_k \, k!} \, x^k \quad \text{para todo } x \in (-1,1).
+\end{equation}
+
+\end{itemize}
+\subsubsection{Funci\'on hipergeom\'etrica modificada}\label{hipermodia}
+Hemos visto al comienzo de este capítulo que es necesario, en la definición (\ref{hipergene}) de las funciones hipergeométricas, suponer que los parámetros $c_j$ no son enteros negativos ni cero (excepto posiblemente en el caso de los polinomios hipergeométricos). Esta restricción es a veces problemática. Puede evitarse definiendo las funciones hipergeométricas modificadas ${}_p \mathcal{F}_q$ mediante
+
+\begin{equation}\label{hipermodi}
+{}_p \mathcal{F}_q\left(\left.\begin{array}{c}
+a_1, \ldots, a_p \\
+c_1, \ldots, c_q
+\end{array} \right\rvert\, x\right)
+= \displaystyle\sum_{k=0}^{+\infty} \dfrac{(a_1)_k \cdots (a_p)_k}{\Gamma(c_1+k) \cdots \Gamma(c_q+k)\, k!} \, x^k
+\end{equation}
+
+
+Como la función $\dfrac{1}{\Gamma}$ está definida en $\mathbb{R}$ (ver \ref{aped.A}), el término general de la serie (\ref{hipermodi}) está siempre definido, incluso si alguno de los $c_j$ es un entero negativo o cero. Además, cuando ninguno de los $c_j$ es un entero negativo ni cero, tenemos por (\ref{gammapoc})
+\begin{equation}\label{hipermodigamma}
+{}_p \mathcal{F}_q\left(\left.\begin{array}{c}
+a_1, \ldots, a_p \\
+c_1, \ldots, c_q
+\end{array} \right\rvert\, x\right)
+= \dfrac{1}{\Gamma(c_1) \cdots \Gamma(c_q)} 
+\, {}_p F_q\left(\left.\begin{array}{c}
+a_1, \cdots, a_p \\
+c_1, \cdots, c_q
+\end{array} \right\rvert\, x\right)
+\end{equation}
+Por lo tanto, utilizaremos ${}_p \mathcal{F}_q$ en lugar de ${}_p F_q$ cada vez que ello simplifique las cosas, y luego usaremos (\ref{hipermodigamma}) para pasar de una función a la otra.
+
+Denotemos $\mathcal{D}_0 = \mathbb{R}$ cuando $p \leq q$ o cuando ${}_p F_q$ y ${}_p \mathcal{F}_q$ son polinomios hipergeométricos, y $\mathcal{D}_0 = \, ]-1,1[ \,$ cuando $p = q+1$ y ${}_p F_q$, ${}_p \mathcal{F}_q$ no son polinomios hipergeométricos. 
+
+\subsubsection{Ecuaciones Diferenciales}\label{EDhipergeometrica}
+Mostraremos en esta sección que las funci\'on hipergeométrica ${}_pF_q$, definida en (\ref{hipergene}) , satisface una ecuación diferencial lineal. Para este propósito, introducimos el operador de Euler
+\begin{equation}\label{eulerope}
+D = x \dfrac{d}{dx}
+\end{equation}
+\Theorem{ED de las funciones hipergeométricas}{  
+Las funciones ${}_pF_q$ y ${}_p \mathcal{F}_q$ satisfacen en $\mathcal{D}_0$ la ecuación diferencial lineal de orden $(q+1)$
+
+\begin{equation}\label{EDhiper}
+\left(D + c_1 - 1\right) \cdots \left(D + c_q - 1\right) D y = x \left(D + a_1\right) \cdots \left(D + a_p\right) y
+\end{equation}}\label{thm:Edhiper}
+\begin{demo}
+hsd
+\end{demo}
+\Example{ ED de la funci\'on hipergeom\'etrica de Gauss}{ La función hipergeométrica de Gauss ${}_2F_1$, definida por (\ref{funcionhipergeometrica})
+satisface en $\mathcal{D}_0$ la ecuación diferencial lineal de segundo orden
+\begin{equation}\label{edgauhiper}
+(D + c - 1)\, D y = x\, (D + a)(D + b)\, y
+\end{equation} }
+\begin{sol}
+La ED (\ref{edgauhiper}) es equivalente a la ecuaci\'on
+\[
+\begin{aligned}
+&\displaystyle (1 - x)\, D^2 y + \left(c - 1 - (a + b)x\right) D y - abx\, y = 0 
+\quad \text{Aplicando el operador de Euler (\ref{eulerope})} \\
+ &\displaystyle (1 - x)x\left(\dfrac{d y}{d x} + x\, \dfrac{d^2 y}{d x^2}\right) 
++ x\left(c - 1 - (a + b)x\right) \dfrac{d y}{d x} - abx\, y = 0 \\
+ &\displaystyle x(1 - x)\, \dfrac{d^2 y}{d x^2} + \left(c - (a + b + 1)x\right) \dfrac{d y}{d x} - ab\, y = 0
+\end{aligned}
+\]
+
+\end{sol}
+Las ecuaciones diferenciales que satisfacen las funciones hipergeométricas ${}_1F_1$ y ${}_0F_1$ pueden obtenerse mediante el mismo método (indicar que se pondran como ejercicios).
+\subsection{Funci\'on hipergeom\'etrica de Gauss}\label{fhg}
+La función hipergeométrica de Gauss \( {}_2F_1 \) es la más importante dentro de las funciones hipergeométricas, ya que muchas funciones especiales clásicas pueden expresarse como casos particulares de ella. Además, \( {}_2F_1 \) resuelve una ecuación diferencial de segundo orden con tres puntos singulares regulares, lo que la convierte en una herramienta central en el estudio de funciones especiales y ecuaciones diferenciales. Su estructura rica y sus múltiples aplicaciones en física, geometría y análisis la hacen esencial en el desarrollo del análisis matemático.
+Ahora discutiremos algunos importantes casos de la serie hipergeom\'etrica definida en (\ref{funcionhipergeometrica})
+\subsubsection*{Caso 1}
+$a$ o $b$ es un número entero negativo o cero, por ejemplo, $a = -n$, donde $n \geq 0$ es un número entero. En este caso, la serie (\ref{funcionhipergeometrica}) se reduce a un polinomio hipergeométrico
+
+\begin{equation}\label{hiperpoli}
+{}_2F_1\left(\left.\begin{array}{c}
+-n,\, b \\
+c
+\end{array} \right\rvert\, x\right) =\displaystyle \sum_{k=0}^{n} \dfrac{(-n)_k (b)_k}{(c)_k\, k!} \, x^k \quad (x \in \mathbb{R}).
+\end{equation}
+Aquí, $c$ puede ser un número entero negativo o cero, siempre que se cumpla $c \leq -n$.
+\subsubsection*{Caso 2}
+Ni $a$ ni $b$ son enteros negativos o cero. En este caso, debemos suponer que $c \notin \mathbb{Z}_{\leq 0}$, de modo que $(c)_n$ nunca se anule. Bajo esta condición, la serie (\ref{funcionhipergeometrica}) converge para $|x| < 1$, y se define la función hipergeométrica de Gauss ${}_2F_1$ mediante
+
+\begin{equation}\label{gauupoli}
+{}_2F_1\left(\left.\begin{array}{c}
+a,\, b \\
+c
+\end{array} \right\rvert\, x\right) = \displaystyle\sum_{k=0}^{+\infty} \dfrac{(a)_k (b)_k}{(c)_k\, k!} \, x^k \quad (x \in (-1,1).
+\end{equation}
+Al igual que en el caso general (Subsecci\'on (\ref{hipermodia})), podemos simplificar las expresiones introduciendo la función hipergeométrica modificada ${}_2 \mathcal{F}_1$, definida por
+\begin{equation}\label{gauupoli}
+{}_2 \mathcal{F}_1\left(\left.\begin{array}{c}
+a,\, b \\
+c
+\end{array} \right\rvert\, x\right) = \displaystyle\sum_{k=0}^{+\infty} \dfrac{(a)_k (b)_k}{\Gamma(c + k)\, k!} \, x^k=\dfrac{1}{\Gamma(c)}{ }_2 F_1\left(\begin{array}{c|c}
+a, b & x \\
+c & x
+\end{array}\right)
+\end{equation}
+A continuación se analizarán algunas funciones que pueden expresarse como un caso particular de la función hipergeométrica de Gauss. 
+\Example{ Representación hipergeométrica del arcoseno }{ 
+Exprese la función 
+\[
+f(x) = \arcsin(x), \quad \forall x \in (-1,1),
+\]
+en términos de la función hipergeométrica de Gauss \( {}_2F_1 \). }
+\begin{sol}
+Para todo \( x \in (-1,1) \),
+
+\[
+\begin{aligned}
+\arcsin x 
+&= \displaystyle \int_0^x \left(1 - t^2\right)^{-\dfrac{1}{2}} \, dt\qquad \text{usando (\ref{hiperbino})}\\[2ex]
+& =\displaystyle \int_0^x \displaystyle\sum_{k=0}^{+\infty} \dfrac{\displaystyle\left(\dfrac{1}{2}\right)_k}{\displaystyle k!} \, t^{2k} \, dt \\[2ex]
+&= \displaystyle x \sum_{k=0}^{+\infty} \dfrac{\displaystyle\left(\dfrac{1}{2}\right)_k}{\displaystyle k!(2k+1)} \, x^{2k}
+\end{aligned}
+\]
+
+Aplicamos el teorema  (\ref{thm:fhper}), con
+
+\[
+\displaystyle \dfrac{\lambda_{k+1}}{\lambda_k} = \dfrac{\left(k + \dfrac{1}{2}\right)^2}{(k+1)\left(k + \dfrac{3}{2}\right)}
+\]
+\[\arcsin x=x_{\cdot 2} F_1\left(\left.\begin{array}{c}
+\dfrac{1}{2}, \dfrac{1}{2} \\
+\dfrac{3}{2}
+\end{array} \right\rvert\, x^2\right)\]
+\end{sol}
+\Example{ Representación hipergeométrica de la tangente inversa }{ 
+Exprese la función 
+\[
+f(x) = \arctan(x), \quad \forall x \in (-1,1),
+\]
+en términos de la función hipergeométrica de Gauss \( {}_2F_1 \). }
+\begin{sol}
+Sabemos que, para todo \( x \in (-1,1)\)
+
+\[
+\begin{aligned}
+\arctan x 
+&= \displaystyle\int_0^x \dfrac{1}{1 + t^2} \, dt =\displaystyle \sum_{k=0}^{+\infty} (-1)^k \, \dfrac{x^{2k+1}}{2k+1} \\\\[1.5ex]
+&= \displaystyle x \sum_{k=0}^{+\infty} \dfrac{1}{2k+1} \left(-x^2\right)^k = \displaystyle \sum_{k=0}^{+\infty} \lambda_k \left(-x^2\right)^k
+\end{aligned}
+\]
+
+Aquí, se tiene que \( \lambda_0 = 1 \) y
+
+\[
+\displaystyle \dfrac{\lambda_{k+1}}{\lambda_k} = \dfrac{2k+1}{2k+3} = \dfrac{\left(k + \dfrac{1}{2}\right)(k+1)}{\left(k + \dfrac{3}{2}\right)(k+1)}
+\]
+
+Por lo tanto, el teorema (\ref{thm:fhper}) proporciona 
+\[
+\arctan x=x_{.2} F_1\left(\left.\begin{array}{c}
+1, \dfrac{1}{2} \\
+\dfrac{3}{2}
+\end{array} \right\rvert\,-x^2\right)
+\]
+
+\end{sol}
+\subsection{Propiedades de la funci\'on hipergeom\'etrica}\label{prophiper}
+Antes de continuar con aplicaciones específicas, es importante establecer algunas identidades fundamentales que satisfacen las funciones hipergeométricas de Gauss. Estas propiedades, derivadas de la estructura de la serie hipergeométrica definida en (\ref{hiperpq}) y de su ecuación diferencial asociada (ver Sección \ref{EDhipergeometrica}), permiten transformar y relacionar funciones con distintos parámetros, simplificando así el análisis de soluciones en contextos teóricos y aplicados.
+
+Las propiedades que se presentan a continuación constituyen herramientas clave en el tratamiento analítico de expresiones hipergeométricas y serán de gran utilidad más adelante, especialmente al establecer relaciones entre las soluciones de ecuaciones diferenciales asociadas a funciones especiales, expresadas en términos de la función hipergeométrica de Gauss.
+\Property{Propiedades funcionales de la función hipergeométrica}{ Las funciones hipergeom\'etricas de Gauss satisfacen las siguientes propiedades
+
+\begin{equation} \label{prohiper1}
+{}_2F_1\left(\begin{array}{c|c}
+a+1,\ b & \\
+c & x
+\end{array}\right) -
+{}_2F_1\left(\begin{array}{c|c}
+a,\ b & \\
+c & x
+\end{array}\right) =
+\dfrac{b x}{c}\
+{}_2F_1\left(\begin{array}{c|c}
+a+1,\ b+1 & \\
+c+1 & x
+\end{array}\right)
+\end{equation}
+
+\begin{equation} \label{prohiper2}
+{}_2F_1\left(\begin{array}{c|c}
+a,\ b & \\
+c & x
+\end{array}\right) -
+{}_2F_1\left(\begin{array}{c|c}
+a,\ b & \\
+c-1 & x
+\end{array}\right) =
+-\dfrac{a b x}{c(c-1)}\
+{}_2F_1\left(\begin{array}{c|c}
+a+1,\ b+1 & \\
+c+1 & x
+\end{array}\right)
+\end{equation}
+
+\begin{equation} \label{prohiper3}
+{}_2F_1\left(\begin{array}{c|c}
+a,\ b+1 & \\
+c+1 & x
+\end{array}\right) -
+{}_2F_1\left(\begin{array}{c|c}
+a,\ b & \\
+c & x
+\end{array}\right) =
+\dfrac{a(c-b)x}{c(c+1)}\
+{}_2F_1\left(\begin{array}{c|c}
+a+1,\ b+1 & \\
+c+2 & x
+\end{array}\right)
+\end{equation}
+
+\begin{equation} \label{prohiper4}
+{}_2F_1\left(\begin{array}{c|c}
+a-1,\ b+1 & \\
+c & x
+\end{array}\right) -
+{}_2F_1\left(\begin{array}{c|c}
+a,\ b & \\
+c & x
+\end{array}\right) =
+\dfrac{(a-b-1)x}{c}\
+{}_2F_1\left(\begin{array}{c|c}
+a,\ b+1 & \\
+c+1 & x
+\end{array}\right)
+\end{equation}}
+\begin{demo}
+Para demostrar la propiedad (\ref{prohiper1}) tenemos de la expresi\'on (\ref{funcionhipergeometrica})
+\[
+\begin{aligned}
+&{}_2F_1\left( \begin{array}{c|c}
+a+1,\ b & \\
+c & x
+\end{array} \right)
+-
+{}_2F_1\left( \begin{array}{c|c}
+a,\ b & \\
+c & x
+\end{array} \right)
+= \displaystyle \sum_{k=0}^{\infty} \left[ \dfrac{(a+1)_k - (a)_k}{(c)_k\, k!} (b)_k \right] x^k \\[1.5ex]
+&= \displaystyle \sum_{k=1}^{\infty} \dfrac{(a)_k (b)_k}{(c)_k\, (k-1)!} \cdot \dfrac{x^k}{a k}
+\qquad \text{(usando la identidad de Pochhammer)} \\[1.5ex]
+&= x \displaystyle \sum_{k=0}^{\infty} \dfrac{(a+1)_k (b+1)_k}{(c+1)_k\, k!} x^k
+\qquad \text{(haciendo el cambio } k = m + 1 \text{)} \\[1.5ex]
+&= \dfrac{b x}{c} \cdot
+{}_2F_1\left( \begin{array}{c|c}
+a+1,\ b+1 & \\
+c+1 & x
+\end{array} \right)
+\end{aligned}
+\]
+\end{demo}
+Las demás propiedades se omiten por brevedad y se dejan al lector como ejercicio (ver secci\'on \ref{hiperprop}), ya que su demostración puede llevarse a cabo siguiendo razonamientos análogos a los expuestos anteriormente. %Esta actividad no solo refuerza la comprensión de las técnicas empleadas, sino que también promueve el desarrollo de habilidades analíticas esenciales para el estudio riguroso de las funciones especiales.
+%\begin{demo}
+%
+%\[
+%\begin{gathered}
+%\displaystyle F(a+1, b, c, x) = \dfrac{\Gamma(c)}{\Gamma(a+1)\Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a+1)\Gamma(m+b)}{m! \Gamma(m+c)} x^m \\
+%\displaystyle F(a, b, c, x) = \dfrac{\Gamma(c)}{\Gamma(a)\Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a)\Gamma(m+b)}{m! \Gamma(m+c)} x^m
+%\end{gathered}
+%\]
+%
+%Sustituyendo ...
+%
+%\[
+%\begin{aligned}
+%&= \dfrac{\Gamma(c)}{\Gamma(a+1)\Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a+1)\Gamma(m+b)}{m! \Gamma(m+c)} x^m - \dfrac{\Gamma(c)}{\Gamma(a)\Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a)\Gamma(m+b)}{m! \Gamma(m+c)} x^m \\
+%&= \dfrac{\Gamma(c)}{a\Gamma(a)\Gamma(b)} \sum_{m=0}^{\infty} \dfrac{(m+a)\Gamma(m+a)\Gamma(m+b)}{m! \Gamma(m+c)} x^m - \dfrac{\Gamma(c)}{\Gamma(a)\Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a)\Gamma(m+b)}{m! \Gamma(m+c)} x^m \\
+%&= \sum_{m=0}^{\infty} \dfrac{\Gamma(c)}{\Gamma(a)\Gamma(b)} \dfrac{\Gamma(m+a)\Gamma(m+b)}{m! \Gamma(m+c)} \left( \dfrac{m+a}{a} - 1 \right) x^m \\
+%&= \sum_{m=0}^{\infty} \dfrac{\Gamma(c)}{\Gamma(a)\Gamma(b)} \dfrac{\Gamma(m+a)\Gamma(m+b)}{m! \Gamma(m+c)} \cdot \dfrac{m}{a} x^m \\
+%&= \sum_{m=1}^{\infty} \dfrac{\Gamma(c)}{\Gamma(a)\Gamma(b)} \dfrac{\Gamma(m+a)\Gamma(m+b)}{m! \Gamma(m+c)} \cdot \dfrac{m}{a} x^m \\
+%&\text{Sea } k = m - 1 \Rightarrow m = k + 1,\ \text{entonces cuando } m \to 1,\ k \to 0,\quad \text{Sustituyendo:} \\
+%&= \sum_{k=0}^{\infty} \dfrac{\Gamma(c)}{a\Gamma(a)\Gamma(b)} \cdot \dfrac{\Gamma(k+a+1)\Gamma(k+b+1)(k+1)}{(k+1)! \Gamma(k+c+1)} x^{k+1} \\
+%&= \dfrac{\Gamma(c)}{\Gamma(a+1)\Gamma(b)} x \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a+1)\Gamma(m+b+1)}{m! \Gamma(m+c+1)} x^m \\
+%&= \dfrac{b}{c} x \cdot \dfrac{c\Gamma(c)}{\Gamma(a+1) b\Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a+1)\Gamma(m+b+1)}{m! \Gamma(m+c+1)} x^m \\
+%&= \dfrac{b}{c} x \cdot \dfrac{\Gamma(c+1)}{\Gamma(a+1)\Gamma(b+1)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a+1)\Gamma(m+b+1)}{m! \Gamma(m+c+1)} x^m \\
+%\text{Así:} \\
+%\displaystyle F(a+1, b, c, x) - F(a, b, c, x) = \dfrac{b}{c} x F(a+1, b+1, c+1, x)
+%\end{aligned}
+%\]
+%\end{demo}
+
+
+
+%\Property{Propiedades}{	
+%	\begin{eqnarray}
+%		F(a, b, c, x)-F(a, b, c-1, x)&=&-\frac{a b x}{c(c-1)} F(a+1, b+1, c+1, x)
+%\end{eqnarray}}
+%\begin{demo}
+%
+%\[
+%\begin{aligned}
+%\displaystyle F(a, b, c, x) = \dfrac{\Gamma(c)}{\Gamma(a)\Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a)\Gamma(m+b)}{m!\Gamma(m+c)} x^m \\
+%\displaystyle F(a, b, c-1, x) = \dfrac{\Gamma(c-1)}{\Gamma(a)\Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a)\Gamma(m+b)}{m!\Gamma(m+c-1)} x^m
+%\end{aligned}
+%\]
+%
+%Sustituyendo...
+%
+%\begin{eqnarray*}
+%&=& \dfrac{\Gamma(c)}{\Gamma(a)\Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a)\Gamma(m+b)}{m!\Gamma(m+c)} x^m - \dfrac{\Gamma(c-1)}{\Gamma(a)\Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a)\Gamma(m+b)}{m!\Gamma(m+c-1)} x^m \\
+%&=& \dfrac{\Gamma(c)}{\Gamma(a)\Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a)\Gamma(m+b)}{m!\Gamma(m+c)} x^m - \dfrac{(c-1)\Gamma(c-1)}{(c-1)\Gamma(a)\Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a)\Gamma(m+b)(m+c-1)}{m!\Gamma(m+c)} x^m \\
+%&=& \sum_{m=0}^{\infty} \dfrac{\Gamma(c)}{\Gamma(a)\Gamma(b)} \dfrac{\Gamma(m+a)\Gamma(m+b)}{m!\Gamma(m+c)} x^m - \sum_{m=0}^{\infty} \dfrac{\Gamma(c)}{(c-1)\Gamma(a)\Gamma(b)} \dfrac{\Gamma(m+a)\Gamma(m+b)(m+c-1)}{m!\Gamma(m+c)} x^m \\
+%&=& \sum_{m=0}^{\infty} \dfrac{\Gamma(c)}{\Gamma(a)\Gamma(b)} \dfrac{\Gamma(m+a)\Gamma(m+b)}{m!\Gamma(m+c)} \left[ 1 - \dfrac{m+c-1}{c-1} \right] x^m \\
+%&=& \sum_{m=0}^{\infty} \dfrac{\Gamma(c)}{\Gamma(a)\Gamma(b)} \dfrac{\Gamma(m+a)\Gamma(m+b)}{m!\Gamma(m+c)} \left[ \dfrac{-m}{c-1} \right] x^m \\
+%&=& \sum_{m=1}^{\infty} \dfrac{\Gamma(c)}{\Gamma(a)\Gamma(b)} \dfrac{\Gamma(m+a)\Gamma(m+b)}{m!\Gamma(m+c)} \left[ \dfrac{-m}{c} \right] x^m \quad \text{Cambiando } k = m - 1 \\
+%&=& \sum_{k=0}^{\infty} \dfrac{\Gamma(c)}{\Gamma(a)\Gamma(b)} \dfrac{\Gamma(k+a+1)\Gamma(k+b+1)}{(k+1)!\Gamma(k+c+1)} \left[ \dfrac{-(k+1)}{c-1} \right] x^{k+1} \\
+%&=& \sum_{m=0}^{\infty} \dfrac{\Gamma(c)}{\Gamma(a)\Gamma(b)} \dfrac{\Gamma(m+a+1)\Gamma(m+b+1)}{m!\Gamma(m+c+1)} \left[ \dfrac{-1}{c-1} \right] x^{m+1} \\
+%&=& -\dfrac{abx}{c(c-1)} \cdot \dfrac{\Gamma(c+1)}{\Gamma(a+1)\Gamma(b+1)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a+1)\Gamma(m+b+1)}{m!\Gamma(m+c+1)} x^m
+%\end{eqnarray*}
+%
+%Por lo tanto:
+%
+%\begin{eqnarray*}
+%F(a, b, c, x) - F(a, b, c-1, x) &=& -\dfrac{abx}{c(c-1)} F(a+1, b+1, c+1, x)
+%\end{eqnarray*}
+%\end{demo}
+
+
+%\Property{Propiedades}{\begin{eqnarray}
+%	F(a, b+1, c+1, x)-F(a, b, c, x)&=&\frac{a(c-b) x}{c(c+1)} F(a+1, b+1, c+2, x)
+%	\end{eqnarray}}
+
+
+%\begin{demo}
+%
+%\[
+%\begin{aligned}
+%&\displaystyle F(a, b+1, c+1, x) = \dfrac{\Gamma(c+1)}{\Gamma(a) \Gamma(b+1)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a) \Gamma(m+b+1)}{m! \Gamma(m+c+1)} x^m \\
+%&\displaystyle F(a, b, c, x) = \dfrac{\Gamma(c)}{\Gamma(a) \Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a) \Gamma(m+b)}{m! \Gamma(m+c)} x^m \\
+%&\text{Sustituyendo ...} \\
+%&= \dfrac{\Gamma(c+1)}{\Gamma(a) \Gamma(b+1)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a) \Gamma(m+b+1)}{m! \Gamma(m+c+1)} x^m - \dfrac{\Gamma(c)}{\Gamma(a) \Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a) \Gamma(m+b)}{m! \Gamma(m+c)} x^m \\
+%&= \sum_{m=0}^{\infty} \dfrac{\Gamma(c+1)}{\Gamma(a) \Gamma(b+1)} \dfrac{\Gamma(m+a) \Gamma(m+b+1)}{m! \Gamma(m+c+1)} x^m - \sum_{m=0}^{\infty} \dfrac{\Gamma(c)}{\Gamma(a) \Gamma(b)} \dfrac{\Gamma(m+a) \Gamma(m+b)}{m! \Gamma(m+c)} x^m \\
+%&= \sum_{m=0}^{\infty} \dfrac{c \Gamma(c)}{\Gamma(a) b \Gamma(b)} \dfrac{\Gamma(m+a)(m+b) \Gamma(m+b)}{m! (m+c) \Gamma(m+c)} x^m - \sum_{m=0}^{\infty} \dfrac{\Gamma(c)}{\Gamma(a) \Gamma(b)} \dfrac{\Gamma(m+a) \Gamma(m+b)}{m! \Gamma(m+c)} x^m \\
+%&= \sum_{m=0}^{\infty} \dfrac{\Gamma(c)}{\Gamma(a) \Gamma(b)} \dfrac{\Gamma(m+a) \Gamma(m+b)}{m! \Gamma(m+c)} \left[ \dfrac{c(m+b)}{b(m+c)} - 1 \right] x^m \\
+%&= \sum_{m=0}^{\infty} \dfrac{\Gamma(c)}{\Gamma(a) \Gamma(b)} \dfrac{\Gamma(m+a) \Gamma(m+b)}{m! \Gamma(m+c)} \left[ \dfrac{m(c-b)}{b(m+c)} \right] x^m \\
+%&= \sum_{m=1}^{\infty} \dfrac{\Gamma(c)}{\Gamma(a) \Gamma(b)} \dfrac{\Gamma(m+a) \Gamma(m+b)}{m! \Gamma(m+c)} \left[ \dfrac{m(c-b)}{b(m+c)} \right] x^m \\
+%&\text{Sea } k = m - 1 \Rightarrow m = k + 1, \text{ sustituyendo:} \\
+%&= \sum_{k=0}^{\infty} \dfrac{\Gamma(c)}{\Gamma(a) \Gamma(b)} \dfrac{\Gamma(k+a+1) \Gamma(k+b+1)}{(k+1)! \Gamma(k+c+1)} \left[ \dfrac{(k+1)(c-b)}{b(k+c+1)} \right] x^{k+1} \\
+%&= \dfrac{(c-b) \Gamma(c)}{\Gamma(a) b \Gamma(b)} x \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a+1) \Gamma(m+b+1)(m+1)}{(m+1)! (m+c+1) \Gamma(m+c+1)} x^m \\
+%&= \dfrac{a b(c-b)}{c(c+1)} \cdot \dfrac{\Gamma(c+2)}{\Gamma(a+1) \Gamma(b+1)} x \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a+1) \Gamma(m+b+1)}{m! \Gamma(m+c+2)} x^m \\
+%&\displaystyle F(a, b+1, c+1, x) - F(a, b, c, x) = \dfrac{a(c-b)x}{c(c+1)} F(a+1, b+1, c+2, x)
+%\end{aligned}
+%\]
+%\end{demo}
+
+
+
+%\Property{Propiedades}{\begin{eqnarray}
+%		F(a-1, b+1, c, x)-F(a, b, c, x)&=&\frac{(a-b-1) x}{c} F(a, b+1, c+1, x)
+%\end{eqnarray}}
+
+%\begin{demo}
+%
+%\[
+%\begin{aligned}
+%&\displaystyle F(a-1, b+1, c, x) = \dfrac{\Gamma(c)}{\Gamma(a-1) \Gamma(b+1)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a-1) \Gamma(m+b+1)}{m! \Gamma(m+c)} x^m \\
+%&\displaystyle F(a, b, c, x) = \dfrac{\Gamma(c)}{\Gamma(a) \Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a) \Gamma(m+b)}{m! \Gamma(m+c)} x^m \\
+%&\text{Sustituyendo ...} \\
+%&= \dfrac{\Gamma(c)}{\Gamma(a-1) \Gamma(b+1)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a-1) \Gamma(m+b+1)}{m! \Gamma(m+c)} x^m - \dfrac{\Gamma(c)}{\Gamma(a) \Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a) \Gamma(m+b)}{m! \Gamma(m+c)} x^m \\
+%&= \dfrac{(a-1)\Gamma(c)}{\Gamma(a) b \Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a)(m+b) \Gamma(m+b)}{(m+a-1)m! \Gamma(m+c)} x^m - \dfrac{\Gamma(c)}{\Gamma(a) \Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a) \Gamma(m+b)}{m! \Gamma(m+c)} x^m \\
+%&= \dfrac{\Gamma(c)}{\Gamma(a) \Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a) \Gamma(m+b)}{m! \Gamma(m+c)} \left[ \dfrac{(a-1)(m+b)}{b(m+a-1)} - 1 \right] x^m \\
+%&= \dfrac{\Gamma(c)}{\Gamma(a) \Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a) \Gamma(m+b)}{m! \Gamma(m+c)} \left[ \dfrac{m(a-1-b)}{b(m+a-1)} \right] x^m \\
+%&= \dfrac{\Gamma(c)}{\Gamma(a) \Gamma(b)} \sum_{m=1}^{\infty} \dfrac{\Gamma(m+a) \Gamma(m+b)}{m! \Gamma(m+c)} \left[ \dfrac{m(a-1-b)}{b(m+a-1)} \right] x^m \\
+%&\text{Sustituyendo } k = m - 1 \text{ y cambiando } k = m: \\
+%&= \dfrac{\Gamma(c)}{\Gamma(a) \Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a+1) \Gamma(m+b+1)}{(m+1)! \Gamma(m+c+1)} \left[ \dfrac{(m+1)(a-1-b)}{b(m+a)} \right] x^{m+1} \\
+%&= \dfrac{a-1-b}{b} x \cdot \dfrac{\Gamma(c)}{\Gamma(a) \Gamma(b)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a+1) \Gamma(m+b+1)(m+1)}{(m+a)(m+1)! \Gamma(m+c+1)} x^m \\
+%&= \dfrac{a-1-b}{c} x \cdot \dfrac{\Gamma(c+1)}{\Gamma(a) \Gamma(b+1)} \sum_{m=0}^{\infty} \dfrac{\Gamma(m+a) \Gamma(m+b+1)}{m! \Gamma(m+c+1)} x^m
+%\end{aligned}
+%\]
+%
+%As\'i:
+%
+%\begin{eqnarray*}
+%F(a-1, b+1, c, x) - F(a, b, c, x) &=& \dfrac{a-1-b}{c} x F(a, b+1, c+1, x)
+%\end{eqnarray*}
+%\end{demo}
+
+
+%\Example{Ejemplo}{
+%	\begin{eqnarray*}
+%		F(a, b, a, x) &=& (1 - x)^{-b}
+%	\end{eqnarray*}
+%}
+
+%\begin{demo}
+	%Expresamos \( (1 - x)^{-b} \) en series de Maclaurin:
+%	\begin{eqnarray*}
+%		f(x) &=& (1 - x)^{-b} \\
+%		f^{(0)}(x) &=& (1 - x)^{-b} \\
+%		f^{(1)}(x) &=& b(1 - x)^{-(1 + b)} \\
+%		f^{(2)}(x) &=& b(1 + b)(1 - x)^{-(2 + b)} \\
+%		\vdots \\
+%		f^{(m)}(x) &=& b(1 + b)(2 + b) \ldots (m - 1 + b)(1 - x)^{-(m + b)} \\
+%		f^{(m)}(x) &=& (b)_m (1 - x)^{-(m + b)} \\
+%		f^{(m)}(0) &=& (b)_m
+%	\end{eqnarray*}
+
+%	Así:
+%	\begin{eqnarray}
+%		f(x) = (1 - x)^{-b} &=& \displaystyle\sum_{m=0}^{\infty} \dfrac{(b)_m}{m!} x^m \quad |x| < 1
+%	\end{eqnarray}
+
+%	Por la definición dada en \ref{funcion_hipergeometrica}, tenemos:
+%	\begin{eqnarray*}
+%		F(a, b, a, x) &=& \displaystyle\sum_{m=0}^{\infty} \dfrac{(a)_m (b)_m}{m! (a)_m} x^m \\
+%		F(a, b, a, x) &=& \displaystyle\sum_{m=0}^{\infty} \dfrac{(b)_m}{m!} x^m
+%	\end{eqnarray*}
+
+%	Lo cual verifica la igualdad.
+%\end{demo}
+
+
+%\Example{Ejemplo}{	\begin{eqnarray*}
+%		% \nonumber % Remove numbering (before each equation)
+%		F\left(\frac{1}{2}, 1, \displaystyle\frac{3}{2},-x^{2}\right)&=&\displaystyle\frac{\tan^{-1}(x)}{x}
+%\end{eqnarray*}}
+
+%\begin{demo}
+%	Sabemos que
+%	\begin{eqnarray*}
+%		% \nonumber % Remove numbering (before each equation)
+%		\displaystyle\int_0^{x} \frac{1}{1+t^{2}}dt&=&\displaystyle\tan^{-1}(x)  \quad|x|<1\\
+%		\text{y}\\
+%		\displaystyle\frac{1}{1-t}&=&\displaystyle\sum_{m=0}^{\infty} t^{m} \quad|t|<1
+%	\end{eqnarray*}
+%%	\begin{eqnarray*}
+%		\frac{1}{1-(-t)^{2}}&=&\displaystyle\sum_{m=0}^{\infty}(-1)^{m} t^{2m}
+%	\end{eqnarray*}
+%	\begin{eqnarray*}
+%		\displaystyle\int_{0}^{x} \frac{1}{1+t^{2}} d t=\displaystyle\sum_{m=0}^{\infty} \frac{(-1)^{m} x^{2 m+1}}{2 m+1}&=&\displaystyle\tan ^{-1}(x)
+%	\end{eqnarray*}
+%	De donde
+%	\begin{eqnarray*}
+%		\displaystyle\frac{\tan ^{-1}(x)}{x}&=&\displaystyle\sum_{m=0}^{\infty} \frac{(-1)^{m} x^{2m}}{2m+1}\\
+%		&=&\displaystyle\frac{\Gamma(1+1/2)}{\Gamma(1/2)\Gamma(1)}\sum_{m=0}^{\infty}\frac{\Gamma(1/2+m)\Gamma(1+m)(-1)^{m}}{m!\Gamma(1+1/2+m)}x^{2m}
+%	\end{eqnarray*}
+%	Por la definici\'on de \ref{funcionhipergeometrica} en t\'ermino de Gamma se tiene
+%	\begin{eqnarray*}
+%		\displaystyle\frac{\tan ^{-1}(x)}{x}&=&\displaystyle\sum_{m=0}^{\infty} \frac{(-1)^{m} x^{2m}}{2 m+1}=F\left(\frac{1}{2}, 1, \frac{3}{2},-x^{2}\right) \quad |x|<1
+%	\end{eqnarray*}
+%\end{demo}
+\medskip
+
+\noindent
+Uno de los ejemplos más importantes de funciones especiales que se expresan en términos de la función hipergeométrica de Gauss lo constituyen los polinomios de Jacobi. Estos polinomios surgen de manera natural al considerar parámetros específicos en la función ${}_2F_1$ y juegan un papel central en diversos contextos del análisis, como la teoría de ortogonalidad, soluciones de ecuaciones diferenciales y aplicaciones físicas. A continuación, se presenta su definición a partir de la función hipergeométrica.
+
+\Definition{Polinomios de Jacobi}{Los polinomios de jacobi de grado n se define por \begin{align}
+		P_{n}^{(\alpha,\beta)}(x) &=\dfrac{(\alpha +1)_{n}}{n!}\,{}_2F_1\left( \begin{array}{c|c}
+-n,\ n + \alpha + \beta + 1 & \\
+\alpha + 1 & \dfrac{1-x}{2}
+\end{array} \right)
+	\end{align}
+	donde $_{2}F_{1}$ es la funci\'on hipergeom\'etrica de Gauss.}\label{defijacobi}
+
+\medskip
+
+\noindent
+A partir de la Definición~\ref{defijacobi}, se pueden derivar expresiones explícitas para los polinomios de Jacobi. A continuación, se presentan algunos ejemplos que ilustran cómo estos polinomios pueden obtenerse utilizando la función hipergeométrica de Gauss ${}_2F_1$. Esto permite no solo calcular los polinomios $P_n^{(\alpha,\beta)}(x)$ de manera concreta, sino también apreciar su conexión estructural con las funciones hipergeométricas.
+\Example{Ejemplo}{Utiliza la definici\'on (\ref{defijacobi}) para calcular los primeros $3$ polinomios de Jacobi de orden $(\alpha,\beta)$}
+
+	\begin{sol}
+		Si  $n=0$
+		\begin{align*}
+			P_{0}^{(x, \beta)} &(x)=\frac{(\alpha+1)_{0}}{0 !}\, _{2}F_{1}\left(0, \alpha+\beta+1, \alpha+1 ; \frac{1-x}{2}\right) \\
+			&=\sum_{k=0}^{0} \frac{(0)_{k}(\alpha+\beta+1)_{k}}{k !(\alpha+1)_{k}}\left(\frac{1-x}{2}\right)^{k}
+		\end{align*}
+		\begin{eqnarray}\label{p0(x)}
+			% \nonumber % Remove numbering (before each equation)
+			P_{0}^{(\alpha, \beta)}(x) &=&1
+		\end{eqnarray}
+		si $n=1$
+		\begin{align*}
+			P_{1}^{(\alpha, \beta)}(x) &=\frac{(\alpha+1)!}{1 !}\,_{2}F_{1}\left(-1, \alpha+\beta+2, \alpha+1 ; \frac{1-x}{2}\right) \\
+			&=(\alpha+1) \sum_{k=0}^{1} \frac{(-1)_{k}(\alpha+\beta+2)_{k}}{k !(\alpha+1) k}\left(\frac{1-x}{2}\right)^{k}\\
+			&=(\alpha+1)\left[\frac{(-1)_{0}(\alpha+\beta+2)_{0}}{0 !(\alpha+1)_{0}}\left(\frac{1-x}{2}\right)^{0}+\frac{(-1)_{1}(\alpha+\beta+2)_{1}}{1 !(\alpha+1)_{1}}\frac{1-x}{2}\right]\\
+			\intertext{Simplificando}\\
+			&=(\alpha+1)\left[1-\frac{(\alpha+\beta+2)}{(\alpha+1)}\left(\frac{1-x}{2}\right)\right]\\
+			&=(\alpha+1)-(\alpha+\beta+2)\left(\frac{1-x}{2}\right) \\
+			&=\frac{1}{2}[2 \alpha+2-\alpha-\beta-2+(\alpha+\beta+2) x]
+		\end{align*}
+		\begin{eqnarray}\label{p1(x)}
+			% \nonumber % Remove numbering (before each equation)
+			P_{1}^{\left(\alpha_{1} \beta\right)}(x) &=&\frac{1}{2}[\alpha-\beta+(\alpha+\beta+2) x]
+		\end{eqnarray}
+		Si $n=2 $
+		\begin{align*}
+			P_{2}^{(\alpha, \beta)}(x)&=\frac{(\alpha+1)_{2}}{2 !}\, _{2}F_{1}\left(-2, \alpha+\beta+3, \alpha+1, \frac{1-x}{2}\right) \\
+			&=\frac{(\alpha+1)_{2}}{2 !} \sum_{k=0}^{2} \frac{(-2) k(\alpha+\beta+3) k}{(\alpha+1)_{k} k !}\left(\frac{1-x}{2}\right)^{k}\\
+			&=\frac{(-2)_{1}(\alpha+\beta+3)_{1}}{(\alpha+1)_{1} 1 !}\left(\frac{1-x}{2}\right)^{1}+\frac{(-2)_{2}(\alpha+\beta+3)_{2}}{(\alpha+1)_{2} 2 !}\left(\frac{1-x}{2}^{2}\right)\\
+			&=\frac{(\alpha+1) 2}{2 !}\left[1-\frac{2(\alpha+\beta+3)}{\alpha+1}\left(\frac{1-x}{2}\right)+\frac{(-2)_{2}(\alpha+\beta+3)_{2}}{4(\alpha+1)_{2} 2 !}\left(1-2 x+x^{2}\right)\right]\\
+			&=\frac{1}{2 !}\left[(\alpha+1)_{2}-\frac{2(\alpha+2)(\alpha+\beta+3)}{2}(1-x)+\frac{(-2)_{2}(\alpha+\beta+3)_{2}}{4\times2 !}\left(1-2 x+x^{2}\right)\right]\\
+			&=\frac{1}{2 !}\left[(\alpha+1)_{2}-(\alpha+2)(\alpha+\beta+3)+(\alpha+2)(\alpha+\beta+3) x+\frac{(\alpha+\beta+3) 2}{4}\left(1-2 x+x^{2}\right)\right]
+		\end{align*}
+		\begin{align*}
+			P_{2}^{(\alpha, \beta)}(x) =\frac{1}{2!}\left[(\alpha+1)_{2}-(\alpha+2)(\alpha+\beta+3)+(\alpha+2)(\alpha+\beta+3) x+\frac{(\alpha+\beta+3)_{2}}{4}-\frac{(\alpha+\beta+3)_{2}}{2}x..\right] \\
+			.. +\frac{1}{2!} \frac{(\alpha+\beta+3)_{2}}{4} x^{2}
+		\end{align*}
+		Simplificando se obtiene que
+		\begin{align*}
+			P_{2}^{(\alpha, \beta)}&=\frac{1}{2 !}\left[-4-(\alpha+\beta)+(\alpha-\beta)^{2}+\frac{(\alpha-\beta)(\alpha+\beta+3)}{2}x+\frac{(\alpha+\beta+3)(\alpha+\beta+4)}{4} x^{2}\right]
+		\end{align*}
+		\begin{equation}\label{p2(x)}
+P_{2}^{(\alpha, \beta)} = \dfrac{1}{8} \left\{ -4 - (\alpha+\beta) + (\alpha - \beta)^2 + 2(\alpha - \beta)(\alpha + \beta + 3)x + (\alpha + \beta + 3)(\alpha + \beta + 4)x^2 \right\}
+\end{equation}
+	\end{sol}
+\subsection{Ecuaci\'on hipergeom\'etrica confluente}
+Tomando la sustituci\'on $x=\frac{t}{b}$  en \ref{ecuacion hipergeometrica} obtendremos la ecuaci\'on hipergeom\'etrica confluente. Calculando las derivadas tenemos:
+\begin{eqnarray*}
+	\frac{d y}{d x}&=&b \frac{d y}{d t} \\
+	\frac{d^2 y}{d x^2}&=&b^2 \frac{d^2 y}{d t^2}
+\end{eqnarray*}
+Reemplazando las derivadas en \ref{ecuacion hipergeometrica}
+$$
+\begin{gathered}
+	\left(\frac{t}{b}\right)\left(1-\left(\frac{t}{b}\right)\right) b^2 \frac{d^2 y}{d t^2}+\left[c-(a+b+1)\left(\frac{t}{b}\right)\right] b \frac{d y}{d t}-a b y(t)=0 \\
+	\left(\frac{t}{b}-\frac{t^2}{b^2}\right) b^2 \frac{d^2 y}{d t^2}+[c b-(a+b+1) t] \frac{d y}{d t}-a b y=0 \\
+	\left(b t-t^2\right) \frac{d^2 y}{d t^2}+[c b-(a+b+1) t] \frac{d y}{d t}-a b y=0 \\
+	\left(t-\frac{t^2}{b}\right) \frac{d^2 y}{d t^2}+\left[c-\left(1+\frac{a+1}{b}\right) t\right] \frac{d y}{d t}-a y=0
+\end{gathered}
+$$
+Si hacemos que $ b \rightarrow \infty$, obtenemos la ecuaci\'on hipergeom\'etrica confluente
+\begin{eqnarray}\label{ecuacionconfluente}
+	% \nonumber % Remove numbering (before each equation)
+	t \frac{d^2 y}{d t^2}+(c-t) \frac{d y}{d t}-a y&=&0
+\end{eqnarray}
+Sabemos que la soluci\'on es de la siguiente forma
+$$
+\begin{gathered}
+	F\left(a, b, c, \frac{t}{b}\right)=\frac{\Gamma(c)}{\Gamma(a)}\left(\sum_{m=0}^{\infty} \frac{\Gamma(a+m)}{\Gamma(c+m) m !}\left\{\frac{\Gamma(b+m)}{b^m \Gamma(b)}\right\} t^m\right) \\
+	\lim _{b \rightarrow \infty} F\left(a, b, c, \frac{t}{b}\right)=? \\
+	\lim _{b \rightarrow \infty} F\left(a, b, c, \frac{t}{b}\right)=\lim _{b \rightarrow \infty} \frac{\Gamma(c)}{\Gamma(a)}\left(\sum_{m=0}^{\infty} \frac{\Gamma(a+m)}{\Gamma(c+m) m !}\left\{\frac{\Gamma(b+m)}{b^m \Gamma(b)}\right\} t^m\right)
+\end{gathered}
+$$
+Tomamos el $\displaystyle\lim _{b \rightarrow \infty} \frac{\Gamma(b+m)}{b^m \Gamma(b)}$ y resolvamos ese limite ...
+Por la propiedades de la funci\'on gamma
+\begin{eqnarray*}
+	% \nonumber % Remove numbering (before each equation)
+	\dfrac{\Gamma(b+m)}{\Gamma(b)}&=&\prod_{i=0}^{m-1}(b+i)=b(b+1) \ldots(b+m-1)\\
+	\dfrac{\Gamma(b+m)}{\Gamma(b)}&=&b^m+\cdots\\
+	\text{Entonces}\\
+	\lim _{b \rightarrow \infty} \frac{b^m+\cdots}{b^m}&=&1
+\end{eqnarray*}
+esto sigue que
+\begin{eqnarray*}
+	\displaystyle\lim _{b \rightarrow \infty} F\left(a, b, c, \frac{t}{b}\right)&=&\frac{\Gamma(c)}{\Gamma(a)}\left(\sum_{m=0}^{\infty} \frac{\Gamma(a+m)}{\Gamma(c+m) m !} t^m\right)
+\end{eqnarray*}
+Por lo que
+\begin{eqnarray}\label{serieconfluente}
+	\displaystyle\lim _{b \rightarrow \infty} F\left(a, b, c, \frac{t}{b}\right)&=&F(a, c, t)
+\end{eqnarray}
+La expresi\'on anterior se llama \textbf{serie Hipergeom\'etrica Confluente de Gauss}.
+\section{Ecuaciones diferenciales como caso particular de funci\'on Hipergeom\'etrica}
+La función hipergeométrica \( {}_2F_1(a,b;c;x) \) ocupa un lugar destacado en el estudio de ecuaciones diferenciales. Muchas ecuaciones clásicas, como las de Legendre, Chebyshev, Hermite o Bessel, pueden verse como casos particulares de la ecuación hipergeométrica. Esto nos permite expresar sus soluciones en términos de una misma función, lo que unifica su análisis y nos brinda una herramienta poderosa para abordar diversos problemas con un enfoque común.\\
+Antes de tratar las ecuaciones cl\'asicas analizamos una ecuaci\'on cuya forma general se plantea como ejercicio al lector.
+\Example{ Una EDO reducida a la Ecuaci\'on Hipergeom\'etrica}{ Expresa la ecuaci\'on diferencial
+\begin{equation*}
+  \left( x^{2}+4x+3 \right)\dfrac{d^{2}y}{dx^{2}}+\left(2x+1\right)\dfrac{dy}{dx}+5y=0
+\end{equation*} en t\'ermino de la ecuaci\'on Hipergeom\'etrica.}
+\begin{sol}
+\begin{equation*}
+\begin{aligned}
+& (x + 3)(x + 1) \dfrac{dy}{dx} + (2x + 1) \dfrac{dy}{dx} + 5y = 0 \\[0.3em]
+& z = \dfrac{x+1}{-2} \hspace{3cm} \text{(Cambio de variable)} \\[0.3em]
+& \dfrac{dy}{dx} =- \dfrac{1}{2}\dfrac{dy}{dz} \\[0.3em]
+& \dfrac{d^2y}{dx^2} = \dfrac{1}{4}\dfrac{d^2y}{dz^2} 
+\end{aligned}
+\end{equation*}
+Reemplazando en la ecuación diferencial, obtenemos
+\begin{equation*}
+z(1 - z)\, y^{\prime\prime} - \left( \dfrac{1}{2} +2z \right) y^{\prime} - 5y = 0
+\end{equation*}
+De la expresión (\ref{hipersolgeneral}) tenemos que la solución es
+\begin{equation*}
+\begin{aligned}
+y(x) =\; & c_{0}\;F\left(\dfrac{1 + \sqrt{19}i}{2},\, \dfrac{1 - \sqrt{19}i}{2},\,- \dfrac{1}{2},\, x\right) \\
+& + c_{1}\;x^{\frac{3}{2}} F\left(\dfrac{4 + \sqrt{19}i}{2},\, \dfrac{4 - \sqrt{19}i}{2},\, \dfrac{5}{2},\, x\right)
+\end{aligned}
+\end{equation*}
+
+\end{sol}
+\subsection{Ecuaci\'on de Laguerre como caso particular de la Ecuaci\'on Hipergeom\'etrica Confluente de Gauss}
+En \ref{ecuacionconfluente} tomando la sustituci\'on $c=\alpha+1\quad \text { y }\quad a=-n$
+\begin{eqnarray*}
+	t \frac{d^2 y}{d t^2}+(\alpha+1-t) \frac{d y}{d t}+n y&=&0
+\end{eqnarray*}
+Por lo tanto la soluci\'on est\'a dada por
+\begin{eqnarray*}
+	F(-n, \alpha+1, t)&=&\frac{\Gamma(\alpha+1)}{\Gamma(-n)} \sum_{m=0}^{\infty} \frac{\Gamma(m-n)}{\Gamma(\alpha+1+m) m !} t^m
+\end{eqnarray*}
+En el caso de que $\alpha=0$, obtenemos los polinomios de Laguerre de orden cero.
+\begin{eqnarray*}
+	F(-n,+1, t)&=&\displaystyle\frac{\Gamma(1)}{\Gamma(-n)} \sum_{m=0}^{\infty} \frac{\Gamma(m-n)}{\Gamma(m+1) m !} t^m\\
+	&=&\Gamma(1+n) \sum_{m=0}^{\infty} \frac{(-1)^m}{(n-m) ! m ! \Gamma(m+1)} t^m\\
+	\text{Partiendo de}\\
+	\displaystyle\frac{\Gamma(1+n)}{(n-m) ! m ! \Gamma(m+1)}&=&\frac{n !}{m !(n-m) ! m !}\\
+	&=&\displaystyle\frac{1}{m !}\left(\frac{n !}{m !(n-m) !}\right)\\
+	&=&\displaystyle\frac{1}{m !}\left(\begin{array}{l}n \\ m\end{array}\right)\\
+	\text{Entonces nos queda}\\
+	L_n^0(t)&=&\sum_{m=0}^n\displaystyle \frac{1}{m !}\left(\begin{array}{l}n \\ m\end{array}\right)(-t)^m
+\end{eqnarray*}
+\textcolor{red}{revisar la parte siguiente con la anterior}
+A partir de la serie hipergeom\'etrica confluente se obtienen los polinomios de Laguerre lo que motiva a presentar la definici\'on siguiente
+
+\Definition{Serie hipergeom\'etrica}{Sea $_{1}F_{1}$ la serie hipergeom\'etrica confluente de Gauss, los polinonios de Laguerre $L_n^{(\alpha)}(x)$ se obtienen a partir de
+	\begin{eqnarray}\label{laguerreiper}
+		L_{n}^{(\alpha)}(x)=\left(\begin{array}{c}
+			n+\alpha \\
+			n
+		\end{array}\right) \, _{1}F_{1}(-n, \alpha+1 ; x)
+\end{eqnarray}}
+
+Ahora a modo de ilustraci\'on obtenemos los polinomios de Laguerre.
+
+\Example{Polinomios de Laguerre}{	Obtenga los primeros cuatro polinomios de Laguerre $L_{n}(x)$ utilizando la expresi\'on (\ref{laguerreiper}).}
+
+ \begin{sol}
+	\begin{equation*}
+\begin{aligned}
+&\text{Para } n = 0 \\
+&L_0^{(0)}(x) = \binom{0}{0} \cdot {}_1F_1(0,1;x) = \binom{0}{0} \cdot 1 = 1 \\[0.8em]
+%
+&\text{Para } n = 1 \\
+&L_1^{(0)}(x) = \binom{1}{1} \cdot {}_1F_1(-1,1;x) 
+= \binom{1}{1} \left[1 + \dfrac{-1}{1}x\right] = 1 - x \\[0.8em]
+%
+&\text{Para } n = 2 \\
+&L_2^{(0)}(x) = \binom{2}{2} \cdot {}_1F_1(-2,1;x) 
+= 1 + \dfrac{-2}{1}x + \dfrac{(-2)(-1)}{1 \cdot 2 \cdot 2}x^2 
+= 1 - 2x + \dfrac{1}{2}x^2 \\[0.8em]
+%
+&\text{Para } n = 3 \\
+&L_3^{(0)}(x) = \binom{3}{3} \cdot {}_1F_1(-3,1;x) 
+= 1 + \dfrac{-3}{1}x + \dfrac{(-3)(-2)}{1 \cdot 2 \cdot 2}x^2 + \dfrac{(-3)(-2)(-1)}{1 \cdot 2 \cdot 3 \cdot 6}x^3 \\
+&\hspace{3.2cm}= 1 - 3x + \dfrac{3}{2}x^2 - \dfrac{1}{6}x^3
+\end{aligned}
+\end{equation*}
+
+\end{sol}
+
+
+\subsection{Ecuaci\'on de Hermite como caso particular de la ecuaci\'on Hipergeom\'etrica confluente}
+En la ecuaci\'on definida en \ref{H} se toma la sustituci\'on $z=x^2$. Obteniendo las derivadas
+\[
+\begin{aligned}
+& dz = 2x \, dx \\[0.5em]
+& \dfrac{d}{dz}(\,) = \dfrac{1}{2x} \dfrac{d}{dx}(\,) \\[0.5em]
+& \dfrac{d}{dz} \left( \dfrac{d}{dz}(\,) \right) = \dfrac{1}{2x} \dfrac{d}{dx} \left( \dfrac{1}{2x} \dfrac{d}{dx}(\,) \right) \\[0.5em]
+& \dfrac{d^2}{dz^2}(\,) = \dfrac{1}{4} \cdot \dfrac{1}{x} \dfrac{d}{dx} \left( x^{-1} \dfrac{d}{dx}(\,) \right) \\[0.5em]
+& = \dfrac{1}{4x} \left[ x^{-1} \dfrac{d^2}{dx^2}(\,) - x^{-2} \dfrac{d}{dx}(\,) \right] \\[0.5em]
+& = \dfrac{1}{4} \dfrac{d^2}{dx^2}(\,) - \dfrac{1}{4x^3} \dfrac{d}{dx}(\,) 
+   - \dfrac{1}{2x^2} \cdot \dfrac{1}{2x} \dfrac{d}{dx}(\,) \\[0.5em]
+& = \dfrac{d^2}{dz^2}(\,) = \dfrac{1}{4z} \dfrac{d^2}{dx^2}(\,) - \dfrac{1}{2z} \dfrac{d}{dz}(\,) \\[0.5em]
+& \dfrac{d^2}{dx^2}(\,) = 4z \dfrac{d^2}{dz^2}(\,) + 2 \dfrac{d}{dz}(\,) \\[0.5em]
+& 4z \dfrac{d}{dz}(\,) = 2x \dfrac{d}{dx}(\,)
+\end{aligned}
+\]
+
+Sustituyendo las derivadas en \ref{H}, tenemos
+$$
+\begin{gathered}
+	4 z y^{\prime \prime}(z)+2 y^{\prime}(z)-4 z y^{\prime}(z)+2 n y(z)=0 \\
+	4 z y^{\prime \prime}+2[1-2 z] y^{\prime}+2 n y(z)=0 \\
+	z y^{\prime \prime}+\left[\frac{1}{2}-z\right] y^{\prime}+\frac{n}{2} z=0
+\end{gathered}
+$$
+La ecuaci\'on obtenida es un caso de \ref{ecuacionconfluente} con $c=\frac{1}{2}\quad \text{y} \quad a=-\frac{n}{2}$.
+As\'i las soluciones est\'an dada por
+$$
+\begin{aligned}
+	&y_{0}(x)= _1F_1\left(-\frac{n}{2} , \frac{1}{2} , x^2\right) \\
+	&y_{1}(x)=x _1F_1\left(-\frac{n+1}{2}+1 , \frac{3}{2} , x^2\right)
+\end{aligned}
+$$
+
+\Example{Representaci\'on integral de la funci\'on Hipergeometrica}{Agregar
+	\textcolor[rgb]{1.00,0.00,0.00}{Agregar mas ejemplos y expresar las funciones en el capitulo en termino de la hipergeometrica}}
+
+	
+
+\subsection{Ecuaci\'on de Jacoby como caso particular de la ecuaci\'on Hipergeom\'etrica }
+
+\subsection{Ecuaci\'on de Chevyshev como caso particular de la ecuaci\'on Hipergeom\'etrica }
+Tomando el cambio de variable $t=\dfrac{1-x}{2}$ en la ecuaci\'on (\ref{chebyshev equation}) obtenemos la ecuaci\'on hipergeom\'etrica
+\begin{equation}\label{chevyhiper}
+t\left(1-t\right)y^{\prime\prime}+\left(\dfrac{1}{2}-t\right)y^{\prime}+a^{2}y=0
+\end{equation}
+Cuya soluci\'on entorno a los puntos $x_{0}=0$ y $x_{0}=1$ se presenta a continuaci\'on. 
+\begin{itemize}
+  \item Como $x_{0}=0$ es un punto ordinario de (\ref{chevyhiper}) su soluci\'on se obtiene de la expresi\'on (\ref{hipersolgeneral})
+  \begin{eqnarray}\label{chevyhiper10}
+		y(x)=c_{0}\;F\left(a, -a, \dfrac{1}{2}, \dfrac{1-x}{2}\right)+c_{1}\left(\dfrac{1-x}{2}\right)^{1/2} F\left(\dfrac{1}{2}+a,\dfrac{1}{2}-a,\dfrac{1}{2},\dfrac{1-x}{2}\right)
+	\end{eqnarray}
+  \item De la expresi\'on (\ref{hiper1}) obtenemos la soluci\'on alrededor de $x_{0}=1$
+  \begin{equation}\label{chevyhiper1}
+    y(x)=c_0 F\left(a,-a, \dfrac{1}{2}, \dfrac{1-x}{2}\right)+c_1\left(\dfrac{1-x}{2}\right)^{1 / 2} F\left(a+\dfrac{1}{2},-a+\dfrac{1}{2}, \dfrac{3}{2}, \dfrac{1-x}{2}\right)
+  \end{equation}
+\end{itemize}
+\subsection{Ecuaci\'on de Legendre como caso particular de la ecuaci\'on Hipergeom\'etrica }
+Sean $\lambda=n\left(n+1\right)$ y $x=1-2t$ en la ecuaci\'on (\ref{ecuacionlegendre}), realizando el cambio de variable llegamos a la ecuaci\'on
+\begin{equation}\label{legendrehiper}
+  t\left(1-t\right)y^{\prime\prime}+\left(1-2t\right)y^{\prime}+n\left(n+1\right)y=0
+\end{equation}
+Como la soluci\'on de (\ref{ecuacionlegendre}) son los polinomios de Legendre, la soluc\'ion de (\ref{legendrehiper}) podemos expresarla como
+\begin{equation}\label{pnhiper}
+P_n(x)=F(-n, n+1,1,(1-x) / 2)
+\end{equation}
+\medskip
+
+\noindent
+En el siguiente ejemplo se ilustrará cómo se pueden obtener los primeros tres polinomios de Legendre a partir de la función hipergeométrica de Gauss. Esta estrategia permite evidenciar la relación que existe entre dichos polinomios clásicos y las soluciones particulares de la ecuación hipergeométrica, reforzando así su importancia dentro del estudio de funciones especiales.
+
+\Example{Polinomios de Legendre a partir de la funci\'on Hipergeom\'etrica}{ Obtenga los polinomios $P_{0}(x), P_{1}(x), P_{2}(x)$ de Legendre utilizando la funci\'on Hipergeom\'etrica}
+\begin{sol}
+\[
+\begin{aligned}
+\displaystyle n &= 0 \\
+\displaystyle P_0(x) &= \displaystyle\sum_{m=0}^0 \dfrac{(-0)_m (1)_m}{m!(1)_m} \left( \dfrac{1 - x}{2} \right)^m \\
+\displaystyle P_0(x) &= 1 \\
+\\
+\displaystyle n &= 1 \\
+\displaystyle P_1(x) &=\displaystyle \sum_{m=0}^1 \dfrac{(-1)_m (2)_m}{m!(1)_m} \left( \dfrac{1 - x}{2} \right)^m \\
+\displaystyle P_1(x) &= 1 - 2 \left( \dfrac{1 - x}{2} \right) \\
+\displaystyle P_1(x) &= x \\
+\\
+\displaystyle n &= 2 \\
+\displaystyle P_2(x) &=\displaystyle \sum_{m=0}^2 \dfrac{(-2)_m (3)_m}{m!(1)_m} \left( \dfrac{1 - x}{2} \right)^m \\
+\displaystyle P_2(x) &= 1 - 3(1 - x) + \dfrac{3}{2}(1 - x)^2 \\
+\displaystyle P_2(x) &= \dfrac{1}{2}(3x^2 - 1)
+\end{aligned}
+\]
+\end{sol} 
+En el siguiente ejemplo, obtendremos las soluciones de la ecuación de Airy (\ref{Airy equation}), la cual fue analizada previamente en la Sección~\ref{ecuacionairy}, expresándolas en términos de la función hipergeométrica.
+\Example{ ED Airy  }{ Obtenga las soluciones de la ED (\ref{Airy equation}) en t\'erminos de la funci\'on hipergeom\'etrica }
+\begin{sol}
+Tomando $n=k+3$ en la expresi\'on de recurrencia (\ref{Airyrecurr} )
+\begin{equation}\label{{Airyrecurrencia}}
+a_{k+3}=\dfrac{a_k}{(k+2)(k+3)} \quad \forall k \geq 0
+\end{equation}
+Ahora reemplazando $k$ sucesivamente por $3k,3k+1,3k+2$
+\begin{itemize}
+  \item \begin{equation*}
+          a_{3 k+3}=\dfrac{a_{3 k}}{3(3 k+2)(k+1)}
+        \end{equation*}
+        \[
+\begin{aligned}
+&\begin{array}{ll}
+k = 0 ; & \displaystyle a_3 = \dfrac{a_0}{3 \cdot 2 \cdot 1} \\[1.2ex]
+k = 1 ; & \displaystyle a_6 = \dfrac{a_3}{3 \cdot 5 \cdot 2} = \dfrac{a_0}{3^2 \cdot 2 \cdot 1 \cdot 5 \cdot 2} \\[1.2ex]
+k = 2 ; & \displaystyle a_9 = \dfrac{a_6}{3 \cdot 8 \cdot 3} = \dfrac{a_0}{3^3 \cdot 3 \cdot 2 \cdot 1 \cdot 8 \cdot 5 \cdot 2} \\[1.2ex]
+k = 3 ; & \displaystyle a_{12} = \dfrac{a_9}{3 \cdot 11 \cdot 4} = \dfrac{a_0}{3^4 \cdot 4 \cdot 3 \cdot 2 \cdot 1 \cdot 11 \cdot 8 \cdot 5 \cdot 2} \\[1.2ex]
+&\vdots  \\
+& \displaystyle a_{3k} = \dfrac{a_0}{3^k \cdot k! \cdot (3k-1)(3k-4) \cdots 5 \cdot 2}\qquad \forall k \geq 1  \\[1.2ex]
+& = \dfrac{a_0}{3^{2k} \cdot k! \cdot \left(-\dfrac{1}{3}+k\right)\left(-\dfrac{1}{3}+k-1\right) \cdots\left(-\dfrac{1}{3}+2\right) \left(-\dfrac{1}{3}+1\right)} \\[1.2ex]
+& = \dfrac{a_0}{3^{2k} \cdot k! \cdot \left[\left(-\dfrac{1}{3}+1\right)+(k-1)\right]\left[\left(-\dfrac{1}{3}+1\right)+(k-2)\right] \cdots \left[\left(-\dfrac{1}{3}+1\right)+1\right] \left(-\dfrac{1}{3}+1\right)} \\[1.2ex]
+& \displaystyle a_{3k} = \dfrac{a_0}{3^{2k} \cdot k! \cdot \left(\dfrac{2}{3}\right)_{k}}
+\end{array}
+\end{aligned}
+\]
+
+  \item \[
+\begin{aligned}
+& a_{3k+4} = \dfrac{a_{3k+1}}{3(k+1)(3k+4)} \\
+&\begin{array}{ll}
+
+k = 0 ; & \displaystyle a_4 = \dfrac{a_1}{3 \cdot 1 \cdot 4} \\[1.2ex]
+k = 1 ; & \displaystyle a_7 = \dfrac{a_4}{3 \cdot 2 \cdot 7} = \dfrac{a_1}{3^2  \cdot 2 \cdot 1\cdot 4 \cdot 7} = \dfrac{a_1}{3^3 \cdot 3 \cdot 2 \cdot 1 \cdot 10 \cdot 7 \cdot 4} \\[1.2ex]
+&\vdots  \\[1.2ex]
+ & \displaystyle a_{3k+1} = \dfrac{a_1}{3^k \cdot k! \cdot (3k+1)(3k-2) \cdots 7 \cdot 4}\qquad \forall k \geq 1\\[1.2ex]
+& = \dfrac{a_1}{3^{2k} \cdot k! \cdot \left( \dfrac{4}{3} \right)_k}
+\end{array}
+\end{aligned}
+\]
+  \item \[a_{3 k+5}=\dfrac{a_{3 k+2}}{(3 k+4)(3 k+5)}\]
+  Como en la expresi\'on (\ref{Airyrecurr} ) se obtuvo que $a_{2}=0$ , entonces $a_{3 k+5}=0$
+\end{itemize}
+Por tanto, una expresi\'on de la soluci\'on general de la ecuaci\'on de Airy es
+\begin{equation*}
+\displaystyle y =  \displaystyle \sum_{k=0}^{+\infty} a_{3k} x^{3k} + \sum_{k=0}^{+\infty} a_{3k+1} x^{3k+1} 
+\end{equation*}
+Por la expresi\'on (\ref{hiperfun}) dada en el teorema (\ref{thm:fhper})
+\begin{equation}\label{airyhiper}
+\displaystyle a_0  \;_{0}F_{1}\left(\left. c_{\dfrac{2}{3}} \right| \dfrac{x^3}{9} \right) + a_1 x\; _{0}F_{1}\left(\left. c_{\dfrac{4}{3}} \right| \dfrac{x^3}{9} \right)
+\end{equation}
+\end{sol} 
+\section{Ejercicios}
+\subsection*{Propiedades de la funci\'on hipergeom\'etrica}\label{hiperprop}
+\begin{enumerate}
+  \item Demostrar la propiedad (\ref{prohiper2}) de la funci\'on hipergeom\'etrica.
+  \item Demostrar la propiedad (\ref{prohiper3}) de la funci\'on hipergeom\'etrica.
+  \item Demostrar la propiedad (\ref{prohiper4}) de la funci\'on hipergeom\'etrica.
+\end{enumerate} 
