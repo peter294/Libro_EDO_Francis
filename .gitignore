@@ -10,6 +10,8 @@
 *.synctex.gz
 *.auxlock
 *.mtc*
+*.idx
+*.maf
 
 # Bibliografía
 *.bbl
